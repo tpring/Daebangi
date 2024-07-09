@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* 기본 폰트 */
+
 @font-face {
     font-family: 'SUIT-Regular';
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
@@ -50,5 +52,8 @@
     }
     .shared-butten {
         @apply text-title bg-point w-full h-[80px] text-white py-3 rounded-md;
+    }
+    .comment-button {
+        @apply p-3 rounded-lg bg-white hover:brightness-90;
     }
 }
