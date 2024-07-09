@@ -4,16 +4,15 @@ import { useState } from 'react';
 import { createClient } from '../../api/supabase/client';
 import Link from 'next/link';
 
-export default function LoginPage() {
+import React from 'react';
+
+const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const supabase = createClient();
 
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
-        console.log('email', email);
-        console.log('password', password);
 
         const { data, error } = await supabase.auth.signInWithPassword({
             email: email,
@@ -25,10 +24,10 @@ export default function LoginPage() {
             console.error('error:', error);
         } else {
             alert('성공했습니다.');
+            window.location.href = '/';
         }
         return data;
     };
-
     return (
         <div>
             <h1>Login</h1>
@@ -45,4 +44,6 @@ export default function LoginPage() {
             <Link href={'/signup'}>회원가입 하러 가기</Link>
         </div>
     );
-}
+};
+
+export default LoginPage;
