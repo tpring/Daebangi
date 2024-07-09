@@ -22,6 +22,7 @@ const config: Config = {
                 subtitle: '1.5rem',
                 title: '2rem',
             },
+
             fontWeight: {
                 basics: '500',
                 subtitle: '700',
