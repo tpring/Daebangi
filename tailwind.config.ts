@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         primary: ["LINESeedKR-Bd", "sans-serif"],
-        secondary: ["AnotherFont", "sans-serif"],
+        secondary: ["Ainmom", "sans-serif"],
       },
       colors: {
         main: "#FFF7DB",
