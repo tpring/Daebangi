@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @font-face {
     font-family: 'LINESeedKR-Bd';
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
@@ -40,5 +39,8 @@
     }
     .shared-butten {
         @apply text-title bg-point w-full h-[80px] text-white py-3 rounded-md;
+    }
+    .comment-button {
+        @apply p-3 rounded-lg bg-white hover:brightness-90;
     }
 }

@@ -29,17 +29,6 @@ const LoginPage = () => {
         }
         return data;
     };
-    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files ? event.target.files[0] : null;
-        setSelectedImage(file);
-
-        if (file) {
-            const previewUrl = URL.createObjectURL(file);
-            setImagePreview(previewUrl);
-        } else {
-            setImagePreview(null);
-        }
-    };
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
