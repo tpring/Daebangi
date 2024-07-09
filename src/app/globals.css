@@ -3,37 +3,41 @@
 @tailwind utilities;
 
 @layer utilities {
-}
-@font-face {
-  font-family: "LINESeedKR-Bd";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2")
-    format("woff2");
-  font-weight: 400;
-  font-style: normal;
+    .shared-input {
+        @apply text-title text-point w-[520px] h-[80px] border-2 border-point border-r p-2 rounded-[12px];
+    }
+    .shared-butten {
+        @apply text-title bg-point w-full h-[80px] text-white py-3 rounded-md;
+    }
 }
 
 @font-face {
-  font-family: "LINESeedKR-Bd";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2")
-    format("woff2");
-  font-weight: 700;
-  font-style: normal;
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
 }
 
 /* 포인트 폰트 */
 @font-face {
-  font-family: "Ainmom";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_01@1.0/Ainmom.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'Ainmom';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_01@1.0/Ainmom.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @layer base {
-  .body {
-    @apply font-primary;
-  }
-  .reactive-body {
-    @apply w-main-desktop md-max:w-main-tablet sm-max:w-main-mobile;
-  }
+    .body {
+        @apply font-primary;
+    }
+    .reactive-body {
+        @apply w-main-desktop md-max:w-main-tablet sm-max:w-main-mobile;
+    }
 }
