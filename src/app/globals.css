@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+<<<<<<< Updated upstream
 
 @layer utilities {
 }
@@ -37,3 +38,5 @@
     @apply w-main-desktop md-max:w-main-tablet sm-max:w-main-mobile;
   }
 }
+=======
+>>>>>>> Stashed changes
