@@ -1,7 +1,7 @@
 ---
 name: '✅UPDATE'
-about: Update 작업 상황을 작성해주세요
-title: '[UPDATE]'
+about: 기존의 기능을 개선하거나 업데이트
+title: '[UPDATE] '
 labels: ''
 assignees: ''
 ---
