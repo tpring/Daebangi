@@ -1,7 +1,7 @@
 ---
-name: '📒feature'
-about: feature 작업 상황을 작성해주세요
-title: '[feature]'
+name: '📒FEATURE'
+about: 새로운 기능 추가
+title: '[FEATURE] '
 labels: ''
 assignees: ''
 ---

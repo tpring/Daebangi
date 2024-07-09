@@ -1,7 +1,7 @@
 ---
 name: "\U0001FA79FIX"
-about: 코드 수정시 작성해주세요
-title: '[FIX]'
+about: 버그 수정, 문제 해결
+title: '[FIX] '
 labels: ''
 assignees: ''
 ---
