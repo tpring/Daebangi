@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 
-const LikeButton = () => {
+const LikeButton: React.FC = () => {
   const [isLiked, setIsLiked] = useState(false);
 
   const handleToggleLike = () => {
