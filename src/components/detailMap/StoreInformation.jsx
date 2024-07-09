@@ -16,8 +16,8 @@ const StoreInformation = () => {
             </div>
             {/* 가게정보_텍스트영역 */}
             <div className="w-full md:w-2/3 pt-4 md:pt-0 md:pl-8">
-                <h1 className="text-title font-bold mb-3 flex justify-between items-center">
-                    <span>성심당 대전역점</span>
+                <h1 className="mb-3 flex justify-between items-center">
+                    <span className="text-title font-title">성심당 대전역점</span>
                     <LikeButton />
                 </h1>
                 <address className="not-italic mb-2">
