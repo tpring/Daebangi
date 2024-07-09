@@ -1,7 +1,7 @@
 ---
 name: "\U0001F525DEL"
-about: 코드 삭제시 작성해주세요
-title: '[DEL]'
+about: 불필요한 코드나 파일 삭제
+title: '[DEL] '
 labels: ''
 assignees: ''
 ---
