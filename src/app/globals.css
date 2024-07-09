@@ -9,6 +9,9 @@
     .shared-butten {
         @apply text-title bg-point w-full h-[80px] text-white py-3 rounded-md;
     }
+    .comment-button {
+    @apply p-3 rounded-lg bg-white hover:brightness-90;
+    }
 }
 
 @font-face {
