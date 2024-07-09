@@ -1,7 +1,7 @@
 ---
 name: "\U0001F41EBUG"
-about: 버그 발생시 작성해주세요e
-title: '[BUG]'
+about: 버그를 수정하는 작업
+title: '[BUG] '
 labels: ''
 assignees: ''
 ---

@@ -1,7 +1,7 @@
 ---
 name: '⚒️ REFACTOR'
-about: Refactor 작업 상황을 작성해주세요
-title: '[REFACTOR]'
+about: 코드의 구조나 디자인을 변경하되 기능은 그대로 유지
+title: '[REFACTOR] '
 labels: ''
 assignees: ''
 ---

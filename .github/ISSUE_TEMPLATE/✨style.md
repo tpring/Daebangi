@@ -1,7 +1,7 @@
 ---
 name: '✨STYLE'
-about: Style 작업 상황을 작성해주세요
-title: '[STYLE]'
+about: 코드의 스타일, 포맷, 문서화 관련 변경
+title: '[STYLE] '
 labels: ''
 assignees: ''
 ---
