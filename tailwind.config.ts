@@ -8,10 +8,37 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      fontFamily: {
+        primary: ["LINESeedKR-Bd", "sans-serif"],
+        secondary: ["AnotherFont", "sans-serif"],
+      },
+      colors: {
+        main: "#FFF7DB",
+        base: "#FBF8EE",
+        point: "#A16040",
+      },
+      fontSize: {
+        basics: "1rem",
+        subtitle: "1.5rem",
+        title: "2rem",
+      },
+      screens: {
+        "md-max": { max: "1068px" },
+        "sm-max": { max: "734px" },
+      },
+      width: {
+        "main-desktop": "1020px",
+        "main-tablet": "710px",
+        "main-mobile": "82%",
+      },
+      height: {
+        "37": "37px",
+      },
+      animation: {
+        baked: "",
+      },
+      keyframes: {
+        shake: {},
       },
     },
   },
