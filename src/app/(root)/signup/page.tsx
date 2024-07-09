@@ -18,12 +18,18 @@ const SignupPage = () => {
         const { data, error } = await supabase.auth.signUp({
             email,
             password,
+            options: {
+                data: {
+                    nickname,
+                },
+            },
         });
 
         if (error) {
+            alert('실패.');
             console.log('error:', error);
         } else {
-            await supabase.from('users').insert({ email, nickname });
+            alert('성공했습니다.');
             window.location.href = '/login';
         }
         return data;
