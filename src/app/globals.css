@@ -2,25 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .comment-button {
-    @apply p-3 rounded-lg bg-white hover:brightness-90;
-  }
-}
+/* 기본 폰트 */
 @font-face {
-    font-family: 'LINESeedKR-Bd';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
-    font-weight: 400;
+    font-family: 'SUIT-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: 500;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'LINESeedKR-Bd';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-family: 'SUIT-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+}
 /* 포인트 폰트 */
 @font-face {
     font-family: 'Ainmom';
@@ -30,10 +32,16 @@
 }
 
 @layer base {
-    .body {
-        @apply font-primary;
+    body {
+        @apply font-main;
     }
     .reactive-body {
         @apply w-main-desktop md-max:w-main-tablet sm-max:w-main-mobile;
+    }
+}
+
+@layer utilities {
+    .comment-button {
+        @apply p-3 rounded-lg bg-white hover:brightness-90;
     }
 }
