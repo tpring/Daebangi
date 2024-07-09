@@ -18,19 +18,24 @@ const Comment: React.FC = () => {
     setComment(e.target.value);
   };
 
+  //  삭제 수정 로직 구현 해야함.
   return (
     <div className="border">
-      <h1 className="text-subtitl font-semibold">댓글 남겨 주세요</h1>
-      <form onSubmit={handleSubmit}>
-        <Image src={userProfile} alt="유저 프로필" width={30} height={30} />
+      <h1 className="text-subtitle font-semibold py-2">댓글 남겨 주세요</h1>
+      <form className="flex items-center gap-2" onSubmit={handleSubmit}>
+        <Image src={userProfile} alt="유저 프로필" width={80} height={80} />
         <input
           onChange={handleChange}
-          className="w-full border border-point rounded-[60px]"
+          className="px-5 w-full h-[52px] text-title border-point border-4 rounded-[60px] focus:outline-none"
         />
       </form>
       <div>
-        <h1>댓글 3개</h1>
+        {/* 댓글 갯수 구하는 로직 구현해야함 */}
+        <h1 className="text-subtitle font-semibold py-2">
+          댓글 <span>3</span>개
+        </h1>
         <ul>
+          {/* 더미 데이터 입니다. */}
           <CommentItem nickname={"빵이조아"} content={"택수님의 고향.."} />
           <CommentItem nickname={"빵이조아"} content={"택수님의 고향.."} />
           <CommentItem nickname={"빵이조아"} content={"택수님의 고향.."} />
