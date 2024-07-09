@@ -1,20 +1,19 @@
-import { FormEventHandler } from "react";
+import { ChangeEventHandler } from "react";
 
 type CommentInputProps = {
-  handleSumbit: FormEventHandler | undefined;
+  onChange: ChangeEventHandler<HTMLInputElement> | undefined;
 };
 
-const CommentInput: React.FC<CommentInputProps> = ({ handleSumbit }) => {
+const CommentInput: React.FC<CommentInputProps> = ({ onChange }) => {
   return (
-    <form className="flex" onSubmit={handleSumbit}>
-      <div className="w-[80px] h-[80px] border border-black">
-        사진 들어갈 자리
-      </div>
+    <div>
+      <div className="w-[80px] h-[80px] border">사진 들어갈 자리</div>
       <input
         type="sumbit"
-        className="w-full rouneded-[60px] border border-[#7E4431]"
+        onChange={onChange}
+        className="w-full rounded-[60px] border border-point outline-point"
       />
-    </form>
+    </div>
   );
 };
 
