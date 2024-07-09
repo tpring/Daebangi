@@ -9,7 +9,7 @@ const config: Config = {
     theme: {
         extend: {
             fontFamily: {
-                primary: ['LINESeedKR-Bd', 'sans-serif'],
+                main: ['SUIT-Regular', 'sans-serif'],
                 secondary: ['Ainmom', 'sans-serif'],
             },
             colors: {
@@ -21,6 +21,11 @@ const config: Config = {
                 basics: '1rem',
                 subtitle: '1.5rem',
                 title: '2rem',
+            },
+            fontWeight: {
+                basics: '500',
+                subtitle: '700',
+                title: '900',
             },
             screens: {
                 'md-max': { max: '1068px' },
