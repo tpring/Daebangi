@@ -2,63 +2,36 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { createClient } from "@/app/api/supabase/client";
+import {
+  checkLikeStatus,
+  toggleLikeStatus,
+} from "@/app/api/(supabase)/(like)/route";
 
 const LikeButton: React.FC = () => {
-  const supabase = createClient();
   const [isLiked, setIsLiked] = useState(false);
 
   // 테스트용 userId, bakeryId
-  const userId = "386e5d5f-5bfc-427c-b4c0-126d3252b48c";
-  const bakeryId = "0389023d-f2d5-4956-8eb4-f24a89aa03d3";
+  const userId = "6e2e560b-bd56-4039-806b-6f152ced0853";
+  const bakeryId = "009a052c-3b40-4500-9416-349b625585b5";
 
-  const checkLikeStatus = async () => {
+  const fetchLikeStatus = async () => {
     try {
-      const { data, error } = await supabase
-        .from("like")
-        .select("*")
-        .eq("user_id", userId)
-        .eq("bakery_id", bakeryId);
-
-      if (error) {
-        console.error(error);
-      } else {
-        setIsLiked(data.length > 0);
-      }
+      const status = await checkLikeStatus(userId, bakeryId);
+      setIsLiked(status);
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    checkLikeStatus();
-  }, [checkLikeStatus]);
+    fetchLikeStatus();
+  }, []);
 
   const handleToggleLike = async () => {
     try {
-      if (isLiked) {
-        const { error } = await supabase
-          .from("like")
-          .delete()
-          .eq("user_id", userId)
-          .eq("bakery_id", bakeryId);
-
-        if (error) {
-          console.error(error);
-        } else {
-          setIsLiked(false);
-        }
-      } else {
-        const { error } = await supabase.from("like").insert({
-          user_id: userId,
-          bakery_id: bakeryId,
-        });
-
-        if (error) {
-          console.error(error);
-        } else {
-          setIsLiked(true);
-        }
+      const result = await toggleLikeStatus(isLiked, userId, bakeryId);
+      if (result) {
+        setIsLiked(!isLiked);
       }
     } catch (error) {
       console.error(error);
