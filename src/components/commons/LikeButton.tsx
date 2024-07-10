@@ -1,18 +1,67 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import { createClient } from "@/app/api/supabase/client";
 
 const LikeButton: React.FC = () => {
+  const supabase = createClient();
   const [isLiked, setIsLiked] = useState(false);
 
-  const handleToggleLike = () => {
-    if (isLiked) {
-      // + 해당 userId, bakeryId 가진 커럼 DB like 테이블에서 삭제하기
-      setIsLiked(false);
-    } else {
-      // + DB like 테이블에 추가하기(userId, bakeryId)
-      setIsLiked(true);
+  // 테스트용 userId, bakeryId
+  const userId = "386e5d5f-5bfc-427c-b4c0-126d3252b48c";
+  const bakeryId = "0389023d-f2d5-4956-8eb4-f24a89aa03d3";
+
+  const checkLikeStatus = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("like")
+        .select("*")
+        .eq("user_id", userId)
+        .eq("bakery_id", bakeryId);
+
+      if (error) {
+        console.error(error);
+      } else {
+        setIsLiked(data.length > 0);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    checkLikeStatus();
+  }, [checkLikeStatus]);
+
+  const handleToggleLike = async () => {
+    try {
+      if (isLiked) {
+        const { error } = await supabase
+          .from("like")
+          .delete()
+          .eq("user_id", userId)
+          .eq("bakery_id", bakeryId);
+
+        if (error) {
+          console.error(error);
+        } else {
+          setIsLiked(false);
+        }
+      } else {
+        const { error } = await supabase.from("like").insert({
+          user_id: userId,
+          bakery_id: bakeryId,
+        });
+
+        if (error) {
+          console.error(error);
+        } else {
+          setIsLiked(true);
+        }
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
