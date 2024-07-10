@@ -6,6 +6,7 @@ import { createClient } from '../../../supabase/client';
 import LogoBread from '../../../../public/image/breads/LogoBread.png';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { v4 as uuidv4 } from 'uuid';
 
 const SignupPage = () => {
     const [email, setEmail] = useState('');
@@ -16,6 +17,7 @@ const SignupPage = () => {
     const [profileUrl, setProfileUrl] = useState<string | null>(null);
     const supabase = createClient();
     const router = useRouter();
+    const newUuid = uuidv4();
 
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -31,31 +33,12 @@ const SignupPage = () => {
             return;
         }
 
-        let profileImageUrl: string | null = null;
-        if (profile) {
-            const { data: uploadData, error: uploadError } = await supabase.storage
-                .from('image')
-                .upload(`profileImage/${profile.name}`, profile);
-
-            if (uploadError) {
-                alert('이미지 업로드 실패: ' + uploadError.message);
-                console.error('uploadError:', uploadError);
-                return;
-            }
-
-            const {
-                data: { publicUrl },
-            } = supabase.storage.from('image').getPublicUrl(uploadData.path);
-            profileImageUrl = publicUrl;
-        }
-
         const { data, error } = await supabase.auth.signUp({
             email,
             password,
             options: {
                 data: {
                     nickname,
-                    profile: profileImageUrl,
                 },
             },
         });
@@ -68,10 +51,46 @@ const SignupPage = () => {
             }
             console.error('error:', error);
         } else {
-            alert('회원가입 성공! 로그인 페이지로 이동합니다.');
+            alert('회원가입 성공! 프로필 이미지 업로드를 진행합니다.');
+            if (data.user) {
+                // 회원가입 후 프로필 이미지 업로드
+                await uploadProfileImage(data.user.id);
+            }
             router.push('/login');
         }
-        return data;
+    };
+
+    const uploadProfileImage = async (userId: string) => {
+        if (profile) {
+            // 이미지 업로드
+            const { data: uploadData, error: uploadError } = await supabase.storage
+                .from('image')
+                .upload(`profileImage/${newUuid}.png`, profile);
+
+            if (uploadError) {
+                alert('이미지 업로드 실패: ' + uploadError.message);
+                console.error('uploadError:', uploadError);
+                return;
+            }
+
+            // 업로드된 이미지의 public URL 가져오기
+            const {
+                data: { publicUrl },
+            } = supabase.storage.from('image').getPublicUrl(uploadData.path);
+
+            // User 테이블에 프로필 이미지 URL 업데이트
+            const { error: updateError } = await supabase
+                .from('user')
+                .update({ profile: publicUrl })
+                .eq('user_id', userId);
+
+            if (updateError) {
+                alert('프로필 이미지 URL 업데이트 실패: ' + updateError.message);
+                console.error('updateError:', updateError);
+            } else {
+                alert('프로필 이미지 업로드 성공!');
+            }
+        }
     };
 
     const handleProfileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
