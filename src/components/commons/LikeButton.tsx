@@ -6,14 +6,19 @@ import {
   checkLikeStatus,
   toggleLikeStatus,
 } from "@/app/api/(supabase)/(like)/route";
+import { useUserStore } from "@/store/userStore";
 
-const LikeButton: React.FC = () => {
+interface LikeButtonProp {
+  bakeryId: string;
+}
+
+const LikeButton: React.FC<LikeButtonProp> = ({ bakeryId }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // 테스트용 userId, bakeryId
-  const userId = "6e2e560b-bd56-4039-806b-6f152ced0853";
-  const bakeryId = "009a052c-3b40-4500-9416-349b625585b5";
+  const { userId } = useUserStore((state) => ({
+    userId: state.userId,
+  }));
 
   const fetchLikeStatus = async () => {
     try {
