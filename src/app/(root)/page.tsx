@@ -1,6 +1,7 @@
 import BakeryCard from "../../components/commons/BakeryCard";
 import searchBread from "../../../public/image/breads/searchBread.png";
 import Image from "next/image";
+import { BakeryList } from "@/components/BakeryList/BakeryList";
 
 export default function Home() {
   return (
@@ -28,12 +29,13 @@ export default function Home() {
         </div>
         <div className="flex justify-center items-center">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <BakeryCard />
-            <BakeryCard />
-            <BakeryCard />
-            <BakeryCard />
-            <BakeryCard />
-            <BakeryCard />
+            <div>
+              <BakeryList />
+              <BakeryList />
+              <BakeryList />
+              <BakeryList />
+              <BakeryList />
+            </div>
           </div>
         </div>
       </div>

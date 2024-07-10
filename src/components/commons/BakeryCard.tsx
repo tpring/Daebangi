@@ -2,7 +2,7 @@ import Image from "next/image";
 import phone from "../../../public/image/icons/phone.png";
 import LikeButton from "./LikeButton";
 
-export default function BakeryCard() {
+export const BakeryCard = () => {
   return (
     <>
       <div className="flex justify-center items-center">
@@ -38,4 +38,4 @@ export default function BakeryCard() {
       </div>
     </>
   );
-}
+};
