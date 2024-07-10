@@ -36,6 +36,11 @@ const LikeButton: React.FC<LikeButtonProp> = ({ bakeryId }) => {
   }, []);
 
   const handleToggleLike = async () => {
+    if (userId === null) {
+      alert("로그인 해주세요.");
+      return false;
+    }
+
     try {
       const result = await toggleLikeStatus(isLiked, userId, bakeryId);
       if (result) {
