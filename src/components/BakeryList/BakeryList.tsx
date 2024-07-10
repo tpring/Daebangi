@@ -4,7 +4,7 @@ type Bakery = {
     bakery_id: string;
     name: string;
     image: string;
-    phone: string | null;
+    phone: string;
     address: string;
 };
 
@@ -34,6 +34,9 @@ export const BakeryList = () => {
                         query: {
                             name: bakery.name,
                             address: bakery.address,
+                            image: bakery.image,
+                            phone: bakery.phone,
+                            bakeryId: bakery.bakery_id,
                         },
                     }}
                     key={bakery.bakery_id}
@@ -41,6 +44,7 @@ export const BakeryList = () => {
                 >
                     <div>
                         <BakeryCard
+                            bakeryId={bakery.bakery_id}
                             image={bakery.image}
                             name={bakery.name}
                             phone={bakery.phone}
