@@ -5,8 +5,8 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import LogoBread from '../../../../public/image/breads/LogoBread.png';
 import { createClient } from '../../../supabase/client';
-import { useUserStore } from '../../../store/userStore';
 import { useRouter } from 'next/navigation';
+import { useUserStore } from '@/store/userStore';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -18,13 +18,29 @@ const LoginPage = () => {
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
+        // 유효성 검사
+        if (!email || !password) {
+            alert('이메일과 비밀번호를 모두 입력해주세요.');
+            return;
+        }
+
+        if (password.length < 6) {
+            alert('비밀번호는 6자리 이상이어야 합니다.');
+            return;
+        }
+
         const { data, error } = await supabase.auth.signInWithPassword({
             email: email,
             password: password,
         });
 
         if (error) {
-            alert('로그인 실패');
+            // Supabase의 오류 메시지에 따라 유효성 검사 처리
+            if (error.message.includes('Invalid login credentials')) {
+                alert('이메일이나 비밀번호가 잘못되었습니다.');
+            } else {
+                alert('로그인 실패: ' + error.message);
+            }
             console.error('error:', error);
         } else {
             if (data.user) {
@@ -40,7 +56,7 @@ const LoginPage = () => {
                     console.error('userError:', userError);
                 } else {
                     // Zustand 상태 업데이트
-                    setUser(userData.user_id, userData.email, userData.nickname, userData.profile);
+                    setUser(userData.user_id, userData.email, userData.nickname ?? '', userData.profile ?? '');
                     alert('로그인 성공');
                     router.push('/');
                 }
@@ -54,7 +70,7 @@ const LoginPage = () => {
             <Image src={LogoBread} alt="Logo Bread" width={288} height={201} priority className="mb-[-20px]" />
             <label className="font-secondary text-[60px]">대빵이</label>
             <form onSubmit={handleLogin}>
-                <p className="text-subtitle my-3">이메일</p>
+                <p className="shared-text">이메일</p>
                 <input
                     className="shared-input mb-4 focus:outline-[#C9AB9C]"
                     type="email"
@@ -62,7 +78,7 @@ const LoginPage = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <p className="text-subtitle my-3">비밀번호</p>
+                <p className="shared-text">비밀번호</p>
                 <input
                     className="shared-input mb-4 focus:outline-[#C9AB9C]"
                     type="password"
