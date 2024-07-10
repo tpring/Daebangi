@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { createClient } from "@/supabase/client";
 import Image from "next/image";
-import { createClient } from "@/app/api/supabase/client";
+import { useEffect, useState } from "react";
 
 const LikeButton: React.FC = () => {
   const supabase = createClient();
