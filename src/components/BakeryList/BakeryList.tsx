@@ -19,7 +19,7 @@ export const BakeryList = () => {
 
   useEffect(() => {
     const fetchBreads = async () => {
-      const { data } = await supabase.from("bakery").select("*");
+      const { data } = await supabase.from<Bakery>("bakery").select("*");
       return data;
     };
     setBreads;
