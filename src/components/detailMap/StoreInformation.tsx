@@ -12,8 +12,8 @@ const StoreInformation = () => {
                     layout="fill"
                     objectFit="cover"
                     className="rounded-md"
-                />
-            </div>
+                /> 
+            </div> 
             {/* 가게정보_텍스트영역 */}
             <div className="w-full md:w-2/3 pt-4 md:pt-0 md:pl-8">
                 <h1 className="mb-3 flex justify-between items-center">

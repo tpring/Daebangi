@@ -6,8 +6,6 @@ type Bakery = {
     image: string;
     phone: string | null;
     address: string;
-    x: number | null;
-    y: number | null;
 };
 
 import { useEffect, useState } from 'react';
@@ -35,8 +33,7 @@ export const BakeryList = () => {
                         pathname: `/detail/${bakery.bakery_id}`,
                         query: {
                             name: bakery.name,
-                            x: bakery.x,
-                            y: bakery.y,
+                            address: bakery.address,
                         },
                     }}
                     key={bakery.bakery_id}
