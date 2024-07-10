@@ -2,7 +2,11 @@
 const nextConfig = {
   images: {
     domains: ["txvvzlryxqhzxjcsncqo.supabase.co"],
-    remotePatterns: [{ hostname: "raw.githubusercontent.com" }],
+    remotePatterns: [
+      {
+        hostname: "raw.githubusercontent.com",
+      },
+    ],
   },
 };
 
