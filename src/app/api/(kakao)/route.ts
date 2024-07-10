@@ -10,7 +10,7 @@ export const loadKakaoMapScript = (kakaoMapKey: string): Promise<void> => {
         const script = document.createElement('script');
         script.src = scriptUrl;
         script.async = true; // 비동기로 스크립트 로드
-        script.defer = true; // 스크립트가 늦게 로드되도록 설정
+        script.defer = true;
 
         // 스크립트가 로드되었을 때 실행되는 함수
         script.onload = () => {
