@@ -4,7 +4,7 @@ type Bakery = {
   bakery_id: string;
   name: string;
   image: string;
-  phone: number;
+  phone: string;
   address: string;
 };
 
