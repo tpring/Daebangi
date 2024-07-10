@@ -9,6 +9,7 @@ import {
 
 const LikeButton: React.FC = () => {
   const [isLiked, setIsLiked] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // 테스트용 userId, bakeryId
   const userId = "6e2e560b-bd56-4039-806b-6f152ced0853";
@@ -20,6 +21,8 @@ const LikeButton: React.FC = () => {
       setIsLiked(status);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -37,6 +40,10 @@ const LikeButton: React.FC = () => {
       console.error(error);
     }
   };
+
+  if (isLoading) {
+    return null;
+  }
 
   return (
     <button onClick={handleToggleLike}>
