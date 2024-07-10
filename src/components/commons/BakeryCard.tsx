@@ -1,8 +1,19 @@
+"use client";
+
+type BakeryCard = {
+  name: string;
+  image: string;
+  phone: number;
+  address: string;
+};
+
 import Image from "next/image";
 import phone from "../../../public/image/icons/phone.png";
 import LikeButton from "./LikeButton";
+import { useEffect, useState } from "react";
+import { createClient } from "@/supabase/client";
 
-export const BakeryCard = () => {
+export const BakeryCard = ({ image, name, phone, address }: BakeryCard) => {
   return (
     <>
       <div className="flex justify-center items-center">
@@ -10,14 +21,14 @@ export const BakeryCard = () => {
           <div className="flex justify-center items-center">
             <Image
               className="p-2 "
-              src="/image/breads/dummyData.jpg"
+              src={image}
               alt="bread img"
               width={500}
               height={500}
             />
           </div>
           <div className="flex justify-between items-center text-lg font-bold text-black mt-2">
-            성심당 대전역점
+            {name}
             <span className="felx left text-red-500 text-xl">
               <LikeButton />
             </span>
@@ -26,13 +37,13 @@ export const BakeryCard = () => {
           <div className="flex left text-gray-700 text-md mt-2">
             <span className="flex left text-gray-700 text-lg align-middle flex items-center  inline-flex mr-0.5">
               <span className="mr-2">
-                <Image src={phone} alt="phone icon" width={20} height={20} />
+                {/* <Image src={phone} alt="phone icon" width={20} height={20} /> */}
               </span>{" "}
             </span>
             1588-8069
           </div>
           <div className="text-gray-700 text-sm mt-1 p-1 text-left">
-            대전 동구 중앙로 215 대전역사 2F 1대전역 4번 출구에서 38m
+            {address}
           </div>
         </div>
       </div>
