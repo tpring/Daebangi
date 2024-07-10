@@ -1,4 +1,5 @@
 import BakeryCard from "../../../components/commons/BakeryCard";
+import Link from "next/link";
 
 const MyPage = () => {
     return (
@@ -10,9 +11,7 @@ const MyPage = () => {
                     </div>
                     <div className="ml-6">
                         <h1 className="text-3xl font-bold">임금님 반갑습니다.</h1>
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">
-                            내정보 수정
-                        </button>
+                        <Link href="/modifyprofile">내 정보 수정</Link>
                     </div>
                 </div>
             </div>
