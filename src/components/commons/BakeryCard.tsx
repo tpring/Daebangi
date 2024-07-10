@@ -22,7 +22,7 @@ export default function BakeryCard() {
           </div>
           <div className="border-t border-point my-4"></div>
           <div className="flex left text-gray-700 text-md mt-2">
-            <span className="flex left text-gray-700 text-lg align-middle flex items-center  inline-flex items-center mr-0.5">
+            <span className="flex left text-gray-700 text-lg align-middle flex items-center  inline-flex mr-0.5">
               <Image src={phone} alt="phone icon" width={20} height={20} />
             </span>{" "}
             1588-8069
