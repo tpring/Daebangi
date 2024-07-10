@@ -10,9 +10,9 @@ export default function Home() {
       </div>
       <div className="relative">
         <div className="w-screen flex justify-center items-center h-60">
-          <div className="flex relative w-full max-w-2xl items-center">
+          <div className="flex relative w-full max-w-2xl items-center ">
             <input
-              className="w-full p-4 pl-10 pr-20 rounded-full border border-point text-2xl h-12 flex items-center font-secondary"
+              className="w-full p-4 pl-10 pr-20 rounded-full border border-point text-2xl h-12 flex items-center font-secondary focus:outline-none"
               type="text"
               placeholder="어떤 대빵이가 궁금하니?"
             />
@@ -26,7 +26,7 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div className="flex justify-center items-center py-10">
+        <div className="flex justify-center items-center">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <BakeryCard />
             <BakeryCard />

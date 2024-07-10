@@ -1,5 +1,6 @@
 import Image from "next/image";
 import phone from "../../../public/image/icons/phone.png";
+import LikeButton from "./LikeButton";
 
 export default function BakeryCard() {
   return (
@@ -15,16 +16,19 @@ export default function BakeryCard() {
               height={500}
             />
           </div>
-          <div className="flex left text-lg font-bold text-black mt-2">
+          <div className="flex justify-between items-center text-lg font-bold text-black mt-2">
             성심당 대전역점
-            {/* 좋아요 하트 자리 */}
-            {/* <span className="felx left text-red-500 text-xl">❤️</span> */}
+            <span className="felx left text-red-500 text-xl">
+              <LikeButton />
+            </span>
           </div>
           <div className="border-t border-point my-4"></div>
           <div className="flex left text-gray-700 text-md mt-2">
             <span className="flex left text-gray-700 text-lg align-middle flex items-center  inline-flex mr-0.5">
-              <Image src={phone} alt="phone icon" width={20} height={20} />
-            </span>{" "}
+              <span className="mr-2">
+                <Image src={phone} alt="phone icon" width={20} height={20} />
+              </span>{" "}
+            </span>
             1588-8069
           </div>
           <div className="text-gray-700 text-sm mt-1 p-1 text-left">
