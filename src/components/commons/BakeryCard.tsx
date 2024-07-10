@@ -3,12 +3,12 @@
 type BakeryCard = {
   name: string;
   image: string;
-  phone: number;
+  phone: string;
   address: string;
 };
 
 import Image from "next/image";
-import phone from "../../../public/image/icons/phone.png";
+import phoneIcon from "../../../public/image/icons/phone.png";
 import LikeButton from "./LikeButton";
 import { useEffect, useState } from "react";
 import { createClient } from "@/supabase/client";
@@ -37,10 +37,15 @@ export const BakeryCard = ({ image, name, phone, address }: BakeryCard) => {
           <div className="flex left text-gray-700 text-md mt-2">
             <span className="flex left text-gray-700 text-lg align-middle flex items-center  inline-flex mr-0.5">
               <span className="mr-2">
-                {/* <Image src={phone} alt="phone icon" width={20} height={20} /> */}
+                <Image
+                  src={phoneIcon}
+                  alt="phone icon"
+                  width={20}
+                  height={20}
+                />
               </span>{" "}
             </span>
-            1588-8069
+            {phone}
           </div>
           <div className="text-gray-700 text-sm mt-1 p-1 text-left">
             {address}
