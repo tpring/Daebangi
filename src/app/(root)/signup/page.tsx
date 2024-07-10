@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { createClient } from "../../../../supabase/client";
+import { createClient } from "../../../supabase/client";
 
 import React from "react";
 

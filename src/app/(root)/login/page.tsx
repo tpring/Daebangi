@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import LogoBread from "../../../../public/image/breads/LogoBread.png";
-import { createClient } from "../../../../supabase/client";
+import { createClient } from "../../../supabase/client";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
