@@ -1,6 +1,7 @@
 "use client";
 
 type BakeryCard = {
+  bakeryId: string;
   name: string;
   image: string;
   phone: string;
@@ -12,7 +13,13 @@ import phoneIcon from "../../../public/image/icons/phone.png";
 import LikeButton from "./LikeButton";
 import defaultImg from "../../../public/image/noimg.jpg";
 
-export const BakeryCard = ({ image, name, phone, address }: BakeryCard) => {
+export const BakeryCard = ({
+  bakeryId,
+  image,
+  name,
+  phone,
+  address,
+}: BakeryCard) => {
   return (
     <>
       <div className="flex justify-center items-center">
@@ -31,7 +38,7 @@ export const BakeryCard = ({ image, name, phone, address }: BakeryCard) => {
           <div className="flex justify-between items-center text-lg font-bold text-black mt-2">
             {name}
             <span className="felx left text-red-500 text-xl">
-              <LikeButton />
+              <LikeButton bakeryId={bakeryId} />
             </span>
           </div>
           <div className="border-t border-point my-4"></div>
