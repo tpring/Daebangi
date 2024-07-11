@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useUserStore } from "@/store/userStore";
 import { createClient } from "@/supabase/client";
@@ -7,12 +7,10 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import UserProfile from "../commons/UserProfile";
 import CommentItem from "./CommentItem";
 
-
 type CommentProps = {
-    bakery_id: string;
+  bakery_id: string;
 };
 const CommentList: React.FC<CommentProps> = ({ bakery_id }) => {
-
   const [comment, setComment] = useState<string>("");
   const [commentList, setCommentList] = useState<Comment[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -22,12 +20,10 @@ const CommentList: React.FC<CommentProps> = ({ bakery_id }) => {
     profile: state.profile,
   }));
 
-
-    const supabase = createClient();
-    useEffect(() => {
-        fetcthCommentList();
-    }, []);
-
+  const supabase = createClient();
+  useEffect(() => {
+    fetcthCommentList();
+  }, []);
 
   // 댓글 목록 불러오기
   const fetcthCommentList = async () => {
@@ -70,40 +66,9 @@ const CommentList: React.FC<CommentProps> = ({ bakery_id }) => {
     fetcthCommentList();
   };
 
-    // 댓글 목록 불러오기
-    const fetcthCommentList = async () => {
-        const { data: comments, error } = await supabase
-            .from('comment')
-            .select('*')
-            .eq('bakery_id', bakery_id)
-            .order('comment_id', { ascending: false });
-        if (comments) {
-            setCommentList(comments);
-        } else {
-            console.error('댓글 목록 fetch 실패 :', error);
-            throw error;
-        }
-    };
-
-    // 댓글 저장 함수
-    const handleSubmitComment = async () => {
-        const userId = '386e5d5f-5bfc-427c-b4c0-126d3252b48c';
-        const bakeryId = bakery_id;
-        // DB에 입력하기
-        const { error } = await supabase.from('comment').insert({
-            user_id: userId,
-            bakery_id: bakeryId,
-            content: comment,
-        });
-        // 리셋
-        setComment('');
-        fetcthCommentList();
-    };
-
-
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setComment(e.target.value);
-    };
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setComment(e.target.value);
+  };
 
   return (
     <div>
@@ -135,15 +100,14 @@ const CommentList: React.FC<CommentProps> = ({ bakery_id }) => {
                   userId={comment.user_id}
                   commentId={comment.comment_id}
                   onCommentUpdate={fetcthCommentList}
-
-                                />
-                            </div>
-                        );
-                    })}
-                </div>
-            )}
+                />
+              </div>
+            );
+          })}
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default CommentList;
