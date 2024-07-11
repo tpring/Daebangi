@@ -1,7 +1,7 @@
-import React from "react";
-import dynamic from "next/dynamic";
-import Comment from "@/components/comment/Comment";
+import CommentList from "@/components/comment/CommentList";
 import StoreInformation from "@/components/detailMap/StoreInformation";
+import dynamic from "next/dynamic";
+import React from "react";
 
 const SkeletonLoader = () => (
   <div className="w-full h-96 md:h-500 lg:h-600">
@@ -33,7 +33,8 @@ const DetailPage: React.FC<DetailPageProps> = ({ searchParams }) => {
     <div className="reactive-body mx-auto">
       {name && address ? <KakaoMap name={name} address={address} /> : null}
       {bakeryId ? <StoreInformation bakeryId={bakeryId} /> : null}
-      <Comment />
+
+      {bakeryId ? <CommentList bakery_id={bakeryId} /> : null}
     </div>
   );
 };
