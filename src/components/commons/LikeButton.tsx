@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { createClient } from "@/supabase/client";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import {
   checkLikeStatus,
   toggleLikeStatus,

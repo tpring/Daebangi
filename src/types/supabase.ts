@@ -41,25 +41,25 @@ export type Database = {
       }
       comment: {
         Row: {
-          bakery_id: string | null
+          bakery_id: string
           comment_id: number
-          content: string | null
+          content: string
           created_at: string
-          user_id: string | null
+          user_id: string
         }
         Insert: {
-          bakery_id?: string | null
+          bakery_id: string
           comment_id?: number
-          content?: string | null
+          content?: string
           created_at?: string
-          user_id?: string | null
+          user_id: string
         }
         Update: {
-          bakery_id?: string | null
+          bakery_id?: string
           comment_id?: number
-          content?: string | null
+          content?: string
           created_at?: string
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: [
           {
