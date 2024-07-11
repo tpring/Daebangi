@@ -1,26 +1,25 @@
 import Image from "next/image";
-
+import DefaultProfile from "../../../public/image/breads/bread2.png";
 type UserProfileProps = {
   src: string;
   width?: number;
   height?: number;
 };
 
-const UserProfile: React.FC<UserProfileProps> = ({
-  src,
-  width = 80,
-  height = 80,
-}) => {
-  if (src) {
-    const widthAndHeight = `w-[${width}px] h-[${height}px]`;
-    return (
-      <div
-        className={`font-basics border rounded-[100%] ${widthAndHeight} flex items-center overflow-hidden`}
-      >
-        <Image src={src!} width={width} height={height} alt="유저프로필" />
-      </div>
-    );
-  }
+const UserProfile: React.FC<UserProfileProps> = ({ src, width = 80, height = 80 }) => {
+  const width_height = `w-[${width}px] h-[${height}px]`;
+
+  return (
+    <div className={`border rounded-full ${width_height} overflow-hidden`}>
+      <Image
+        src={src! || DefaultProfile}
+        width={width}
+        height={height}
+        alt="유저프로필"
+        className="w-full h-full object-cover"
+      />
+    </div>
+  );
 };
 
 export default UserProfile;
