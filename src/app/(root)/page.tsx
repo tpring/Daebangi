@@ -1,7 +1,8 @@
 
 "use client";
 
-import BakeryCard from "@/components/commons/BakeryCard";
+import UpButton from "@/components/commons/UpButton";
+import BouncingBread from "@/components/main/BouncingBread";
 import searchBread from "../../../public/image/breads/searchBread.png";
 import Image from "next/image";
 import { useRouter } from "../../../node_modules/next/navigation";
@@ -34,9 +35,8 @@ export default function Home() {
 
   return (
     <>
-      <div className="bg-main py-20 text-center text-2xl font-bold">
-        애니메이션
-      </div>
+     <BouncingBread />
+
       <div className="relative">
         <div className="w-screen flex justify-center items-center h-60">
           <div className="flex relative w-full max-w-2xl items-center ">
@@ -65,6 +65,7 @@ export default function Home() {
           <BakeryList />
         </div>
       </div>
+      <UpButton />
     </>
   );
 }
