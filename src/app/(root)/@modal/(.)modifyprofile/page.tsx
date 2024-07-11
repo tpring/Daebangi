@@ -4,8 +4,7 @@ import type { Config } from 'tailwindcss';
 
 //modifyprofile의 페이지를 인터셉트 하는 페이지 입니다.
 // 모달창
-export default function Page() {
-
+const Page = () => {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white rounded-lg shadow-lg p-3 w-70 max-w">
@@ -31,4 +30,6 @@ export default function Page() {
             </div>
         </div>
     );
-}
+};
+
+export default Page;
