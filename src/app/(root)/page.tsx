@@ -1,4 +1,3 @@
-
 "use client";
 
 import UpButton from "@/components/commons/UpButton";
@@ -35,10 +34,10 @@ export default function Home() {
 
   return (
     <>
-     <BouncingBread />
+      <BouncingBread />
 
       <div className="relative">
-        <div className="w-screen flex justify-center items-center h-60">
+        <div className="flex justify-center items-center h-60">
           <div className="flex relative w-full max-w-2xl items-center ">
             <input
               className="w-full p-4 pl-10 pr-20 rounded-full border border-point text-2xl h-12 flex items-center font-secondary focus:outline-none"
@@ -48,16 +47,8 @@ export default function Home() {
               onKeyDown={handleKeyDown}
               placeholder="어떤 대빵이가 궁금하니?"
             />
-            <button
-              className="absolute right-4 top-1/2 transform -translate-y-1/2"
-              onClick={handleSearch}
-            >
-              <Image
-                src={searchBread}
-                alt="search bread"
-                width={40}
-                height={40}
-              />
+            <button className="absolute right-4 top-1/2 transform -translate-y-1/2" onClick={handleSearch}>
+              <Image src={searchBread} alt="search bread" width={40} height={40} />
             </button>
           </div>
         </div>
