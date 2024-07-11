@@ -5,9 +5,7 @@ import { BakeryList } from "@/components/BakeryList/BakeryList";
 export default function Home() {
   return (
     <>
-      <div className="bg-main py-20 text-center text-2xl font-bold">
-        애니메이션
-      </div>
+      <div className="bg-main py-20 text-center text-2xl font-bold">애니메이션</div>
       <div className="relative">
         <div className="w-screen flex justify-center items-center h-60">
           <div className="flex relative w-full max-w-2xl items-center ">
@@ -17,12 +15,8 @@ export default function Home() {
               placeholder="어떤 대빵이가 궁금하니?"
             />
             <button className="absolute right-4 top-1/2 transform -translate-y-1/2">
-              <Image
-                src={searchBread}
-                alt="search bread"
-                width={40}
-                height={40}
-              />
+              <Image src={searchBread} alt="search bread" width={40} height={40} />
+
             </button>
           </div>
         </div>

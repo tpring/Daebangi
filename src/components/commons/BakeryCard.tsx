@@ -1,9 +1,11 @@
 "use client";
 
+
 import Image from "next/image";
 import phoneIcon from "../../../public/image/icons/phone.png";
 import LikeButton from "./LikeButton";
 import defaultImg from "../../../public/image/noimg.jpg";
+
 
 type BakeryCardProps = {
   bakeryId: string;
@@ -37,6 +39,7 @@ export const BakeryCard: React.FC<BakeryCardProps> = ({ bakeryId, image, name, p
           </span>
           {phone ? phone : "매장번호 미제공"}
         </div>
+
         <div className="text-gray-700 text-sm mt-1 p-1 text-left truncate">{address}</div>
       </div>
     </div>
