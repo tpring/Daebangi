@@ -4,7 +4,7 @@ type Bakery = {
   bakery_id: string;
   name: string;
   image: string;
-  phone: number;
+  phone: string;
   address: string;
 };
 
@@ -29,6 +29,7 @@ export const BakeryList = () => {
       {breads.map((bakery) => (
         <div key={bakery.bakery_id}>
           <BakeryCard
+            bakeryId={bakery.bakery_id}
             image={bakery.image}
             name={bakery.name}
             phone={bakery.phone}
