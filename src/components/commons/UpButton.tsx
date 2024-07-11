@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import React, { useEffect, useState } from "react";
 
 const UpButton: React.FC = () => {
   const [showButton, setShowButton] = useState(false);
@@ -32,7 +32,7 @@ const UpButton: React.FC = () => {
       } hover:transform hover:scale-105 hover:transition-transform hover:duration-300`}
       aria-label="스크롤 위로"
     >
-      <Image src="/image/breads/milk.png" alt="스크롤 업버튼" width={95} height={95} />
+      <Image src="/image/breads/upButtonMilk.png" alt="스크롤 업버튼" width={95} height={95} />
     </button>
   );
 };
