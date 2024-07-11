@@ -1,17 +1,22 @@
 import Image from 'next/image';
 import LikeButton from '@/components/commons/LikeButton';
+import defaultImg from '../../../public/image/noimg.png';
 
 type StoreInformationProps = {
     bakeryId: string;
+    name: string | null;
+    address: string | null;
+    image: string | null;
+    phone: string | null;
 };
 
-const StoreInformation: React.FC<StoreInformationProps> = ({ bakeryId }) => {
+const StoreInformation: React.FC<StoreInformationProps> = ({ bakeryId, image, name, phone, address }) => {
     return (
         <section className="flex flex-col md:flex-row justify-between mt-6">
             {/* 가게정보_이미지영역 */}
             <div className="relative w-full md:w-1/3 h-48 md:h-56">
                 <Image
-                    src="/image/breads/dummyData.jpg"
+                    src={image || defaultImg}
                     alt="베이커리 이미지"
                     layout="fill"
                     objectFit="cover"
@@ -21,7 +26,7 @@ const StoreInformation: React.FC<StoreInformationProps> = ({ bakeryId }) => {
             {/* 가게정보_텍스트영역 */}
             <div className="w-full md:w-2/3 pt-4 md:pt-0 md:pl-8">
                 <h1 className="mb-3 flex justify-between items-center">
-                    <span className="text-title font-title">성심당 대전역점</span>
+                    <span className="text-title font-title">{name}</span>
                     <LikeButton bakeryId={bakeryId} />
                 </h1>
                 <address className="not-italic mb-2">
@@ -29,10 +34,10 @@ const StoreInformation: React.FC<StoreInformationProps> = ({ bakeryId }) => {
                         <dt>
                             <Image src="/image/icons/phone.png" alt="전화 아이콘" width={20} height={20} />
                         </dt>
-                        <dd>1588-8069</dd>
+                        <dd> {phone ? phone : '매장번호 미제공'}</dd>
                     </dl>
                 </address>
-                <p>대전 동구 중앙로 215 대전광역시 2F 대전역 4번 출구에서 38m</p>
+                <p>{address}</p>
             </div>
         </section>
     );

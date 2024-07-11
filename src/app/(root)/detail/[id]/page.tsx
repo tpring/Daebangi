@@ -1,39 +1,32 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-import Comment from '@/components/comment/Comment';
+import CommentList from '@/components/comment/CommentList';
 import StoreInformation from '@/components/detailMap/StoreInformation';
-
-const SkeletonLoader = () => (
-    <div className="w-full h-96 md:h-500 lg:h-600">
-        <div className="w-full h-full bg-gray-100 animate-pulse">
-            <div className="w-full h-full bg-gray-300"></div>
-        </div>
-    </div>
-);
+import SkeletonMap from '@/components/commons/Skeleton/SkeletonMap';
 
 const KakaoMap = dynamic(() => import('@/components/detailMap/KakaoMap'), {
     ssr: false,
-    loading: () => <SkeletonLoader />,
+    loading: () => <SkeletonMap />,
 });
 
-type SearchParams = {
-    name?: string;
-    address?: string;
-    bakeryId?: string;
-};
-
 type DetailPageProps = {
-    searchParams: SearchParams;
+    searchParams: {
+        name: string;
+        address: string;
+        bakeryId: string;
+        image: string;
+        phone: string;
+    };
 };
 
 const DetailPage: React.FC<DetailPageProps> = ({ searchParams }) => {
-    const { name, address, bakeryId } = searchParams;
+    const { name, address, bakeryId, image, phone } = searchParams;
 
     return (
-        <div className="reactive-body mx-auto">
-            {name && address ? <KakaoMap name={name} address={address} /> : null}
-            {bakeryId ? <StoreInformation bakeryId={bakeryId} /> : null}
-            <Comment />
+        <div className="reactive-body mx-auto space-y-8">
+            {name && address ? <KakaoMap name={name} address={address} /> : <SkeletonMap />}
+            <StoreInformation bakeryId={bakeryId} name={name} address={address} image={image} phone={phone} />
+            <CommentList bakery_id={bakeryId} />
         </div>
     );
 };
