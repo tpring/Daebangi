@@ -8,19 +8,29 @@ type Bakery = {
   address: string;
 };
 
-import { createClient } from "@/supabase/client";
-import Link from "next/link";
+
 import { useEffect, useState } from "react";
+import { createClient } from "@/supabase/client";
 import { BakeryCard } from "../commons/BakeryCard";
+import Link from "next/link";
 
 export const BakeryList = () => {
   const [breads, setBreads] = useState<Bakery[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
 
   useEffect(() => {
     const supabase = createClient();
     const fetchBreads = async () => {
-      const { data } = await supabase.from("bakery").select("*");
-      setBreads((data as Bakery[]) || []);
+
+      try {
+        const { data } = await supabase.from("bakery").select("*");
+        setBreads((data as Bakery[]) || []);
+      } catch (error) {
+        setError("목록을 불러오는 중 오류가 발생했습니다.");
+        console.error(error);
+      }
+
     };
     fetchBreads();
   }, []);

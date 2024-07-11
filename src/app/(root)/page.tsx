@@ -16,6 +16,7 @@ export default function Home() {
             />
             <button className="absolute right-4 top-1/2 transform -translate-y-1/2">
               <Image src={searchBread} alt="search bread" width={40} height={40} />
+
             </button>
           </div>
         </div>

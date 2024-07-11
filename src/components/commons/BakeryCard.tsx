@@ -3,8 +3,8 @@
 
 import Image from "next/image";
 import phoneIcon from "../../../public/image/icons/phone.png";
-import defaultImg from "../../../public/image/noimg.jpg";
 import LikeButton from "./LikeButton";
+import defaultImg from "../../../public/image/noimg.jpg";
 
 
 type BakeryCardProps = {
@@ -32,13 +32,14 @@ export const BakeryCard: React.FC<BakeryCardProps> = ({ bakeryId, image, name, p
         </div>
         <div className="border-t border-point my-4"></div>
         <div className="flex left text-gray-700 text-md mt-2">
-          <span className="flex left text-gray-700 text-lg align-middle items-center inline-flex mr-0.5">
+          <span className="left text-gray-700 text-lg align-middle items-center inline-flex mr-0.5">
             <span className="mr-2">
               <Image src={phoneIcon} alt="phone icon" width={20} height={20} />
             </span>
           </span>
           {phone ? phone : "매장번호 미제공"}
         </div>
+
         <div className="text-gray-700 text-sm mt-1 p-1 text-left truncate">{address}</div>
       </div>
     </div>
