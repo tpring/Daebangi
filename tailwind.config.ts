@@ -39,21 +39,15 @@ const config: Config = {
       height: {
         "37": "37px",
       },
-      dance: {
-        "0%, 100%": { transform: "translate(0, 0)" },
-        "25%": { transform: "translate(-5px, -5px)" },
-        "50%": { transform: "translate(5px, 5px)" },
-        "75%": { transform: "translate(-5px, 5px)" },
+      keyframes: {
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
       },
-    },
-    keyframes: {
-      wobble: {
-        "0%, 100%": { transform: "translateY(0)" },
-        "50%": { transform: "translateY(-10px)" },
+      animation: {
+        float: "float 3s ease-in-out infinite",
       },
-    },
-    animation: {
-      wobble: "wobble 3s ease-in-out infinite",
     },
   },
   plugins: [],

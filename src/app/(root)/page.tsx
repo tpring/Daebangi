@@ -2,7 +2,7 @@ import searchBread from "../../../public/image/breads/searchBread.png";
 import Image from "next/image";
 import { BakeryList } from "@/components/BakeryList/BakeryList";
 import UpButton from "@/components/commons/UpButton";
-import BreadRain from "@/components/main/BreadRain";
+import BreadRain from "@/components/main/BouncingBread";
 
 export default function Home() {
   return (
