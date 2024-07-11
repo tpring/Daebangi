@@ -1,3 +1,4 @@
+
 import CommentList from "@/components/comment/CommentList";
 import StoreInformation from "@/components/detailMap/StoreInformation";
 import dynamic from "next/dynamic";
@@ -36,6 +37,7 @@ const DetailPage: React.FC<DetailPageProps> = ({ searchParams }) => {
       {bakeryId ? <CommentList bakery_id={bakeryId} /> : null}
     </div>
   );
+
 };
 
 export default DetailPage;
