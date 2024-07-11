@@ -83,6 +83,7 @@ const SignupPage = () => {
       fileInputRef.current.click();
     }
   };
+  //수정 로그인시 진입금지
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
