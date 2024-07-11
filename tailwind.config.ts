@@ -39,12 +39,6 @@ const config: Config = {
             height: {
                 '37': '37px',
             },
-            animation: {
-                baked: '',
-            },
-            keyframes: {
-                shake: {},
-            },
         },
     },
     plugins: [],

@@ -1,7 +1,11 @@
 import Image from 'next/image';
 import LikeButton from '@/components/commons/LikeButton';
 
-const StoreInformation = () => {
+type StoreInformationProps = {
+    bakeryId: string;
+};
+
+const StoreInformation: React.FC<StoreInformationProps> = ({ bakeryId }) => {
     return (
         <section className="flex flex-col md:flex-row justify-between mt-6">
             {/* 가게정보_이미지영역 */}
@@ -18,7 +22,7 @@ const StoreInformation = () => {
             <div className="w-full md:w-2/3 pt-4 md:pt-0 md:pl-8">
                 <h1 className="mb-3 flex justify-between items-center">
                     <span className="text-title font-title">성심당 대전역점</span>
-                    <LikeButton />
+                    <LikeButton bakeryId={bakeryId} />
                 </h1>
                 <address className="not-italic mb-2">
                     <dl className="flex items-center space-x-2 mb-3">
