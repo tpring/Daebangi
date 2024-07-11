@@ -1,3 +1,4 @@
+
 "use client";
 
 import BakeryCard from "@/components/commons/BakeryCard";

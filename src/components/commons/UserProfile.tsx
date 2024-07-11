@@ -1,19 +1,25 @@
 import Image from "next/image";
-
+import DefaultProfile from "../../../public/image/breads/bread2.png";
 type UserProfileProps = {
   src: string;
+  width?: number;
+  height?: number;
 };
 
-const UserProfile: React.FC<UserProfileProps> = ({ src }) => {
-  // 유저 정보에 따른 프로필 가져오는 로직 구현 해야함.
+const UserProfile: React.FC<UserProfileProps> = ({ src, width = 80, height = 80 }) => {
+  const width_height = `w-[${width}px] h-[${height}px]`;
 
-  if (src) {
-    return (
-      <div className="font-basics border rounded-[100%] w-[80px] h-[80px] flex items-center overflow-hidden">
-        <Image src={src!} width={80} height={80} alt="유저프로필" />
-      </div>
-    );
-  }
+  return (
+    <div className={`border rounded-full ${width_height} overflow-hidden`}>
+      <Image
+        src={src! || DefaultProfile}
+        width={width}
+        height={height}
+        alt="유저프로필"
+        className="w-full h-full object-cover"
+      />
+    </div>
+  );
 };
 
 export default UserProfile;

@@ -1,12 +1,10 @@
 "use client";
 
+import { checkLikeStatus, toggleLikeStatus } from "@/app/api/(supabase)/(like)/route";
+import { useUserStore } from "@/store/userStore";
+
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import {
-  checkLikeStatus,
-  toggleLikeStatus,
-} from "@/app/api/(supabase)/(like)/route";
-import { useUserStore } from "@/store/userStore";
 
 interface LikeButtonProp {
   bakeryId: string;
@@ -21,8 +19,11 @@ const LikeButton: React.FC<LikeButtonProp> = ({ bakeryId }) => {
   }));
 
   const fetchLikeStatus = async () => {
+
+    if (!userId) return;
     try {
-      const status = await checkLikeStatus(userId, bakeryId);
+      const status = await checkLikeStatus(userId as string, bakeryId);
+
       setIsLiked(status);
     } catch (error) {
       console.error(error);
@@ -33,7 +34,8 @@ const LikeButton: React.FC<LikeButtonProp> = ({ bakeryId }) => {
 
   useEffect(() => {
     fetchLikeStatus();
-  }, []);
+  }, [userId]);
+
 
   const handleToggleLike = async () => {
     if (userId === null) {
@@ -71,6 +73,7 @@ const LikeButton: React.FC<LikeButtonProp> = ({ bakeryId }) => {
           height={20}
           alt="unliked image"
         />
+
       )}
     </button>
   );
