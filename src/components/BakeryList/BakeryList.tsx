@@ -1,21 +1,12 @@
 "use client";
 
-type Bakery = {
-  bakery_id: string;
-  name: string;
-  image: string;
-  phone: string;
-  address: string;
-};
-
-
 import { useEffect, useState } from "react";
 import { createClient } from "@/supabase/client";
 import { BakeryCard } from "../commons/BakeryCard";
 import Link from "next/link";
+import { Bakery } from "@/types/bakery";
 
-
-  interface BakeryListProp {
+interface BakeryListProp {
   searchedBakeries?: Bakery[];
 }
 
@@ -28,19 +19,17 @@ export const BakeryList = ({ searchedBakeries }: BakeryListProp) => {
     } else {
       const supabase = createClient();
       const fetchBreads = async () => {
-        try{
-              const { data } = await supabase.from("bakery").select("*");
-        setBreads((data as Bakery[]) || []);
+        try {
+          const { data } = await supabase.from("bakery").select("*");
+          setBreads((data as Bakery[]) || []);
         } catch (error) {
-        setError("목록을 불러오는 중 오류가 발생했습니다.");
-        console.error(error);
-      }
-    
+          setError("목록을 불러오는 중 오류가 발생했습니다.");
+          console.error(error);
+        }
       };
       fetchBreads();
     }
   }, [searchedBakeries]);
-
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
