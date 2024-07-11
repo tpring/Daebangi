@@ -2,12 +2,12 @@ import searchBread from "../../../public/image/breads/searchBread.png";
 import Image from "next/image";
 import { BakeryList } from "@/components/BakeryList/BakeryList";
 import UpButton from "@/components/commons/UpButton";
-import BreadRain from "@/components/main/BouncingBread";
+import BouncingBread from "@/components/main/BouncingBread";
 
 export default function Home() {
   return (
     <>
-      <BreadRain />
+      <BouncingBread />
       <div className="relative">
         <div className="w-screen flex justify-center items-center h-60">
           <div className="flex relative w-full max-w-2xl items-center ">
