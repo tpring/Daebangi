@@ -8,22 +8,39 @@ type Bakery = {
   address: string;
 };
 
-import { createClient } from "@/supabase/client";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { BakeryCard } from "../commons/BakeryCard";
 
-export const BakeryList = () => {
+import { useEffect, useState } from "react";
+import { createClient } from "@/supabase/client";
+import { BakeryCard } from "../commons/BakeryCard";
+import Link from "next/link";
+
+
+  interface BakeryListProp {
+  searchedBakeries?: Bakery[];
+}
+
+export const BakeryList = ({ searchedBakeries }: BakeryListProp) => {
   const [breads, setBreads] = useState<Bakery[]>([]);
 
   useEffect(() => {
-    const supabase = createClient();
-    const fetchBreads = async () => {
-      const { data } = await supabase.from("bakery").select("*");
-      setBreads((data as Bakery[]) || []);
-    };
-    fetchBreads();
-  }, []);
+    if (searchedBakeries) {
+      setBreads(searchedBakeries);
+    } else {
+      const supabase = createClient();
+      const fetchBreads = async () => {
+        try{
+              const { data } = await supabase.from("bakery").select("*");
+        setBreads((data as Bakery[]) || []);
+        } catch (error) {
+        setError("목록을 불러오는 중 오류가 발생했습니다.");
+        console.error(error);
+      }
+    
+      };
+      fetchBreads();
+    }
+  }, [searchedBakeries]);
+
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
