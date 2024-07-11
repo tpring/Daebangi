@@ -76,7 +76,7 @@ const CommentList: React.FC<CommentProps> = ({ bakery_id }) => {
       <h1 className="text-subtitle py-2">댓글 남겨 주세요</h1>
       <form className="flex items-center gap-2" onSubmit={handleSubmitComment}>
         {/*유저 프로필 */}
-        <div>
+        <div className="ml-3">
           <UserProfile src={profile as string} />
         </div>
         {/* <Image src={profile as string} alt="유저 프로필" width={80} height={80} /> */}

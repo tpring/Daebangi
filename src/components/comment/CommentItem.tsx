@@ -79,7 +79,7 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
     <li className="border-t border-b bg-white p-3 grid grid-cols-3 gap-2 items-center">
       <div className="col-span-2 flex items-center">
         {/* 프로필 이미지 부분 */}
-        <div>
+        <div className="w-[80px]">
           <UserProfile src={commentUser?.profile as string} />
         </div>
         <div className="ml-[50px] ">
