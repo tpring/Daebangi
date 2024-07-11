@@ -1,4 +1,3 @@
-
 import CommentList from "@/components/comment/CommentList";
 import StoreInformation from "@/components/detailMap/StoreInformation";
 import dynamic from "next/dynamic";
@@ -34,10 +33,10 @@ const DetailPage: React.FC<DetailPageProps> = ({ searchParams }) => {
     <div className="reactive-body mx-auto">
       {name && address ? <KakaoMap name={name} address={address} /> : null}
       {bakeryId ? <StoreInformation bakeryId={bakeryId} /> : null}
+
       {bakeryId ? <CommentList bakery_id={bakeryId} /> : null}
     </div>
   );
-
 };
 
 export default DetailPage;
