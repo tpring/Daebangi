@@ -1,11 +1,9 @@
 "use client";
 
-
 import Image from "next/image";
 import phoneIcon from "../../../public/image/icons/phone.png";
+import defaultImg from "../../../public/image/noimg.png";
 import LikeButton from "./LikeButton";
-import defaultImg from "../../../public/image/noimg.jpg";
-
 
 type BakeryCardProps = {
   bakeryId: string;
