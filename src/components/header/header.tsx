@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "../../../node_modules/next/navigation";
 import { useUserStore } from "@/store/userStore";
 import UserProfile from "../commons/UserProfile";
 import breadImage from "../../../public/image/breads/LogoBread.png";
@@ -19,6 +20,7 @@ export const Header: React.FC = () => {
 
   const handleLogout = () => {
     setUser(null, null, null, null);
+    router.push("/"); // 로그아웃 후 메인 페이지로 리다이렉트
   };
 
   return (

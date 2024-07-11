@@ -60,6 +60,7 @@ const LoginPage = () => {
       alert("오류가 발생했습니다. 다시 시도해주세요.");
     }
   };
+  //수정 로그인시 진입금지
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
