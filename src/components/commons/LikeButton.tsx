@@ -1,9 +1,12 @@
 'use client';
-
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import { checkLikeStatus, toggleLikeStatus } from '@/app/api/(supabase)/(like)/route';
-import { useUserStore } from '@/store/userStore';
+import { createClient } from "@/supabase/client";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import {
+  checkLikeStatus,
+  toggleLikeStatus,
+} from "@/app/api/(supabase)/(like)/route";
+import { useUserStore } from "@/store/userStore";
 
 interface LikeButtonProp {
     bakeryId: string;
