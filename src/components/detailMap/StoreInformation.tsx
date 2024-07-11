@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import LikeButton from '@/components/commons/LikeButton';
 import defaultImg from '../../../public/image/noimg.png';
