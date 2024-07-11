@@ -6,7 +6,7 @@ export const POST = async (request: NextRequest) => {
   const supabase = createClient();
   const data = await request.json();
   const bakery_id = data.bakery_id as string;
-  const { data: bakeries, error } = await supabase
+  const { data: searchedBakeries, error } = await supabase
     .from("bakery")
     .select("content")
     .eq("bakery_id", bakery_id);
