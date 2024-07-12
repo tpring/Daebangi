@@ -1,7 +1,9 @@
 "use client";
+import Image from "next/image";
 import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import bread_icon from "../../../../public/image/breads/LogoBread.png";
 type ToastProps = {
   state: string;
   message: string;
@@ -34,15 +36,17 @@ const Toast: React.FC<ToastProps> = ({ state, message, onClear }) => {
             });
             break;
           case "custom": // 커스텀 Toast 입니다.
-            toast(`${message}`, {
+            toast.warn(`${message}`, {
+              icon: ({ theme, type }) => <Image src={bread_icon} width={50} height={50} alt="아이콘" />,
               position: "bottom-right",
               style: {
-                backgroundColor: "#A16040",
-                color: "#FFF7DB",
+                background: "#FBF8EE",
+                color: "black",
                 fontSize: "16px",
               },
               progressStyle: {
-                background: "white",
+                background: "#A16040",
+                borderStyle: "none",
               },
             });
           default:
@@ -66,7 +70,7 @@ const Toast: React.FC<ToastProps> = ({ state, message, onClear }) => {
   */
   return (
     <div>
-      <ToastContainer role="alert" position="bottom-right" />
+      <ToastContainer />
     </div>
   );
 };
