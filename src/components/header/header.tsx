@@ -31,18 +31,18 @@ export const Header: React.FC = () => {
   return (
     <header className="bg-gray-100 border-b border-gray-300">
       <div className="container mx-auto flex justify-between items-center p-2">
-        <div className="flex px-[200px]">
-          <Link href={"/"} className="flex">
+        <div className="flex px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[200px]">
+          <Link href={"/"} className="flex items-center min-w-4">
             <Image src={breadImage} alt="logo" width={50} height={50} />
             <h1 className="text-2xl font-secondary">대빵이</h1>
           </Link>
         </div>
-        <div className="flex px-[215px]">
+        <div className="flex px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[215px]">
           {isLoggedIn ? (
             <>
-              <Link href={"/mypage"} className="flex">
+              <Link href={"/mypage"} className="flex items-center">
                 <UserProfile src={profile} width={40} height={40} />
-                <span className="ml-2 flex justify-between items-center">{nickname}</span>
+                <span className="ml-2">{nickname}</span>
               </Link>
               <button onClick={handleLogout} className="ml-4 text-gray-600 hover:text-gray-900">
                 로그아웃
