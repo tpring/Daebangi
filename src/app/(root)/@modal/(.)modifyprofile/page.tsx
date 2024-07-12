@@ -1,11 +1,12 @@
 "use client";
 import { useUserStore } from "@/store/userStore";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createClient } from "../../../../supabase/client";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import { uploadImage } from "@/supabase/utils/makeimageUrl";
+import LogoBread from "../../../../../public/image/breads/LogoBread.png";
 
 // modifyprofile의 페이지를 인터셉트 하는 페이지 입니다.
 // 모달창
@@ -17,16 +18,20 @@ const Page = () => {
         email: state.email as string,
         nickname: state.nickname as string,
         profile: state.profile,
-        newDescription: state.description,
+        newDescription: state.description as string,
         setUser: state.setUser,
     }));
 
     const [newNickname, setNewNickname] = useState(nickname);
     const [newProfile, setNewProfile] = useState<File | null>(null);
-    const [description, setDescription] = useState("");
+    const [description, setDescription] = useState(newDescription);
     const [profileUrl, setProfileUrl] = useState<string | null>(null);
     const inputref = useRef<HTMLInputElement>(null);
     const newUuid = uuidv4();
+
+    useEffect(() => {
+        setDescription(newDescription);
+    }, [newDescription]);
 
     const handleProfileChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         if (e.target.files) {
@@ -98,7 +103,7 @@ const Page = () => {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white rounded-lg shadow-lg p-3 w-70 max-w">
-                <h2 className="text-2xl font-bold mb-4 text-center shared-text">프로필 수정</h2>
+                <h2 className="mb-4 text-center text-title font-title">프로필 수정</h2>
                 <div className="flex justify-center">
                     <div className="w-32 h-32 bg-gray-300 rounded-full flex items-center justify-center cursor-pointer">
                         {newProfile ? (
@@ -114,7 +119,7 @@ const Page = () => {
                             />
                         ) : (
                             <Image
-                                src={profile || ""}
+                                src={profile || LogoBread.src}
                                 alt="Default Profile"
                                 width={100}
                                 height={100}
@@ -129,15 +134,15 @@ const Page = () => {
                 </div>{" "}
                 <div className="mt-4 flex flex-col">
                     <div className="flex justify-between items-center shared-text">
-                        <p>닉네임</p>
+                        <p className="px-2">닉네임</p>
                         <input className="shared-input" type="text" value={newNickname || ""} onChange={handleNicknameChange} />
                     </div>
                     <div className="flex justify-between items-center mt-4 shared-text">
-                        <p>소개</p>
-                        <input className="shared-input" type="text" onChange={handleDescriptionChange} />
+                        <p className="px-2">소개</p>
+                        <input className="shared-input" type="text" value={description} onChange={handleDescriptionChange} />
                     </div>
                     <div className="flex justify-end mt-4">
-                        <button className="font-secondary shared-text" onClick={handleSubmit}>
+                        <button className="font-secondary shared-butten" onClick={handleSubmit}>
                             프로필 수정 완료
                         </button>
                     </div>
