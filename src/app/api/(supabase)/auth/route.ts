@@ -12,7 +12,7 @@ export const login = async (email: string, password: string) => {
 
 // user 테이블 값 가져오기
 export const getUserData = async (email: string) => {
-  return await supabase.from("user").select("user_id, email, nickname, profile").eq("email", email).single();
+  return await supabase.from("user").select("user_id, email, nickname, profile, description").eq("email", email).single();
 };
 
 // auth에 회원 정보 저장

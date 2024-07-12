@@ -7,11 +7,12 @@ import Image from 'next/image';
 
 const MyPage = () => {
     const supabase = createClient()
-    const { userId, email, nickname, profile } = useUserStore((state) => ({
+    const { userId, email, nickname, profile, description } = useUserStore((state) => ({
         userId: state.userId as string,
         email: state.email,
         nickname: state.nickname,
         profile: state.profile,
+        description: state.description
     }));
 
     return (
@@ -23,6 +24,7 @@ const MyPage = () => {
                     </div>
                     <div className="ml-6">
                         <h1 className="text-3xl font-bold">{nickname}님, 반갑습니다.</h1>
+                        <p className="text-3xl font-bold">{description}</p>
                         <Link href="/modifyprofile">내 정보 수정</Link>
                     </div>
                 </div>
