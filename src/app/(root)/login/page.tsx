@@ -58,7 +58,13 @@ const LoginPage = () => {
             console.error("userError:", userError);
           } else {
             // Zustand 상태 업데이트
-            setUser(userData.user_id, userData.email, userData.nickname ?? "", userData.profile ?? "");
+            setUser(
+              userData.user_id,
+              userData.email,
+              userData.nickname ?? "",
+              userData.profile ?? "",
+              userData.description ?? "",
+            );
             alert("로그인 성공");
             router.push("/");
           }

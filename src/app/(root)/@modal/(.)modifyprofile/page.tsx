@@ -1,18 +1,17 @@
 "use client";
 import { useUserStore } from "@/store/userStore";
-import Image from 'next/image';
-import { HTMLInputAutoCompleteAttribute, useRef, useState } from 'react';
-import { createClient } from '../../../../supabase/client';
-import { useRouter } from 'next/navigation';
+import Image from "next/image";
+import { useRef, useState } from "react";
+import { createClient } from "../../../../supabase/client";
+import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import { uploadImage } from "@/supabase/utils/makeimageUrl";
 
-
-//modifyprofile의 페이지를 인터셉트 하는 페이지 입니다.
+// modifyprofile의 페이지를 인터셉트 하는 페이지 입니다.
 // 모달창
 const Page = () => {
     const router = useRouter();
-    const supabase = createClient()
+    const supabase = createClient();
     const { userId, email, nickname, profile, newDescription, setUser } = useUserStore((state) => ({
         userId: state.userId as string,
         email: state.email as string,
@@ -24,9 +23,9 @@ const Page = () => {
 
     const [newNickname, setNewNickname] = useState(nickname);
     const [newProfile, setNewProfile] = useState<File | null>(null);
-    const [description, setDescription] = useState('')
+    const [description, setDescription] = useState("");
     const [profileUrl, setProfileUrl] = useState<string | null>(null);
-    const inputref = useRef<HTMLInputElement>(null)
+    const inputref = useRef<HTMLInputElement>(null);
     const newUuid = uuidv4();
 
     const handleProfileChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -46,29 +45,30 @@ const Page = () => {
 
     const handleDescriptionChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         setDescription(e.target.value);
-    }
+    };
 
     const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
         e.preventDefault();
 
         // profile은 있는데 선택을 안했을 때
         // profile이 있고 선택 했을 때
-
-        if (newProfile) { // 선택 했을 때
-            const imageFile = newProfile
-            const uploadPath = `profileImage/${newUuid}.png`
-            const publicUrl = await uploadImage(imageFile as File, uploadPath);
-            updateUserInfo(publicUrl)
+        if (newProfile) {
+            // 선택 했을 때
+            const imageFile = newProfile;
+            const uploadPath = `profileImage/${newUuid}.png`;
+            const oldPath = profile ? profile.split("/").slice(-2).join("/") : undefined; // Extract the old path
+            const publicUrl = await uploadImage(imageFile as File, uploadPath, oldPath);
+            if (publicUrl) {
+                updateUserInfo(publicUrl);
+            }
         } else {
             if (profile) {
-                updateUserInfo(profile)
+                updateUserInfo(profile);
             } else {
-                alert('선택된 프로필이 없습니다.')
+                alert("선택된 프로필이 없습니다.");
             }
         }
-
     };
-
     // 기존에는 => 이전에 설정된 프로필이 있던 없던 무조건 사용자로부터 전달받은(이미지 선택) 이미지를 supabase에 넣는다.
     // ==> 선택 했을 때 안 했을 때를 나눠서
     //
@@ -76,35 +76,34 @@ const Page = () => {
     const updateUserInfo = async (publicUrl: string) => {
         try {
             const { error } = await supabase
-                .from('user')
+                .from("user")
                 .update({
                     nickname: newNickname,
                     profile: publicUrl,
-                    description
+                    description,
                 })
-                .eq('user_id', userId);
+                .eq("user_id", userId);
             if (error) {
-                console.error('Error updating user data:', error);
+                console.error("Error updating user data:", error);
             } else {
-
                 setUser(userId, email, newNickname, publicUrl, description);
                 // 프로필 수정 완료 후 /mypage로 이동
                 router.back();
             }
         } catch (error) {
-            console.error('Error updating user data:', error);
+            console.error("Error updating user data:", error);
         }
-    }
+    };
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white rounded-lg shadow-lg p-3 w-70 max-w">
-                <h2 className="mb-4 text-center text-title shared-text">프로필 수정</h2>
+                <h2 className="text-2xl font-bold mb-4 text-center shared-text">프로필 수정</h2>
                 <div className="flex justify-center">
-                    <div className="w-32 h-32 bg-gray-300 rounded-full flex items-center justify-center cursor-pointer" >
+                    <div className="w-32 h-32 bg-gray-300 rounded-full flex items-center justify-center cursor-pointer">
                         {newProfile ? (
                             <Image
-                                src={profileUrl || ''}
+                                src={profileUrl || ""}
                                 alt="Profile"
                                 width={100}
                                 height={100}
@@ -114,24 +113,33 @@ const Page = () => {
                                 }}
                             />
                         ) : (
-                            <Image src={profile || ''} alt="Default Profile" width={100}
-                                height={100} className="w-full h-full rounded-full" onClick={() => {
-                                    inputref.current?.click()
-                                }} />
+                            <Image
+                                src={profile || ""}
+                                alt="Default Profile"
+                                width={100}
+                                height={100}
+                                className="w-full h-full rounded-full"
+                                onClick={() => {
+                                    inputref.current?.click();
+                                }}
+                            />
                         )}
                     </div>
                     <input type="file" onChange={handleProfileChange} ref={inputref} className="hidden" />
-                </div> <div className="mt-4 flex flex-col">
+                </div>{" "}
+                <div className="mt-4 flex flex-col">
                     <div className="flex justify-between items-center shared-text">
                         <p>닉네임</p>
-                        <input className="shared-input" type="text" value={newNickname || ''} onChange={handleNicknameChange} />
+                        <input className="shared-input" type="text" value={newNickname || ""} onChange={handleNicknameChange} />
                     </div>
                     <div className="flex justify-between items-center mt-4 shared-text">
                         <p>소개</p>
                         <input className="shared-input" type="text" onChange={handleDescriptionChange} />
                     </div>
                     <div className="flex justify-end mt-4">
-                        <button className="h-37 bg-point text-white shared-butten" onClick={handleSubmit}>프로필 수정 완료</button>
+                        <button className="font-secondary shared-text" onClick={handleSubmit}>
+                            프로필 수정 완료
+                        </button>
                     </div>
                 </div>
             </div>

@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { createClient } from "@/supabase/client";
-import { BakeryCard } from "../commons/BakeryCard";
-import Link from "next/link";
 import { Bakery } from "@/types/bakery";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { BakeryCard } from "../commons/BakeryCard";
 
 interface BakeryListProp {
   searchedBakeries?: Bakery[];
@@ -28,8 +28,7 @@ export const BakeryList = ({ searchedBakeries }: BakeryListProp) => {
           }
           setBreads((data as Bakery[]) || []);
         } catch (error) {
-          setError("목록을 불러오는 중 오류가 발생했습니다.");
-          console.error(error);
+          console.error("목록을 불러오는 중 오류가 발생했습니다.", error);
         }
       };
       fetchBreads();
