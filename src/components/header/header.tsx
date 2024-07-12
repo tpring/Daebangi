@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "../../../node_modules/next/navigation";
 import { useUserStore } from "@/store/userStore";
 import userDefaultImage from "../../../public/image/icons/userDefaultImage.png";
+import { createClient } from "@/supabase/client";
 
 type HeaderProps = {
   breadImage: StaticImageData;
@@ -14,11 +15,13 @@ type HeaderProps = {
 export const Header: React.FC<HeaderProps> = ({ breadImage }) => {
   const { userId, nickname, profile, setUser } = useUserStore();
   const router = useRouter();
-
   const isLoggedIn = userId !== null;
+  const supabase = createClient();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setUser(null, null, null, null);
+    await supabase.auth.signOut();
+
     router.push("/"); // 로그아웃 후 메인 페이지로 리다이렉트
   };
 
