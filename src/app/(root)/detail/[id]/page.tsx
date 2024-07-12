@@ -3,6 +3,7 @@ import SkeletonMap from "@/components/commons/Skeleton/SkeletonMap";
 import StoreInformation from "@/components/detailMap/StoreInformation";
 import dynamic from "next/dynamic";
 import React from "react";
+
 import { notFound } from "../../../../../node_modules/next/navigation";
 const KakaoMap = dynamic(() => import("@/components/detailMap/KakaoMap"), {
   ssr: false,
@@ -19,6 +20,7 @@ type DetailPageProps = {
 };
 const DetailPage: React.FC<DetailPageProps> = ({ searchParams }) => {
   const { name, address, bakeryId, image, phone } = searchParams;
+
   if (!bakeryId) {
     notFound();
   }

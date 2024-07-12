@@ -1,7 +1,8 @@
 "use client";
 
+import { getUserById } from "@/app/api/supabase/auth/route";
+import { deleteComment, updateComment } from "@/app/api/supabase/comment/route";
 import { useUserStore } from "@/store/userStore";
-import { createClient } from "@/supabase/client";
 import { User } from "@/types/user";
 import { useEffect, useState } from "react";
 import UserProfile from "../commons/UserProfile";
@@ -13,36 +14,24 @@ type CommentItem = {
   onCommentUpdate: () => void;
 };
 const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onCommentUpdate }) => {
-  const [commentUser, setCommentUser] = useState<User>();
-  const [updating, setUpdating] = useState<boolean>(false);
-  const [updatedCotent, setupdatedCotent] = useState<string>("");
-  const [comment, setComment] = useState<string>(content);
+  const [commentUser, setCommentUser] = useState<User | null>(); // 댓글 작성자
+  const [updating, setUpdating] = useState<boolean>(false); // 업데이트 중 인지 판별 하는 상태
+  const [updatedContent, setupdatedContent] = useState<string>(""); // 수정되는 내용
+  const [comment, setComment] = useState<string>(content); // 보여지는 댓글
 
-  const supabase = createClient();
-
-  const { userId: loginedUserId } = useUserStore((state) => ({
+  const { userId: loginUserId } = useUserStore((state) => ({
     userId: state.userId,
   }));
 
-  const isCorrectUser = (): boolean => {
-    if (userId !== loginedUserId) {
-      alert("로그인 후 사용해 주세요~!");
-      console.log("현재 : ", loginedUserId);
-      console.log("댓글 유저 : ", userId);
-      return false;
-    }
-    return true;
-  };
-
   useEffect(() => {
-    // 아이디 값에 따른, 유저 정보를 받아오는 함수
+    // 아이디 값에 따른, 댓글의 유저 정보를 받아오는 함수
     const fetchUserById = async () => {
-      const { data, error } = await supabase.from("user").select("*").eq("user_id", userId);
-
-      if (data) {
-        setCommentUser(data[0]);
-      } else {
-        console.error("댓글의 유저정보 fetch 실패 : ", error);
+      try {
+        const data = await getUserById(userId);
+        setCommentUser(data);
+      } catch (error) {
+        console.error("댓글 유저 정보 fetch 중 실패", error);
+        throw error;
       }
     };
     fetchUserById();
@@ -50,18 +39,12 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
 
   // 댓글 업데이트 로직
   const handleUpdateCommet = async () => {
-    // 댓글을 작성한 사용자가 아니라면 함수 실행 불가.
-    if (!isCorrectUser()) return;
-    if (updating) {
-      // 현재 업데이트 진행 상태라면,
-      if (updatedCotent) {
-        const { error } = await supabase.from("comment").update({ content: updatedCotent }).eq("comment_id", commentId);
-      }
-      // onCommentUpdate(); // 댓글 목록 업데이트
-      setComment(updatedCotent);
+    setupdatedContent("");
+    if (updating && updatedContent) {
+      await updateComment(commentId, updatedContent);
+      setComment(updatedContent);
       setUpdating(false); // 업데이트 모드 종료
     } else {
-      // 업데이트 상태가 아니라면,
       setUpdating(true); // 업데이트 모드 시작
     }
   };
@@ -69,10 +52,9 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
   // 댓글 삭제 로직
   const handleDeleteComment = async () => {
     // 댓글 쓴 유저 아이디와 , 로그인된 유저 아이디 비교 로직 필요
-    if (!isCorrectUser()) return;
-    const response = await supabase.from("comment").delete().eq("comment_id", commentId);
-
-    onCommentUpdate(); // 댓글 목록 업데이트
+    await deleteComment(commentId).then(() => {
+      onCommentUpdate(); // 댓글 목록 업데이트
+    });
   };
 
   return (
@@ -91,8 +73,13 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
             <form onSubmit={handleUpdateCommet}>
               <input
                 className="border rounded-lg w-full px-2 cursor-not-allowed"
-                value={updatedCotent}
-                onChange={(e) => setupdatedCotent(e.target.value)}
+                value={updatedContent}
+                onChange={(e) => setupdatedContent(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                  }
+                }}
               />
             </form>
           )}
@@ -100,7 +87,7 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
       </div>
       <div className="flex gap-1 w-full items-center justify-end mr-3">
         {/*button 부분 */}
-        {userId === loginedUserId ? (
+        {userId === loginUserId ? (
           <>
             <button className="comment-button cursor-pointer" onClick={handleUpdateCommet}>
               수정
