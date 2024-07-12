@@ -6,7 +6,7 @@ type UserState = {
   email: string | null;
   nickname: string | null;
   profile: string | null;
-<<<<<<< HEAD
+
   description: string | null;
   setUser: (
     userId: string,
