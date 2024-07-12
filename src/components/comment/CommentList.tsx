@@ -4,6 +4,7 @@ import { fetchComments, insertComment } from "@/app/api/supabase/comment/route";
 import { useUserStore } from "@/store/userStore";
 import { Comment } from "@/types/comment";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import Toast from "../commons/Toast/Toast";
 import UserProfile from "../commons/UserProfile";
 import CommentItem from "./CommentItem";
 
@@ -13,6 +14,7 @@ type CommentProps = {
 const CommentList: React.FC<CommentProps> = ({ bakery_id: bakeryId }) => {
   const [comment, setComment] = useState<string>("");
   const [commentList, setCommentList] = useState<Comment[]>([]);
+  const [toastState, setToastState] = useState({ state: "", message: "" });
 
   const { userId: loginUserId, profile } = useUserStore((state) => ({
     userId: state.userId as string,
@@ -37,7 +39,7 @@ const CommentList: React.FC<CommentProps> = ({ bakery_id: bakeryId }) => {
   const handleSubmitComment = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (comment.length < 1) {
-      alert("최소 1글자 이상 입력해야 합니다.");
+      setToastState({ state: "warn", message: "최소 1글자 이상 입력해야 합니다." });
       return;
     }
     try {
@@ -51,12 +53,14 @@ const CommentList: React.FC<CommentProps> = ({ bakery_id: bakeryId }) => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!loginUserId) {
-      alert("로그인 후 사용해 주세요~!");
+      setToastState({ state: "warn", message: "로그인 후 사용해주세요~!" });
       return;
     }
     setComment(e.target.value);
   };
-
+  const clearToastState = () => {
+    setToastState({ state: "", message: "" });
+  };
   return (
     <div>
       {/* 댓글 입력란 */}
@@ -91,6 +95,7 @@ const CommentList: React.FC<CommentProps> = ({ bakery_id: bakeryId }) => {
           );
         })}
       </div>
+      {toastState.state && <Toast state={toastState.state} message={toastState.message} onClear={clearToastState} />}
     </div>
   );
 };

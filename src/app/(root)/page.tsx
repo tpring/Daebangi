@@ -1,6 +1,6 @@
 "use client";
 
-import { BakeryList } from "@/components/BakeryList/BakeryList";
+import { BakeryList } from "@/components/bakeryList/BakeryList";
 import SearchBar from "@/components/commons/SearchBar";
 import UpButton from "@/components/commons/UpButton";
 import BouncingBread from "@/components/main/BouncingBread";

@@ -1,16 +1,15 @@
-import dynamic from "next/dynamic";
-import { Metadata } from "next";
-import { fetchBakeryDetails } from "@/app/api/supabase/(detail)/router";
+import { fetchBakeryDetails } from "@/app/api/supabase/(detail)/route";
 import CommentList from "@/components/comment/CommentList";
 import SkeletonMap from "@/components/commons/Skeleton/SkeletonMap";
 import StoreInformation from "@/components/detailMap/StoreInformation";
+import { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { notFound, redirect } from "next/navigation";
 
 // 동적 메타데이터 생성 함수
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const { id } = params;
   const bakery = await fetchBakeryDetails(id);
-
   if (!bakery) {
     return {
       title: "대전 빵집 정보를 찾을 수 없습니다",
