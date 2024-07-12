@@ -1,17 +1,17 @@
 "use client";
 
-import Link from "next/link";
+import { LikeBakeryList } from "@/components/bakeryList/LikeBakeryList";
 import { useUserStore } from "@/store/userStore";
 import Image from "next/image";
-import { LikeBakeryList } from "@/components/BakeryList/LikeBakeryList";
+import Link from "next/link";
 import LogoBread from "../../../../public/image/breads/LogoBread.png";
 
 const MyPage = () => {
-    const { nickname, profile, description } = useUserStore((state) => ({
-        nickname: state.nickname,
-        profile: state.profile,
-        description: state.description
-    }));
+  const { nickname, profile, description } = useUserStore((state) => ({
+    nickname: state.nickname,
+    profile: state.profile,
+    description: state.description,
+  }));
 
     return (
         <div className="reactive-body mx-auto w-main-desktop md-max:w-main-tablet sm-max:w-main-mobile">
@@ -37,8 +37,8 @@ const MyPage = () => {
             </div>
 
             <LikeBakeryList />
-        </div>
-    );
+    </div>
+  );
 };
 
 export default MyPage;

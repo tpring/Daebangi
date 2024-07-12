@@ -11,7 +11,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ src, width = 80, height = 80 
   return (
     <div className={`border rounded-full ${width_height} overflow-hidden`}>
       <Image
-        src={src || userDefualteImage.src}
+        src={src || userDefualteImage}
         width={width}
         height={height}
         alt="유저프로필"
