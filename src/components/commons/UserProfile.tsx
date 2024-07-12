@@ -1,5 +1,5 @@
 import Image from "next/image";
-import DefaultProfile from "../../../public/image/breads/bread2.png";
+import DefaultProfile from "../../../public/image/icons/userDefaultImage.png";
 type UserProfileProps = {
   src?: string | null;
   width?: number;

@@ -1,13 +1,13 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "../../../node_modules/next/navigation";
 import { useUserStore } from "@/store/userStore";
 import { createClient } from "@/supabase/client";
-import UserProfile from "../commons/UserProfile";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import { useRouter } from "../../../node_modules/next/navigation";
 import breadImage from "../../../public/image/breads/LogoBread.png";
+import UserProfile from "../commons/UserProfile";
 
 export const Header: React.FC = () => {
   const { userId, nickname, setUser, profile } = useUserStore((state) => ({
@@ -32,18 +32,18 @@ export const Header: React.FC = () => {
     <header className="bg-gray-100 border-b border-gray-300 ">
       <div className="container mx-auto flex justify-between items-center p-2">
         <div className="flex px-[200px] ">
-          <Link href={"/"}>
+          <Link href={"/"} className="flex">
             <Image src={breadImage} alt="logo" width={50} height={50} />
+            <h1 className="text-2xl font-secondary">대빵이</h1>
           </Link>
-          <h1 className="text-2xl font-secondary">대빵이</h1>
         </div>
         <div className="flex px-[215px]">
           {isLoggedIn ? (
             <>
-              <Link href={"/mypage"}>
-                <UserProfile src={profile?.length === 0 ? profile : null} width={40} height={40} />
+              <Link href={"/mypage"} className="flex">
+                <UserProfile src={profile} width={40} height={40} />
+                <span className="ml-2 flex justify-between items-center">{nickname}</span>
               </Link>
-              <span className="ml-2 flex justify-between items-center">{nickname}</span>
               <button onClick={handleLogout} className="ml-4 text-gray-600 hover:text-gray-900">
                 로그아웃
               </button>
