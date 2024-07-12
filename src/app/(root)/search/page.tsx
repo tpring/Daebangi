@@ -1,11 +1,11 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { searchBakery } from "@/app/api/supabase/bakery/route";
 import { BakeryList } from "@/components/BakeryList/BakeryList";
-import { searchBakery } from "@/app/api/(supabase)/(bakery)/route";
 import SearchBar from "@/components/commons/SearchBar";
 import { Bakery } from "@/types/bakery";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const SearchPage = () => {
   const router = useRouter();

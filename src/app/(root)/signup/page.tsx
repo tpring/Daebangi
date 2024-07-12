@@ -1,14 +1,17 @@
 "use client";
 
-import Link from "next/link";
-import { useState, useRef } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { signUp, updateUserProfile } from "../../api/(supabase)/auth/route";
-import { uploadImage } from "../../../supabase/utils/makeimageUrl";
 import LogoBread from "../../../../public/image/breads/LogoBread.png";
+
+import { uploadImage } from "../../../supabase/utils/makeimageUrl";
+import { signUp, updateUserProfile } from "../../api/supabase/auth/route";
+
 import nookies from "nookies";
+
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");

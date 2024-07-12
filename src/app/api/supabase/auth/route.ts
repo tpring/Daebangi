@@ -1,4 +1,5 @@
 import { createClient } from "@/supabase/client";
+import { User } from "@/types/user";
 
 const supabase = createClient();
 
@@ -35,4 +36,15 @@ export const updateUserProfile = async (userId: string, profileUrl: string) => {
   if (updateError) {
     console.error("프로필 이미지 URL 업데이트 실패: " + updateError.message);
   }
+};
+
+// ID 값에 따른 유저 정보 가져오기
+export const getUserById = async (userId: string): Promise<User | null> => {
+  const { data: user, error } = await supabase.from("user").select("*").eq("user_id", userId);
+
+  if (error) {
+    console.error("댓글의 유저정보 fetch 실패 :", error);
+    return null;
+  }
+  return user[0];
 };
