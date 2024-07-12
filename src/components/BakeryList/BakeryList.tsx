@@ -20,7 +20,7 @@ export const BakeryList = ({ searchedBakeries }: BakeryListProp) => {
       const supabase = createClient();
       const fetchBreads = async () => {
         try {
-          const { data } = await supabase.from("bakery").select("*");
+          const { data } = await supabase.from("bakery").select("*").order("sort_id", { ascending: true });
           setBreads((data as Bakery[]) || []);
         } catch (error) {
           setError("목록을 불러오는 중 오류가 발생했습니다.");
