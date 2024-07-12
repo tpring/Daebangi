@@ -66,7 +66,7 @@ const CommentList: React.FC<CommentProps> = ({ bakery_id: bakeryId }) => {
       <form className="flex items-center gap-2" onSubmit={handleSubmitComment}>
         {/*유저 프로필 */}
         <div className="ml-3">
-          <UserProfile src={profile} />
+          <UserProfile src={profile?.length === 0 ? profile : ""} width={40} height={40} />
         </div>
         {/* <Image src={profile as string} alt="유저 프로필" width={80} height={80} /> */}
         <input
