@@ -29,7 +29,6 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
       try {
         const data = await getUserById(userId);
         setCommentUser(data);
-        console.log("댓글 유저 정보: ", data);
       } catch (error) {
         console.error("댓글 유저 정보 fetch 중 실패", error);
         throw error;
