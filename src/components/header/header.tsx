@@ -10,10 +10,9 @@ import breadImage from "../../../public/image/breads/LogoBread.png";
 import UserProfile from "../commons/UserProfile";
 
 export const Header: React.FC = () => {
-  const { userId, nickname, setUser, profile } = useUserStore((state) => ({
+  const { userId, nickname, profile } = useUserStore((state) => ({
     userId: state.userId,
     nickname: state.nickname,
-    setUser: state.setUser,
     profile: state.profile as string,
   }));
 
@@ -22,7 +21,7 @@ export const Header: React.FC = () => {
   const supabase = createClient();
 
   const handleLogout = async () => {
-    setUser("", "", "", "", "");
+    useUserStore.getState().logout();
     await supabase.auth.signOut();
 
     router.push("/");
