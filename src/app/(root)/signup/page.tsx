@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import { signUp, updateUserProfile } from "../../api/(supabase)/auth/route";
 import { uploadImage } from "../../../supabase/utils/makeimageUrl";
 import LogoBread from "../../../../public/image/breads/LogoBread.png";
+import nookies from "nookies";
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");
@@ -57,6 +58,10 @@ const SignupPage = () => {
           await updateUserProfile(data.user.id, profileUrl);
           alert("회원가입 성공!");
         }
+        // 쿠키에 저장된 토큰 제거
+        nookies.destroy(null, "sb-txvvzlryxqhzxjcsncqo-auth-token");
+        nookies.destroy(null, "sb-txvvzlryxqhzxjcsncqo-auth-token-code-verifier");
+
         router.push("/login");
       }
     } catch (error) {
