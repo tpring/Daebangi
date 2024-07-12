@@ -1,6 +1,4 @@
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
     "printWidth": 120,
     "tabWidth": 2,
     "useTabs": false,
@@ -8,18 +6,4 @@
     "singleQuote": false,
     "bracketSpacing": true,
     "trailingComma": "all"
-=======
-=======
->>>>>>> 49a7f9290f7da2d8fe8a0677274dd493d24c24c2
-  "printWidth": 120,
-  "tabWidth": 2,
-  "useTabs": false,
-  "semi": true,
-  "singleQuote": false,
-  "bracketSpacing": true,
-  "trailingComma": "all"
-<<<<<<< HEAD
->>>>>>> bb6d7e5ebb5ea75d5509a9e49b7954a5b04e973f
-=======
->>>>>>> 49a7f9290f7da2d8fe8a0677274dd493d24c24c2
 }
