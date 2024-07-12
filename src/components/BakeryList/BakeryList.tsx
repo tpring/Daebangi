@@ -28,7 +28,7 @@ export const BakeryList = ({ searchedBakeries }: BakeryListProp) => {
           }
           setBreads((data as Bakery[]) || []);
         } catch (error) {
-          console.log("목록을 불러오는 중 오류가 발생했습니다.", error);
+          console.error("목록을 불러오는 중 오류가 발생했습니다.", error);
         }
       };
       fetchBreads();
