@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from "uuid";
 import { uploadImage } from "@/supabase/utils/makeimageUrl";
 
+
 //modifyprofile의 페이지를 인터셉트 하는 페이지 입니다.
 // 모달창
 const Page = () => {
@@ -98,7 +99,7 @@ const Page = () => {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white rounded-lg shadow-lg p-3 w-70 max-w">
-                <h2 className="text-2xl font-bold mb-4 text-center shared-text">프로필 수정</h2>
+                <h2 className="mb-4 text-center text-title shared-text">프로필 수정</h2>
                 <div className="flex justify-center">
                     <div className="w-32 h-32 bg-gray-300 rounded-full flex items-center justify-center cursor-pointer" >
                         {newProfile ? (
@@ -130,7 +131,7 @@ const Page = () => {
                         <input className="shared-input" type="text" onChange={handleDescriptionChange} />
                     </div>
                     <div className="flex justify-end mt-4">
-                        <button className="font-secondary shared-text" onClick={handleSubmit}>프로필 수정 완료</button>
+                        <button className="h-37 bg-point text-white shared-butten" onClick={handleSubmit}>프로필 수정 완료</button>
                     </div>
                 </div>
             </div>
