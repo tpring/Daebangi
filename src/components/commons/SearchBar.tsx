@@ -34,6 +34,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ initialKeyword = "", onSearch }) 
     }
   };
 
+  const handleSearchBar = (keyword: string) => {
+    router.push(`/search?keyword=${keyword}`);
+  };
+
   return (
     <div className="flex relative w-full max-w-2xl items-center ">
       <input
