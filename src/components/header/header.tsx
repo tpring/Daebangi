@@ -41,7 +41,7 @@ export const Header: React.FC = () => {
           {isLoggedIn ? (
             <>
               <Link href={"/mypage"} className="flex">
-                <UserProfile src={profile} width={40} height={40} />
+                <UserProfile src={profile?.length === 0 ? profile : ""} width={40} height={40} />
                 <span className="ml-2 flex justify-between items-center">{nickname}</span>
               </Link>
               <button onClick={handleLogout} className="ml-4 text-gray-600 hover:text-gray-900">
