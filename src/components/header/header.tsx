@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "../../../node_modules/next/navigation";
 import { useUserStore } from "@/store/userStore";
+import { createClient } from "@/supabase/client";
 import UserProfile from "../commons/UserProfile";
 import breadImage from "../../../public/image/breads/LogoBread.png";
 
@@ -16,10 +17,14 @@ export const Header: React.FC = () => {
     profile: state.profile,
   }));
 
+  const router = useRouter();
   const isLoggedIn = userId !== null;
+  const supabase = createClient();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setUser(null, null, null, null);
+    await supabase.auth.signOut();
+
     router.push("/"); // 로그아웃 후 메인 페이지로 리다이렉트
   };
 
