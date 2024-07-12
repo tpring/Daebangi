@@ -1,11 +1,12 @@
 "use client";
 
+import React, { useState, useEffect } from "react";
+import { Map, CustomOverlayMap } from "react-kakao-maps-sdk";
+import Image from "next/image";
+import Link from "next/link";
+import { KakaoMapProps, GeocoderResult, WindowWithKakao } from "@/types/map";
 import { loadKakaoMapScript } from "@/app/api/kakao/route";
 import SkeletonMap from "@/components/commons/Skeleton/SkeletonMap";
-import { GeocoderResult, KakaoMapProps, WindowWithKakao } from "@/types/map";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { CustomOverlayMap, Map } from "react-kakao-maps-sdk";
 
 const KakaoMap: React.FC<KakaoMapProps> = ({ name, address }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -28,6 +29,7 @@ const KakaoMap: React.FC<KakaoMapProps> = ({ name, address }) => {
       });
   }, [kakaoMapKey, address]);
 
+  // 주소를 좌표로 변환하는 함수
   const searchAddressToCoords = (address: string) => {
     const windowWithKakao = window as WindowWithKakao;
     if (!windowWithKakao.kakao || !windowWithKakao.kakao.maps) return;
@@ -62,10 +64,15 @@ const KakaoMap: React.FC<KakaoMapProps> = ({ name, address }) => {
           yAnchor={1} // 오버레이의 Y 축 앵커 위치
           xAnchor={0.5} // 오버레이의 X 축 앵커 위치
         >
-          <div className="p-0 border-none text-center">
+          <Link
+            href={`https://map.kakao.com/link/map/${name},${coords.lat},${coords.lng}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-0 border-none text-center"
+          >
             <Image src="/image/icons/marker.png" alt={name} width={140} height={140} />
             <p className="m-0 text-[18px] font-bold bg-base p-1 font-secondary">{name}</p>
-          </div>
+          </Link>
         </CustomOverlayMap>
       </Map>
     </div>
