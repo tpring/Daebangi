@@ -1,12 +1,12 @@
 "use client";
 
+import { useUserStore } from "@/store/userStore";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import LogoBread from "../../../../public/image/breads/LogoBread.png";
-import { useRouter } from "next/navigation";
-import { useUserStore } from "@/store/userStore";
-import { login, getUserData } from "../../api/(supabase)/auth/route";
+import { getUserData, login } from "../../api/supabase/auth/route";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");

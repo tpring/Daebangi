@@ -1,7 +1,7 @@
 "use client";
 
+import { fetchComments, insertComment } from "@/app/api/supabase/comment/route";
 import { useUserStore } from "@/store/userStore";
-import { createClient } from "@/supabase/client";
 import { Comment } from "@/types/comment";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import UserProfile from "../commons/UserProfile";
@@ -10,63 +10,52 @@ import CommentItem from "./CommentItem";
 type CommentProps = {
   bakery_id: string;
 };
-const CommentList: React.FC<CommentProps> = ({ bakery_id }) => {
+const CommentList: React.FC<CommentProps> = ({ bakery_id: bakeryId }) => {
   const [comment, setComment] = useState<string>("");
   const [commentList, setCommentList] = useState<Comment[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const { userId, profile } = useUserStore((state) => ({
-    userId: state.userId,
-    profile: state.profile,
+  const { userId: loginUserId, profile } = useUserStore((state) => ({
+    userId: state.userId as string,
+    profile: state.profile as string,
   }));
 
-  const supabase = createClient();
   useEffect(() => {
-    fetcthCommentList();
+    fetchCommentList();
   }, []);
 
   // 댓글 목록 불러오기
-  const fetcthCommentList = async () => {
+  const fetchCommentList = async () => {
+    console.log("불러오기");
     try {
-      const { data: comments, error } = await supabase
-        .from("comment")
-        .select("*")
-        .eq("bakery_id", bakery_id)
-        .order("comment_id", { ascending: false });
-      if (comments) {
-        const sortedComments = [
-          ...comments.filter((comment) => comment.user_id === userId),
-          ...comments.filter((comment) => comment.user_id !== userId),
-        ];
-        setCommentList(sortedComments);
-      } else {
-        console.error("댓글 목록 fetch 실패 :", error);
-        throw error;
-      }
+      const comments = await fetchComments(bakeryId, loginUserId);
+      setCommentList(comments);
     } catch (error) {
-      console.error("댓글 목록 fetch 중 에러 : ", error);
-    } finally {
-      setIsLoading(false);
+      console.error("댓글 목록 fetch 중 에러 :", error);
     }
   };
 
   // 댓글 저장 함수
   const handleSubmitComment = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("댓글작성");
-    const bakeryId = bakery_id;
-    // DB에 입력하기
-    const { error } = await supabase.from("comment").insert({
-      user_id: userId as string,
+    const newComment: Comment = {
       bakery_id: bakeryId,
       content: comment,
-    });
-    // 리셋
-    setComment("");
-    fetcthCommentList();
+      user_id: loginUserId,
+    };
+    try {
+      const updatedCommets = await insertComment(bakeryId, loginUserId, comment);
+      setCommentList(updatedCommets);
+      setComment("");
+    } catch (error) {
+      console.error("댓글 작성 중 에러 :", error);
+    }
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!loginUserId) {
+      alert("로그인 후 사용해 주세요~!");
+      return;
+    }
     setComment(e.target.value);
   };
 
@@ -77,7 +66,7 @@ const CommentList: React.FC<CommentProps> = ({ bakery_id }) => {
       <form className="flex items-center gap-2" onSubmit={handleSubmitComment}>
         {/*유저 프로필 */}
         <div className="ml-3">
-          <UserProfile src={profile as string} />
+          <UserProfile src={profile} />
         </div>
         {/* <Image src={profile as string} alt="유저 프로필" width={80} height={80} /> */}
         <input
@@ -98,8 +87,8 @@ const CommentList: React.FC<CommentProps> = ({ bakery_id }) => {
                 <CommentItem
                   content={comment.content}
                   userId={comment.user_id}
-                  commentId={comment.comment_id}
-                  onCommentUpdate={fetcthCommentList}
+                  commentId={comment.comment_id as number}
+                  onCommentUpdate={fetchCommentList}
                 />
               </div>
             );
