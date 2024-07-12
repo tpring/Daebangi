@@ -1,7 +1,7 @@
 import Image from "next/image";
 import DefaultProfile from "../../../public/image/breads/bread2.png";
 type UserProfileProps = {
-  src: string;
+  src?: string | null;
   width?: number;
   height?: number;
 };

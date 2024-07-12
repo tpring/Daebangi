@@ -2,19 +2,22 @@
 
 import { checkLikeStatus, toggleLikeStatus } from "@/app/api/supabase/(like)/route";
 import { useUserStore } from "@/store/userStore";
-
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-interface LikeButtonProp {
+type LikeButtonProp = {
   bakeryId: string;
-}
+};
+
+type UserStoreState = {
+  userId: string | null;
+};
 
 const LikeButton: React.FC<LikeButtonProp> = ({ bakeryId }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { userId } = useUserStore((state) => ({
+  const { userId } = useUserStore((state: UserStoreState) => ({
     userId: state.userId,
   }));
 
@@ -22,7 +25,6 @@ const LikeButton: React.FC<LikeButtonProp> = ({ bakeryId }) => {
     if (!userId) return;
     try {
       const status = await checkLikeStatus(userId as string, bakeryId);
-
       setIsLiked(status);
     } catch (error) {
       console.error(error);
@@ -35,11 +37,10 @@ const LikeButton: React.FC<LikeButtonProp> = ({ bakeryId }) => {
     fetchLikeStatus();
   }, [userId]);
 
-  const handleToggleLike = async () => {
-    if (userId === null) {
-      alert("로그인 해주세요.");
-      return false;
-    }
+
+  const handleToggleLike = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
 
     try {
       const result = await toggleLikeStatus(isLiked, userId, bakeryId);

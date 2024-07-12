@@ -3,16 +3,27 @@
 import { useUserStore } from "@/store/userStore";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import LogoBread from "../../../../public/image/breads/LogoBread.png";
-import { getUserData, login } from "../../api/supabase/auth/route";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useUserStore } from "@/store/userStore";
+import { login, getUserData } from "../../api/(supabase)/auth/route";
+
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const setUser = useUserStore((state) => state.setUser);
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const messageParam = searchParams.get("message");
+    if (messageParam) {
+      alert(messageParam);
+    }
+  }, [searchParams]);
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

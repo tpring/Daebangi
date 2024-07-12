@@ -3,6 +3,8 @@ import SkeletonMap from "@/components/commons/Skeleton/SkeletonMap";
 import StoreInformation from "@/components/detailMap/StoreInformation";
 import dynamic from "next/dynamic";
 import React from "react";
+
+import { notFound } from "../../../../../node_modules/next/navigation";
 const KakaoMap = dynamic(() => import("@/components/detailMap/KakaoMap"), {
   ssr: false,
   loading: () => <SkeletonMap />,
@@ -18,6 +20,10 @@ type DetailPageProps = {
 };
 const DetailPage: React.FC<DetailPageProps> = ({ searchParams }) => {
   const { name, address, bakeryId, image, phone } = searchParams;
+
+  if (!bakeryId) {
+    notFound();
+  }
   return (
     <div className="reactive-body mx-auto space-y-8">
       {name && address ? <KakaoMap name={name} address={address} /> : <SkeletonMap />}

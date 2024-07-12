@@ -6,8 +6,12 @@ import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import LogoBread from "../../../../public/image/breads/LogoBread.png";
+
 import { uploadImage } from "../../../supabase/utils/makeimageUrl";
 import { signUp, updateUserProfile } from "../../api/supabase/auth/route";
+
+import nookies from "nookies";
+
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");
@@ -57,6 +61,10 @@ const SignupPage = () => {
           await updateUserProfile(data.user.id, profileUrl);
           alert("회원가입 성공!");
         }
+        // 쿠키에 저장된 토큰 제거
+        nookies.destroy(null, "sb-txvvzlryxqhzxjcsncqo-auth-token");
+        nookies.destroy(null, "sb-txvvzlryxqhzxjcsncqo-auth-token-code-verifier");
+
         router.push("/login");
       }
     } catch (error) {
@@ -83,6 +91,7 @@ const SignupPage = () => {
       fileInputRef.current.click();
     }
   };
+  //수정 로그인시 진입금지
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">

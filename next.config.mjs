@@ -8,6 +8,7 @@ const nextConfig = {
       {
         hostname: "search.pstatic.net",
       },
+
       {
         hostname: "txvvzlryxqhzxjcsncqo.supabase.co",
       },
