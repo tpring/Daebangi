@@ -23,8 +23,7 @@ export const BakeryList = ({ searchedBakeries }: BakeryListProp) => {
           const { data } = await supabase.from("bakery").select("*");
           setBreads((data as Bakery[]) || []);
         } catch (error) {
-          setError("목록을 불러오는 중 오류가 발생했습니다.");
-          console.error(error);
+          console.log("목록을 불러오는 중 오류가 발생했습니다.", error);
         }
       };
       fetchBreads();
