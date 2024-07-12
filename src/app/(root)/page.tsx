@@ -18,11 +18,9 @@ export default function Home() {
       <BouncingBread />
       <div className="relative">
         <div className="flex justify-center items-center h-60">
-    
           <SearchBar onSearch={handleSearch} />
         </div>
         <div className="flex justify-center items-center">
-        
           <BakeryList />
         </div>
       </div>
