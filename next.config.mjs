@@ -6,6 +6,9 @@ const nextConfig = {
       {
         hostname: "raw.githubusercontent.com",
       },
+      {
+        hostname: "search.pstatic.net",
+      },
     ],
   },
 };
