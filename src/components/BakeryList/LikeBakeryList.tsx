@@ -40,7 +40,8 @@ export const LikeBakeryList = () => {
         const { data: bakeryData, error: bakeryError } = await supabase
           .from("bakery")
           .select("bakery_id, name, image, phone, address")
-          .in("bakery_id", bakeryIds);
+          .in("bakery_id", bakeryIds)
+          .order("sort_id", { ascending: true });
 
         if (bakeryError) throw bakeryError;
 

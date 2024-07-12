@@ -21,7 +21,8 @@ export const BakeryList = ({ searchedBakeries }: BakeryListProp) => {
       const supabase = createClient();
       const fetchBreads = async () => {
         try {
-          const { data, error } = await supabase.from("bakery").select("*");
+         const { data,error } = await supabase.from("bakery").select("*").order("sort_id", { ascending: true });
+     
           if (error) {
             throw new Error(error.message);
           }
