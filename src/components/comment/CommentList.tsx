@@ -16,7 +16,7 @@ const CommentList: React.FC<CommentProps> = ({ bakery_id: bakeryId }) => {
 
   const { userId: loginUserId, profile } = useUserStore((state) => ({
     userId: state.userId as string,
-    profile: state.profile as string,
+    profile: state.profile,
   }));
 
   useEffect(() => {
@@ -25,7 +25,6 @@ const CommentList: React.FC<CommentProps> = ({ bakery_id: bakeryId }) => {
 
   // 댓글 목록 불러오기
   const fetchCommentList = async () => {
-    console.log("불러오기");
     try {
       const comments = await fetchComments(bakeryId, loginUserId);
       setCommentList(comments);
@@ -37,11 +36,10 @@ const CommentList: React.FC<CommentProps> = ({ bakery_id: bakeryId }) => {
   // 댓글 저장 함수
   const handleSubmitComment = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newComment: Comment = {
-      bakery_id: bakeryId,
-      content: comment,
-      user_id: loginUserId,
-    };
+    if (comment.length < 1) {
+      alert("최소 1글자 이상 입력해야 합니다.");
+      return;
+    }
     try {
       const updatedCommets = await insertComment(bakeryId, loginUserId, comment);
       setCommentList(updatedCommets);
@@ -62,39 +60,37 @@ const CommentList: React.FC<CommentProps> = ({ bakery_id: bakeryId }) => {
   return (
     <div>
       {/* 댓글 입력란 */}
-      <h1 className="text-subtitle py-2">댓글 남겨 주세요</h1>
       <form className="flex items-center gap-2" onSubmit={handleSubmitComment}>
         {/*유저 프로필 */}
         <div className="ml-3">
-          <UserProfile src={profile} />
+          <UserProfile src={profile?.length === 0 ? profile : ""} width={40} height={40} />
         </div>
         {/* <Image src={profile as string} alt="유저 프로필" width={80} height={80} /> */}
         <input
           value={comment}
           onChange={handleChange}
-          className="px-5 w-full h-[52px] text-subtitle border-point border-4 rounded-[60px] focus:outline-none"
+          placeholder="댓글을 남겨 주세요."
+          className="font-secondary px-5 w-full h-[52px] text-subtitle border-point border-4 rounded-[60px] focus:outline-none"
         />
       </form>
-      {/* 댓글 목록 */}
-      {commentList && (
-        <div>
-          <h1 className="text-subtitle font-semibold py-2">
-            댓글 <span>{commentList?.length}</span>개
-          </h1>
-          {commentList.map((comment) => {
-            return (
-              <div key={comment.comment_id}>
-                <CommentItem
-                  content={comment.content}
-                  userId={comment.user_id}
-                  commentId={comment.comment_id as number}
-                  onCommentUpdate={fetchCommentList}
-                />
-              </div>
-            );
-          })}
-        </div>
-      )}
+      <div>
+        <h1 className="text-subtitle font-semibold py-2">
+          댓글 <span>{commentList?.length}</span>개
+        </h1>
+        {/* 댓글 목록 */}
+        {commentList.map((comment) => {
+          return (
+            <div key={comment.comment_id}>
+              <CommentItem
+                content={comment.content}
+                userId={comment.user_id}
+                commentId={comment.comment_id as number}
+                onCommentUpdate={fetchCommentList}
+              />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
