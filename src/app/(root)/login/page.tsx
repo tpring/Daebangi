@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LogoBread from "../../../../public/image/breads/LogoBread.png";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useUserStore } from "@/store/userStore";
 import { login, getUserData } from "../../api/(supabase)/auth/route";
 
@@ -13,6 +13,14 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const setUser = useUserStore((state) => state.setUser);
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const messageParam = searchParams.get("message");
+    if (messageParam) {
+      alert(messageParam);
+    }
+  }, [searchParams]);
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -60,7 +68,6 @@ const LoginPage = () => {
       alert("오류가 발생했습니다. 다시 시도해주세요.");
     }
   };
-  //수정 로그인시 진입금지
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
