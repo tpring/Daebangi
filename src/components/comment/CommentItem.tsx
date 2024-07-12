@@ -29,6 +29,7 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
       try {
         const data = await getUserById(userId);
         setCommentUser(data);
+        console.log("댓글 유저 정보: ", data);
       } catch (error) {
         console.error("댓글 유저 정보 fetch 중 실패", error);
         throw error;
@@ -39,22 +40,24 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
 
   // 댓글 업데이트 로직
   const handleUpdateCommet = async () => {
-    setupdatedContent("");
-    if (updating && updatedContent) {
+    setupdatedContent(content);
+    if (updating && updatedContent.trim()) {
       await updateComment(commentId, updatedContent);
       setComment(updatedContent);
       setUpdating(false); // 업데이트 모드 종료
     } else {
       setUpdating(true); // 업데이트 모드 시작
     }
+    onCommentUpdate();
   };
 
   // 댓글 삭제 로직
   const handleDeleteComment = async () => {
-    // 댓글 쓴 유저 아이디와 , 로그인된 유저 아이디 비교 로직 필요
-    await deleteComment(commentId).then(() => {
-      onCommentUpdate(); // 댓글 목록 업데이트
-    });
+    if (confirm("정말로 이 댓글을 삭제하시겠습니까?")) {
+      await deleteComment(commentId).then(() => {
+        onCommentUpdate(); // 댓글 목록 업데이트
+      });
+    }
   };
 
   return (
@@ -70,7 +73,7 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
           {!updating ? (
             <p className="">{comment}</p>
           ) : (
-            <form onSubmit={handleUpdateCommet}>
+            <form>
               <input
                 className="border rounded-lg w-full px-2 cursor-not-allowed"
                 value={updatedContent}
@@ -81,6 +84,7 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
                   }
                 }}
               />
+              {updatedContent.trim() === "" && <p className="text-red-500 text-sm">댓글을 입력해주세요.</p>}
             </form>
           )}
         </div>
