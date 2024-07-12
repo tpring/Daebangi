@@ -16,8 +16,9 @@ export default function Home() {
   return (
     <>
       <BouncingBread />
+
       <div className="relative">
-        <div className="w-screen flex justify-center items-center h-60">
+        <div className="flex justify-center items-center h-60">
           <SearchBar onSearch={handleSearch} />
         </div>
         <div className="flex justify-center items-center">
