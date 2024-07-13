@@ -36,10 +36,10 @@ export const BakeryList = ({ searchedBakeries }: BakeryListProp) => {
   }, [searchedBakeries]);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 sm-max:grid-cols-1 sm:grid-cols-2 custom-lg:grid-cols-3 gap-8 p-4">
       {breads.map((bakery) => (
         <Link href={`/detail/${bakery.bakery_id}`} key={bakery.bakery_id} passHref>
-          <div>
+          <div className="col-span-1">
             <BakeryCard
               bakeryId={bakery.bakery_id}
               image={bakery.image}

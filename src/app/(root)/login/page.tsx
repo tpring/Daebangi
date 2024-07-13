@@ -78,12 +78,12 @@ const LoginPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      <Image src={LogoBread} alt="Logo Bread" width={288} height={201} priority className="mb-[-20px]" />
-      <label className="font-secondary text-[60px]">대빵이</label>
+      <Image src={LogoBread} alt="Logo Bread" width={220} height={154} priority className="mb-[-20px]" />
+      <label className="font-secondary text-[46px]">대빵이</label>
       <form onSubmit={handleLogin}>
-        <p className="shared-text">이메일</p>
+        <p className="shared-text ">이메일</p>
         <input
-          className="shared-input mb-4 focus:outline-[#C9AB9C]"
+          className="shared-input mb-2 focus:outline-[#C9AB9C]"
           type="email"
           placeholder="Email"
           value={email}
@@ -91,7 +91,7 @@ const LoginPage = () => {
         />
         <p className="shared-text">비밀번호</p>
         <input
-          className="shared-input mb-4 focus:outline-[#C9AB9C]"
+          className="shared-input mb-2 focus:outline-[#C9AB9C]"
           type="password"
           placeholder="Password"
           value={password}

@@ -110,7 +110,7 @@ const SignupPage = () => {
         </div>
         <p className="shared-text">이메일</p>
         <input
-          className="shared-input mb-4 focus:outline-[#C9AB9C]"
+          className="shared-input mb-2 focus:outline-[#C9AB9C]"
           type="email"
           placeholder="Email"
           value={email}
@@ -119,7 +119,7 @@ const SignupPage = () => {
         />
         <p className="shared-text">닉네임</p>
         <input
-          className="shared-input mb-4 focus:outline-[#C9AB9C]"
+          className="shared-input mb-2 focus:outline-[#C9AB9C]"
           type="text"
           placeholder="Nickname"
           value={nickname}
@@ -128,7 +128,7 @@ const SignupPage = () => {
         />
         <p className="shared-text">비밀번호</p>
         <input
-          className="shared-input mb-4 focus:outline-[#C9AB9C]"
+          className="shared-input mb-2 focus:outline-[#C9AB9C]"
           type="password"
           placeholder="Password"
           value={password}
@@ -137,7 +137,7 @@ const SignupPage = () => {
         />
         <p className="shared-text">비밀번호 확인</p>
         <input
-          className="shared-input mb-4 focus:outline-[#C9AB9C]"
+          className="shared-input mb-2 focus:outline-[#C9AB9C]"
           type="password"
           placeholder="Password"
           value={confirmPassword}
@@ -146,7 +146,7 @@ const SignupPage = () => {
         />
         <div>
           <button type="submit" className="shared-butten my-6 hover:bg-[#C9AB9C]">
-            Sign Up
+            회원가입
           </button>
         </div>
       </form>

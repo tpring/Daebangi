@@ -24,7 +24,6 @@ export const LikeBakeryList = () => {
 
   const fetchBakeryData = async () => {
     try {
-      // `like` 테이블에서 `user_id`에 해당하는 `bakery_id` 가져오기
       const { data: likeData, error: likeError } = await supabase
         .from("like")
         .select("bakery_id")
@@ -32,11 +31,9 @@ export const LikeBakeryList = () => {
 
       if (likeError) throw likeError;
 
-      // null 값이 없는 bakery_id 배열을 추출
       const bakeryIds = likeData?.map((row: any) => row.bakery_id).filter((id: any) => id !== null) || [];
 
       if (bakeryIds.length > 0) {
-        // `bakery` 테이블에서 `bakery_id`에 해당하는 정보를 가져오기
         const { data: bakeryData, error: bakeryError } = await supabase
           .from("bakery")
           .select("bakery_id, name, image, phone, address")
@@ -45,7 +42,6 @@ export const LikeBakeryList = () => {
 
         if (bakeryError) throw bakeryError;
 
-        // `bakeryData`를 `Bakery` 타입으로 변환
         const formattedBakeryData: Bakery[] = (bakeryData || []).map((item: any) => ({
           bakery_id: item.bakery_id,
           name: item.name || "",
@@ -68,10 +64,10 @@ export const LikeBakeryList = () => {
   }, [userId, likesChanged]);
 
   return (
-    <div className="reactive-body mx-auto grid grid-cols-3 gap-4 mt-6">
+    <div className="grid grid-cols-1 sm-max:grid-cols-1 sm:grid-cols-2 custom-lg:grid-cols-3 gap-8">
       {bakeryList.length > 0 ? (
         bakeryList.map((bakery) => (
-          <div key={bakery.bakery_id} className="relative">
+          <div key={bakery.bakery_id} className="col-span-1">
             <Link
               href={{
                 pathname: `/detail/${bakery.bakery_id}`,
@@ -97,7 +93,7 @@ export const LikeBakeryList = () => {
           </div>
         ))
       ) : (
-        <div className="mt-6 text-center">
+        <div className="mt-6">
           <h2 className="text-xl font-semibold">좋아하는 가게를 추가해주세요</h2>
         </div>
       )}

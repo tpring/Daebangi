@@ -22,6 +22,11 @@ const config: Config = {
         subtitle: "1.5rem",
         title: "2rem",
       },
+      lineHeight: {
+        basics: "1rem",
+        subtitle: "1.5rem",
+        title: "2rem",
+      },
       fontWeight: {
         basics: "500",
         subtitle: "700",
@@ -30,6 +35,7 @@ const config: Config = {
       screens: {
         "md-max": { max: "1068px" },
         "sm-max": { max: "734px" },
+        "custom-lg": "1060px",
       },
       width: {
         "main-desktop": "1020px",
@@ -47,6 +53,12 @@ const config: Config = {
       },
       animation: {
         float: "float 3s ease-in-out infinite",
+        smokeRise: "smokeRise 4s ease-in-out infinite",
+      },
+      smokeRise: {
+        "0%": { opacity: "0", transform: "translateY(20px)" },
+        "50%": { opacity: "0.7" },
+        "100%": { opacity: "0", transform: "translateY(-100px)" },
       },
     },
   },

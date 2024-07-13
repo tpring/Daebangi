@@ -6,24 +6,21 @@
 
 @font-face {
   font-family: "SUIT-Regular";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2")
-    format("woff2");
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: "SUIT-Regular";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2")
-    format("woff2");
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: "SUIT-Regular";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2")
-    format("woff2");
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2") format("woff2");
   font-weight: 900;
   font-style: normal;
 }
@@ -31,8 +28,7 @@
 /* 포인트 폰트 */
 @font-face {
   font-family: "Ainmom";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_01@1.0/Ainmom.woff")
-    format("woff");
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_01@1.0/Ainmom.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -47,21 +43,21 @@
 }
 
 @layer utilities {
-
   .comment-button {
     @apply p-3 rounded-lg bg-white hover:brightness-90;
   }
   .shared-input {
-    @apply text-title text-point w-[520px] h-[80px] border-2 border-point border-r p-2 rounded-[12px];
+    @apply text-basics text-point w-[360px] h-[47px] border-2 border-point border-r p-2 rounded-[12px];
   }
   .shared-butten {
-    @apply text-title bg-point w-full h-[80px] text-white py-3 rounded-md;
-  }
-  .comment-button {
-    @apply p-3 rounded-lg bg-white hover:brightness-90;
-  }
-  .shared-text {
-    @apply text-subtitle my-3;
+    @apply text-basics bg-point w-full h-[47px] text-white py-3 rounded-md leading-basics;
   }
 
+  .shared-text {
+    @apply text-basics my-3;
+  }
+}
+
+.comment-button {
+  @apply p-3 rounded-lg bg-white hover:brightness-90;
 }
