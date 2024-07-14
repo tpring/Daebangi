@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { getUserData, login } from "@/app/api/supabase/auth/route";
 import Toast from "@/components/commons/toast/Toast";
 import { useUserStore } from "@/store/userStore";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import LogoBread from "../../../../public/image/breads/LogoBread.png";

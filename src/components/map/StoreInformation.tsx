@@ -1,7 +1,7 @@
-import Image from "next/image";
 import LikeButton from "@/components/commons/LikeButton";
-import defaultImg from "../../../public/image/noimg.png";
 import { StoreInformationProps } from "@/types/map";
+import Image from "next/image";
+import defaultImg from "../../../public/image/noimg.png";
 
 const StoreInformation: React.FC<StoreInformationProps> = ({ bakeryId, image, name, phone, address }) => {
   const imageSrc = image || defaultImg.src;
