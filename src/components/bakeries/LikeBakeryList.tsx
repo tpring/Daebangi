@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { BakeryCard } from "../commons/BakeryCard";
+import { BakeryCard } from "./BakeryCard";
 import { useUserStore } from "@/store/userStore";
 import { getUserLikedBakeryIds } from "@/app/api/supabase/like/route";
 import { getBakeriesByIds } from "@/app/api/supabase/bakery/route";
