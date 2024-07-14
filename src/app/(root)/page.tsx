@@ -2,9 +2,8 @@ import { BakeryList } from "@/components/BakeryList/BakeryList";
 import SearchBar from "@/components/commons/SearchBar";
 import UpButton from "@/components/commons/UpButton";
 import BouncingBread from "@/components/main/BouncingBread";
-import { useRouter } from "next/navigation";
 
-export default function Home() {
+const Home = () => {
   return (
     <>
       <BouncingBread />
@@ -19,4 +18,6 @@ export default function Home() {
       <UpButton />
     </>
   );
-}
+};
+
+export default Home;
