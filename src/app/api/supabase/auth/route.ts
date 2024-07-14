@@ -55,6 +55,7 @@ export const signUp = async (email: string, password: string, nickname: string) 
       options: {
         data: {
           nickname,
+          description: "",
         },
       },
     });

@@ -1,13 +1,14 @@
 "use client";
 
-import { getUserData, login } from "@/app/api/supabase/auth/route";
-import Toast from "@/components/commons/toast/Toast";
-import { useUserStore } from "@/store/userStore";
 import Image from "next/image";
 import Link from "next/link";
+
+import Toast from "@/components/commons/toast/Toast";
+import { useUserStore } from "@/store/userStore";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import LogoBread from "../../../../public/image/breads/LogoBread.png";
+import { getUserData, login } from "@/app/api/supabase/auth/route";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -20,7 +21,7 @@ const LoginPage = () => {
   useEffect(() => {
     const messageParam = searchParams.get("message");
     if (messageParam) {
-      setToastState({ state: "custom", message: "로그인 후 이용부탁드립니다" });
+      setToastState({ state: "custom", message: messageParam });
     }
   }, [searchParams]);
 

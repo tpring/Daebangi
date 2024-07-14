@@ -4,12 +4,12 @@ import Toast from "@/components/commons/toast/Toast";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import nookies from "nookies";
 import { useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import LogoBread from "../../../../public/image/breads/LogoBread.png";
 import { uploadImage } from "../../../supabase/utils/makeimageUrl";
-import { signUp, updateUserProfile } from "../../api/supabase/auth/route";
+import nookies from "nookies";
+import userDefaultImage from "../../../../public/image/icons/userDefaultImage.png";
+import { signUp, updateUserProfile } from "@/app/api/supabase/auth/route";
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");
@@ -26,6 +26,12 @@ const SignupPage = () => {
   // 회원가입 처리 함수
   const handleSignup = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    // 이미지
+    if (!profile) {
+      setToastState({ state: "error", message: "이미지를 넣어주세요." });
+      return;
+    }
 
     // 유효성 검사
     if (password.length < 6) {
@@ -61,18 +67,18 @@ const SignupPage = () => {
             }
           }
         }
-        alert("회원가입 성공!");
+        setToastState({ state: "custom", message: `회원가입 성공!` });
 
         // 쿠키에 저장된 토큰 제거
         nookies.destroy(null, "sb-txvvzlryxqhzxjcsncqo-auth-token");
         nookies.destroy(null, "sb-txvvzlryxqhzxjcsncqo-auth-token-code-verifier");
 
-        router.push("/login");
+        router.push("/login?message=회원가입 성공! 로그인 해주세요.");
       }
     } catch (error) {
       console.error(error);
-      setToastState({ state: "error", message: "오류가 발생했습니다. 다시 시도해주세요." });
     }
+    return;
   };
 
   // 프로필 이미지 파일 변경 핸들러
@@ -97,17 +103,21 @@ const SignupPage = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <form onSubmit={handleSignup}>
-        <div className="mt-6 mb-4 flex flex-col items-center justify-center">
-          <Image
-            src={profileUrl || LogoBread.src}
-            alt="Profile"
-            width={200}
-            height={200}
-            priority
-            className="w-40 h-40 rounded-full border-2 border-point object-contain"
-            onClick={handleImageClick}
-          />
-          <input type="file" accept="image/*" onChange={handleProfileChange} className="hidden" ref={fileInputRef} />
+        <div className="mt-6 mb-4 flex flex-col items-center justify-center ">
+          <div className="cursor-pointer relative" onClick={handleImageClick}>
+            <Image
+              src={profileUrl || userDefaultImage.src}
+              alt="Profile"
+              width={200}
+              height={200}
+              priority
+              className="w-40 h-40 rounded-full border-2 border-point object-contain"
+            />
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-30 rounded-full">
+              <span className="text-white text-title">+</span>
+            </div>
+            <input type="file" accept="image/*" onChange={handleProfileChange} className="hidden" ref={fileInputRef} />
+          </div>
           <p className="shared-text">프로필 업로드</p>
         </div>
         <p className="shared-text">이메일</p>
@@ -130,7 +140,7 @@ const SignupPage = () => {
         />
         <p className="shared-text">비밀번호</p>
         <input
-          className="shared-input mb-2 focus:outline-[#895236]"
+          className="shared-input mb-2 focus:outline-[#C9AB9C]"
           type="password"
           placeholder="Password"
           value={password}
@@ -139,7 +149,7 @@ const SignupPage = () => {
         />
         <p className="shared-text">비밀번호 확인</p>
         <input
-          className="shared-input mb-2 focus:outline-[#925435]"
+          className="shared-input mb-2 focus:outline-[#C9AB9C]"
           type="password"
           placeholder="Password"
           value={confirmPassword}

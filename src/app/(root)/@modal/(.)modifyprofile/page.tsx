@@ -13,7 +13,8 @@ import { updateUserInfo } from "@/app/api/supabase/auth/route";
 // 모달창
 const Page = () => {
   const router = useRouter();
-  const { userId, email, nickname, profile, newDescription, setUser } = useUserStore((state) => ({
+  const { userId, email, nickname, profile, newDescription, setUser } = useUserStore((state) => 
+    ({
     userId: state.userId as string,
     email: state.email as string,
     nickname: state.nickname as string,
@@ -76,7 +77,7 @@ const Page = () => {
       <div className="bg-white rounded-lg shadow-lg p-12 w-70 max-w">
         <h2 className="mb-4 text-center text-title font-title">프로필 수정</h2>
         <div className="flex justify-center">
-          <div className="w-32 h-32 border border-[#ccc] rounded-full overflow-hidden bg-[#fdfbfb] flex items-center justify-center cursor-pointer">
+          <div className="relative w-32 h-32 border border-[#ccc] rounded-full overflow-hidden bg-[#fdfbfb] flex items-center justify-center cursor-pointer">
             {newProfile ? (
               <Image
                 src={profileUrl || ""}
@@ -100,6 +101,9 @@ const Page = () => {
                 }}
               />
             )}
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-30 rounded-full">
+              <span className="text-white text-title">+</span>
+            </div>
           </div>
           <input type="file" onChange={handleProfileChange} ref={inputref} className="hidden" />
         </div>{" "}
