@@ -96,7 +96,7 @@ const Page = () => {
           <div className="flex justify-between items-center shared-text">
             <p className="px-2">닉네임</p>
             <input
-              className="shared-input"
+              className="shared-input focus:outline-[#C9AB9C]"
               type="text"
               value={newNickname || ""}
               onChange={(e) => setNewNickname(e.target.value)}
@@ -105,7 +105,7 @@ const Page = () => {
           <div className="flex justify-between items-center mt-4 shared-text">
             <p className="px-2">소개</p>
             <input
-              className="shared-input"
+              className="shared-input focus:outline-[#C9AB9C]"
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
