@@ -49,6 +49,9 @@ const LoginPage = () => {
         } else {
           setToastState({ state: "error", message: `로그인 실패:${error.message} ` });
         }
+        //로그인 실패시 빈배열
+        setEmail("");
+        setPassword("");
       } else {
         if (data.user) {
           // Supabase에서 사용자 정보 가져오기
@@ -74,6 +77,7 @@ const LoginPage = () => {
       console.error(error);
       setToastState({ state: "error", message: "오류가 발생했습니다. 다시 시도해주세요." });
     }
+    return;
   };
 
   return (
@@ -98,7 +102,7 @@ const LoginPage = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <div>
-          <button type="submit" className="shared-butten my-10 hover:bg-[#C9AB9C]">
+          <button type="submit" disabled={false} className="shared-butten my-10 hover:bg-[#C9AB9C]">
             로그인
           </button>
         </div>
