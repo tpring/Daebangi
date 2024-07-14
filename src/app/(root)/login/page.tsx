@@ -2,12 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-
 import { getUserData, login } from "@/app/api/supabase/auth/route";
 import Toast from "@/components/commons/toast/Toast";
 import { useUserStore } from "@/store/userStore";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LogoBread from "../../../../public/image/breads/LogoBread.png";
 
 const LoginPage = () => {
@@ -17,10 +16,11 @@ const LoginPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [toastState, setToastState] = useState({ state: "", message: "" });
+
   useEffect(() => {
     const messageParam = searchParams.get("message");
     if (messageParam) {
-      alert(messageParam);
+      setToastState({ state: "custom", message: "로그인 후 이용부탁드립니다" });
     }
   }, [searchParams]);
 
