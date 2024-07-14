@@ -62,23 +62,23 @@ const CommentList: React.FC<CommentProps> = ({ bakery_id: bakeryId }) => {
     setToastState({ state: "", message: "" });
   };
   return (
-    <div>
+    <div className="pt-24 pb-16 sm-max:pb-8">
       {/* 댓글 입력란 */}
       <form className="flex items-center gap-2" onSubmit={handleSubmitComment}>
         {/*유저 프로필 */}
-        <div className="ml-3">
-          <UserProfile src={profile?.length === 0 ? profile : ""} width={40} height={40} />
+        <div>
+          <UserProfile src={profile?.length === 0 ? profile : ""} width={52} height={52} />
         </div>
         {/* <Image src={profile as string} alt="유저 프로필" width={80} height={80} /> */}
         <input
           value={comment}
           onChange={handleChange}
           placeholder="댓글을 남겨 주세요."
-          className="font-secondary px-5 w-full h-[52px] text-subtitle border-point border-4 rounded-[60px] focus:outline-none"
+          className="font-secondary px-5 w-full h-[52px] text-subtitle border-point border-2 rounded-[60px] focus:outline-none"
         />
       </form>
       <div>
-        <h1 className="text-subtitle font-semibold py-2">
+        <h1 className="text-subtitle font-semibold py-2 border-b mt-5">
           댓글 <span>{commentList?.length}</span>개
         </h1>
         {/* 댓글 목록 */}

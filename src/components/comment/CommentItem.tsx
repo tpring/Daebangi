@@ -13,8 +13,9 @@ type CommentItem = {
   commentId: number;
   onCommentUpdate: () => void;
 };
+
 const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onCommentUpdate }) => {
-  const [commentUser, setCommentUser] = useState<User | null>(); // 댓글 작성자
+  const [commentUser, setCommentUser] = useState<User | null>(null); // 댓글 작성자
   const [updating, setUpdating] = useState<boolean>(false); // 업데이트 중 인지 판별 하는 상태
   const [updatedContent, setupdatedContent] = useState<string>(""); // 수정되는 내용
   const [comment, setComment] = useState<string>(content); // 보여지는 댓글
@@ -31,11 +32,10 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
         setCommentUser(data);
       } catch (error) {
         console.error("댓글 유저 정보 fetch 중 실패", error);
-        throw error;
       }
     };
     fetchUserById();
-  }, []);
+  }, [userId]);
 
   // 댓글 업데이트 로직
   const handleUpdateCommet = async () => {
@@ -60,21 +60,19 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
   };
 
   return (
-    <li className="border-t border-b bg-white p-3 grid grid-cols-3 gap-2 items-center">
-      <div className="col-span-2 flex items-center">
+    <li className="border-b bg-white p-3 grid grid-cols-3 gap-2 items-center sm-max:grid-cols-1">
+      <div className="col-span-2 flex items-center sm-max:col-span-1">
         {/* 프로필 이미지 부분 */}
-        <div className="w-[80px]">
-          <UserProfile src={commentUser?.profile as string} />
-        </div>
-        <div className="ml-[50px] ">
+        <UserProfile src={commentUser?.profile as string} width={52} height={52} />
+        <div className="ml-[50px] sm-max:ml-[20px] ">
           <p className="font-semibold text-basics">{commentUser?.nickname as string}</p>
           {/* content 부분 */}
           {!updating ? (
-            <p className="">{comment}</p>
+            <p>{comment}</p>
           ) : (
             <form>
               <input
-                className="border rounded-lg w-full px-2 cursor-not-allowed"
+                className="border rounded-lg w-full px-1 p-2 mt-1 cursor-not-allowed"
                 value={updatedContent}
                 onChange={(e) => setupdatedContent(e.target.value)}
                 onKeyDown={(e) => {
@@ -83,23 +81,23 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
                   }
                 }}
               />
-              {updatedContent.trim() === "" && <p className="text-red-500 text-sm">댓글을 입력해주세요.</p>}
+              {updatedContent.trim() === "" && <p className="text-red-500 text-sm mt-2">댓글을 입력해주세요.</p>}
             </form>
           )}
         </div>
       </div>
-      <div className="flex gap-1 w-full items-center justify-end mr-3">
-        {/*button 부분 */}
+      <div className="flex gap-1 w-full items-center justify-end mr-3 relative sm-max:mt-2 sm-max:justify-start sm-max:flex-row sm-max:ml-[67px]">
+        {/* button 부분 */}
         {userId === loginUserId ? (
-          <>
-            <button className="comment-button cursor-pointer" onClick={handleUpdateCommet}>
-              수정
+          <div className="flex gap-1 sm-max:gap-2 sm-max:flex-row sm-max:items-center">
+            <button className="comment-button cursor-pointer relative z-10" onClick={handleUpdateCommet}>
+              {updating ? "완료" : "수정"}
             </button>
-            <div className="border-2 h-14" />
-            <button className="comment-button cursor-pointer" onClick={handleDeleteComment}>
+            <span className="inline-block h-4 w-px bg-gray-300 mx-2 sm-max:mx-2 sm-max:h-4 mt-2"></span>
+            <button className="comment-button cursor-pointer relative z-10" onClick={handleDeleteComment}>
               삭제
             </button>
-          </>
+          </div>
         ) : null}
       </div>
     </li>

@@ -62,6 +62,12 @@ const config: Config = {
       },
     },
   },
+  variants: {
+    extend: {
+      textColor: ["hover"],
+      backgroundColor: ["hover"],
+    },
+  },
   plugins: [],
 };
 export default config;

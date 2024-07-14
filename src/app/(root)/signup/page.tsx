@@ -95,7 +95,7 @@ const SignupPage = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <form onSubmit={handleSignup}>
-        <div className="mb-4 flex flex-col items-center justify-center">
+        <div className="mt-6 mb-4 flex flex-col items-center justify-center">
           <Image
             src={profileUrl || LogoBread.src}
             alt="Profile"
@@ -128,7 +128,7 @@ const SignupPage = () => {
         />
         <p className="shared-text">비밀번호</p>
         <input
-          className="shared-input mb-2 focus:outline-[#C9AB9C]"
+          className="shared-input mb-2 focus:outline-[#895236]"
           type="password"
           placeholder="Password"
           value={password}
@@ -137,7 +137,7 @@ const SignupPage = () => {
         />
         <p className="shared-text">비밀번호 확인</p>
         <input
-          className="shared-input mb-2 focus:outline-[#C9AB9C]"
+          className="shared-input mb-2 focus:outline-[#925435]"
           type="password"
           placeholder="Password"
           value={confirmPassword}
@@ -145,14 +145,14 @@ const SignupPage = () => {
           required
         />
         <div>
-          <button type="submit" className="shared-butten my-6 hover:bg-[#C9AB9C]">
+          <button type="submit" className="shared-butten my-6 hover:bg-[#925435]">
             회원가입
           </button>
         </div>
       </form>
       <Link
         href={"/login"}
-        className="text-basics hover:text-teal-600 hover:bg-gray-200 hover:underline transition-colors duration-300 p-2 rounded-md"
+        className="text-basics hover:text-point hover:bg-gray-200 hover:underline transition-colors duration-300 p-2 rounded-md mb-5"
       >
         로그인 하러 가기
       </Link>

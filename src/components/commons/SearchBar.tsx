@@ -41,7 +41,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ initialKeyword = "", onSearch }) 
   return (
     <div className="flex relative w-full max-w-2xl items-center ">
       <input
-        className="w-full p-4 pl-10 pr-20 rounded-full border border-point text-2xl h-12 flex items-center font-secondary focus:outline-none"
+        className="w-full p-4 pl-10 pr-20 rounded-full  border-2 border-point text-2xl h-12 flex items-center font-secondary focus:outline-none"
         type="text"
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
