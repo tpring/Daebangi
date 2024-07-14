@@ -61,7 +61,7 @@ const SignupPage = () => {
             }
           }
         }
-        alert("회원가입 성공!");
+        setToastState({ state: "error", message: `회원가입 성공!` });
 
         // 쿠키에 저장된 토큰 제거
         nookies.destroy(null, "sb-txvvzlryxqhzxjcsncqo-auth-token");
