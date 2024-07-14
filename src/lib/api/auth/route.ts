@@ -102,7 +102,7 @@ export const updateUserInfo = async (userId: string, nickname: string, profileUr
       .update({
         nickname,
         profile: profileUrl,
-        description,
+        description: "소개란을 작성해주세요",
       })
       .eq("user_id", userId);
     if (error) {
