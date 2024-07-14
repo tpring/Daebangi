@@ -39,6 +39,13 @@ const Page = () => {
       setProfileUrl(url);
     }
   };
+
+  const handleImageClick = () => {
+    if (inputref.current) {
+      inputref.current.click();
+    }
+  };
+
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
     if (newProfile) {
@@ -72,8 +79,10 @@ const Page = () => {
           <Image src={CloseButton} alt="close" width={20} height={20} />
         </button>
         <div className="flex justify-center">
-          <div className="relative w-32 h-32 border border-[#ccc] rounded-full overflow-hidden bg-[#fdfbfb] flex items-center justify-center cursor-pointer">
-
+          <div
+            className="relative w-32 h-32 border border-[#ccc] rounded-full overflow-hidden bg-[#fdfbfb] flex items-center justify-center cursor-pointer"
+            onClick={handleImageClick}
+          >
             {newProfile ? (
               <Image
                 src={profileUrl || ""}
@@ -83,9 +92,7 @@ const Page = () => {
                 layout="intrinsic"
                 objectFit="cover"
                 className="rounded-full"
-                onClick={() => {
-                  inputref.current?.click();
-                }}
+
               />
             ) : (
               <Image
@@ -96,9 +103,6 @@ const Page = () => {
                 layout="intrinsic"
                 objectFit="cover"
                 className="rounded-full"
-                onClick={() => {
-                  inputref.current?.click();
-                }}
               />
             )}
             <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-30 rounded-full">
