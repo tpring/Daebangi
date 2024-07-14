@@ -1,5 +1,5 @@
 import LoadingAnimation from "@/components/commons/LoadingAnimation";
-import Header from "@/components/header/header";
+import Header from "@/components/header/Header";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import "./globals.css";
