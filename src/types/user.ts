@@ -1,3 +1,7 @@
-import { Tables } from "./supabase";
-
-export type User = Tables<"user">;
+export type User = {
+  description: string | null;
+  email: string;
+  nickname: string | null;
+  profile: string | null;
+  user_id: string;
+};
