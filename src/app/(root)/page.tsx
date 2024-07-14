@@ -1,6 +1,6 @@
 import { BakeryList } from "@/components/bakeries/BakeryList";
 import SearchBar from "@/components/commons/SearchBar";
-import UpButton from "@/components/commons/UpButton";
+import UpButton from "@/components/main/UpButton";
 import BouncingBread from "@/components/main/BouncingBread";
 
 const Home = () => {

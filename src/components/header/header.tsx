@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/store/userStore";
 import { signOut } from "@/app/api/supabase/auth/route";
-import UserProfile from "../commons/UserProfile";
+import UserProfile from "../commons/profile/UserProfile";
 import breadImage from "../../../public/image/breads/LogoBread.png";
 
 export const Header: React.FC = () => {
