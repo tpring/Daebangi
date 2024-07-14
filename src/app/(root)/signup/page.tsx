@@ -4,12 +4,12 @@ import Toast from "@/components/commons/toast/Toast";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import nookies from "nookies";
 import { useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import LogoBread from "../../../../public/image/breads/LogoBread.png";
 import { uploadImage } from "../../../supabase/utils/makeimageUrl";
 import { signUp, updateUserProfile } from "../../api/supabase/auth/route";
-import nookies from "nookies";
-import LogoBread from "../../../../public/image/breads/LogoBread.png";
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");

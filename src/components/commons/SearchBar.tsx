@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, FormEvent } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import searchBread from "../../../public/image/breads/searchBread.png";
 import { SearchBarProps } from "@/types/search";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { FormEvent, useState } from "react";
+import searchBread from "../../../public/image/breads/searchBread.png";
 
 const SearchBar: React.FC<SearchBarProps> = ({ initialKeyword = "", onSearch }) => {
   const router = useRouter();
