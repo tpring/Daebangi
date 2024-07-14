@@ -1,13 +1,14 @@
 "use client";
 
 import { useUserStore } from "@/store/userStore";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import { uploadImage } from "@/supabase/utils/makeimageUrl";
 import LogoBread from "../../../../../public/image/breads/LogoBread.png";
 import { updateUserInfo } from "@/app/api/supabase/auth/route";
+import CloseButton from "../../../../../public/image/icons/clear.png";
+import Image from "next/image";
 
 // modifyprofile의 페이지를 인터셉트 하는 페이지 입니다.
 // 모달창
@@ -71,10 +72,18 @@ const Page = () => {
     router.back();
   };
 
+  const onClose = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    router.back();
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white rounded-lg shadow-lg p-12 w-70 max-w">
+      <div className="bg-white rounded-lg shadow-lg p-12 w-70 max-w relative">
         <h2 className="mb-4 text-center text-title font-title">프로필 수정</h2>
+        <button onClick={onClose} className="absolute top-4 right-4 text-xl font-bold">
+          <Image src={CloseButton} alt="close" width={20} height={20} />
+        </button>
         <div className="flex justify-center">
           <div className="w-32 h-32 border border-[#ccc] rounded-full overflow-hidden bg-[#fdfbfb] flex items-center justify-center cursor-pointer">
             {newProfile ? (
