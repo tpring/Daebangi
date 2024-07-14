@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import { uploadImage } from "@/supabase/utils/makeimageUrl";
 import LogoBread from "../../../../../public/image/breads/LogoBread.png";
-import { updateUserInfo } from "@/app/api/supabase/auth/route";
+import { updateUserInfo } from "@/lib/api/auth/route";
 
 // modifyprofile의 페이지를 인터셉트 하는 페이지 입니다.
 // 모달창

@@ -1,7 +1,7 @@
-import { fetchBakeryDetails } from "@/app/api/supabase/detail/route";
 import CommentList from "@/components/comment/CommentList";
-import SkeletonMap from "@/components/commons/skeleton/SkeletonMap";
+import SkeletonMap from "@/components/commons/Skeleton/SkeletonMap";
 import StoreInformation from "@/components/map/StoreInformation";
+import { fetchBakeryDetails } from "@/lib/api/detail/route";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { notFound, redirect } from "next/navigation";

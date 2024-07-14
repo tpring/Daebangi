@@ -1,6 +1,6 @@
 "use client";
 
-import { checkLikeStatus, toggleLikeStatus } from "@/app/api/supabase/like/route";
+import { checkLikeStatus, toggleLikeStatus } from "@/lib/api/like/route";
 import { useUserStore } from "@/store/userStore";
 import Image from "next/image";
 import { useEffect, useState } from "react";

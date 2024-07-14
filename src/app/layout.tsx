@@ -1,8 +1,8 @@
 import LoadingAnimation from "@/components/commons/LoadingAnimation";
-import Header from "@/components/header/Header";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import "./globals.css";
+import Header from "@/components/header/header";
 
 export const metadata: Metadata = {
   title: "대빵이",

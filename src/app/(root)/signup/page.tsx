@@ -1,15 +1,15 @@
 "use client";
 
-import Toast from "@/components/commons/toast/Toast";
+import Toast from "@/components/commons/Toast/Toast";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { uploadImage } from "../../../supabase/utils/makeimageUrl";
-import { signUp, updateUserProfile } from "../../api/supabase/auth/route";
 import nookies from "nookies";
 import LogoBread from "../../../../public/image/breads/LogoBread.png";
+import { signUp, updateUserProfile } from "@/lib/api/auth/route";
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");

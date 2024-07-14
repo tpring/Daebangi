@@ -5,8 +5,8 @@ import { Map, CustomOverlayMap } from "react-kakao-maps-sdk";
 import Image from "next/image";
 import Link from "next/link";
 import { KakaoMapProps, GeocoderResult, WindowWithKakao } from "@/types/map";
-import { loadKakaoMapScript } from "@/app/api/kakao/route";
-import SkeletonMap from "@/components/commons/skeleton/SkeletonMap";
+import SkeletonMap from "@/components/commons/Skeleton/SkeletonMap";
+import { loadKakaoMapScript } from "@/urils/loadKakaoMap";
 
 const KakaoMap: React.FC<KakaoMapProps> = ({ name, address }) => {
   const [isLoaded, setIsLoaded] = useState(false);

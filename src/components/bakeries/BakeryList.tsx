@@ -2,10 +2,9 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { createClient } from "@/supabase/client";
 import { Bakery } from "@/types/bakery";
 import { BakeryCard } from "./BakeryCard";
-import { bakeryItem } from "@/app/api/supabase/bakery/route";
+import { bakeryItem } from "@/lib/api/bakery/route";
 
 type BakeryListProp = {
   searchedBakeries?: Bakery[];

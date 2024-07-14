@@ -1,12 +1,12 @@
 "use client";
 
-import { fetchComments, insertComment } from "@/app/api/supabase/comment/route";
 import { useUserStore } from "@/store/userStore";
 import { Comment } from "@/types/comment";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import Toast from "../commons/toast/Toast";
 import UserProfile from "../commons/profile/UserProfile";
 import CommentItem from "./CommentItem";
+import { fetchComments, insertComment } from "@/lib/api/comment/route";
+import Toast from "../commons/Toast/Toast";
 
 type CommentProps = {
   bakery_id: string;

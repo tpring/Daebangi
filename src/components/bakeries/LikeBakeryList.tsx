@@ -4,9 +4,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BakeryCard } from "./BakeryCard";
 import { useUserStore } from "@/store/userStore";
-import { getUserLikedBakeryIds } from "@/app/api/supabase/like/route";
-import { getBakeriesByIds } from "@/app/api/supabase/bakery/route";
+import { getUserLikedBakeryIds } from "@/lib/api/like/route";
 import { Bakery } from "@/types/bakery";
+import { getBakeriesByIds } from "@/lib/api/bakery/route";
 
 export const LikeBakeryList = () => {
   const [bakeryList, setBakeryList] = useState<Bakery[]>([]);

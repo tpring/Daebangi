@@ -4,9 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/store/userStore";
-import { signOut } from "@/app/api/supabase/auth/route";
 import UserProfile from "../commons/profile/UserProfile";
 import breadImage from "../../../public/image/breads/LogoBread.png";
+import { signOut } from "@/lib/api/auth/route";
 
 export const Header: React.FC = () => {
   const { userId, nickname, profile } = useUserStore((state) => ({
