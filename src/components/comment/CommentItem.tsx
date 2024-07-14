@@ -103,7 +103,7 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
               삭제
             </button>
             <ToastContainer />
-          </>
+          </div>
         ) : null}
       </div>
     </li>
