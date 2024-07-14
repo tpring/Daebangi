@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { getUserData, login } from "@/app/api/supabase/auth/route";
-import Toast from "@/components/commons/Toast/Toast";
+import Toast from "@/components/commons/toast/Toast";
 import { useUserStore } from "@/store/userStore";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";

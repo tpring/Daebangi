@@ -1,6 +1,6 @@
 "use client";
 
-import Toast from "@/components/commons/Toast/Toast";
+import Toast from "@/components/commons/toast/Toast";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
