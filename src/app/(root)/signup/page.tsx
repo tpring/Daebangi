@@ -1,5 +1,6 @@
 "use client";
 
+import Toast from "@/components/commons/toast/Toast";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -20,6 +21,7 @@ const SignupPage = () => {
   const router = useRouter();
   const newUuid = uuidv4();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [toastState, setToastState] = useState({ state: "", message: "" });
 
   // 회원가입 처리 함수
   const handleSignup = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -27,11 +29,11 @@ const SignupPage = () => {
 
     // 유효성 검사
     if (password.length < 6) {
-      alert("비밀번호는 6자리 이상이어야 합니다.");
+      setToastState({ state: "custom", message: "비밀번호는 6자리 이상이어야 합니다." });
       return;
     }
     if (password !== confirmPassword) {
-      alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+      setToastState({ state: "custom", message: "비밀번호와 비밀번호 확인이 일치하지 않습니다." });
       return;
     }
 
@@ -42,11 +44,10 @@ const SignupPage = () => {
       if (error) {
         // Supabase의 오류 메시지에 따라 유효성 검사 처리
         if (error.message.includes("User already registered")) {
-          alert("이미 가입된 이메일입니다.");
+          setToastState({ state: "custom", message: "이미 가입된 이메일입니다." });
         } else {
-          alert("가입 실패: " + error.message);
+          setToastState({ state: "error", message: `가입 실패 : ${error.message}` });
         }
-        console.error("error:", error);
       } else {
         //회원가입 성공 후 profile이 있을때 이미지 업로드
         if (profile) {
@@ -70,7 +71,7 @@ const SignupPage = () => {
       }
     } catch (error) {
       console.error(error);
-      alert("오류가 발생했습니다. 다시 시도해주세요.");
+      setToastState({ state: "error", message: "오류가 발생했습니다. 다시 시도해주세요." });
     }
   };
 
@@ -157,6 +158,7 @@ const SignupPage = () => {
       >
         로그인 하러 가기
       </Link>
+      {toastState.state && <Toast state={toastState.state} message={toastState.message} />}
     </div>
   );
 };

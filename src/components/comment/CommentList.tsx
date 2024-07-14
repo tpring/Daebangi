@@ -39,7 +39,7 @@ const CommentList: React.FC<CommentProps> = ({ bakery_id: bakeryId }) => {
   const handleSubmitComment = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (comment.length < 1) {
-      setToastState({ state: "warn", message: "최소 1글자 이상 입력해야 합니다." });
+      setToastState({ state: "custom", message: "최소 1글자 이상 입력해야 합니다." });
       return;
     }
     try {

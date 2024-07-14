@@ -24,6 +24,7 @@ const Test = () => {
         토스트 버튼
       </button>
       {toastState.state && <Toast state={toastState.state} message={toastState.message} onClear={clearToastState} />}
+      {/* <ConfirmToast content={"정말로 삭제하시겠습니까?"} buttonName="삭제" handleFunction={handleClick} /> */}
     </div>
   );
 };
