@@ -1,13 +1,14 @@
 "use client";
 
-import { getUserData, login } from "@/app/api/supabase/auth/route";
-import Toast from "@/components/commons/toast/Toast";
-import { useUserStore } from "@/store/userStore";
 import Image from "next/image";
 import Link from "next/link";
+
+import Toast from "@/components/commons/toast/Toast";
+import { useUserStore } from "@/store/userStore";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import LogoBread from "../../../../public/image/breads/LogoBread.png";
+import { getUserData, login } from "@/app/api/supabase/auth/route";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -20,7 +21,7 @@ const LoginPage = () => {
   useEffect(() => {
     const messageParam = searchParams.get("message");
     if (messageParam) {
-      setToastState({ state: "custom", message: "로그인 후 이용부탁드립니다" });
+      setToastState({ state: "custom", message: messageParam });
     }
   }, [searchParams]);
 
@@ -48,6 +49,9 @@ const LoginPage = () => {
         } else {
           setToastState({ state: "error", message: `로그인 실패:${error.message} ` });
         }
+        //로그인 실패시 빈배열
+        setEmail("");
+        setPassword("");
       } else {
         if (data.user) {
           // Supabase에서 사용자 정보 가져오기
@@ -73,6 +77,7 @@ const LoginPage = () => {
       console.error(error);
       setToastState({ state: "error", message: "오류가 발생했습니다. 다시 시도해주세요." });
     }
+    return;
   };
 
   return (
@@ -97,7 +102,9 @@ const LoginPage = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <div>
+
           <button type="submit" className="shared-butten my-10 hover:bg-[#925435]">
+
             로그인
           </button>
         </div>

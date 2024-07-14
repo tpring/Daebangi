@@ -72,7 +72,8 @@ const Page = () => {
           <Image src={CloseButton} alt="close" width={20} height={20} />
         </button>
         <div className="flex justify-center">
-          <div className="w-32 h-32 border border-[#ccc] rounded-full overflow-hidden bg-[#FDFBFB] flex items-center justify-center cursor-pointer">
+          <div className="relative w-32 h-32 border border-[#ccc] rounded-full overflow-hidden bg-[#fdfbfb] flex items-center justify-center cursor-pointer">
+
             {newProfile ? (
               <Image
                 src={profileUrl || ""}
@@ -100,6 +101,9 @@ const Page = () => {
                 }}
               />
             )}
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-30 rounded-full">
+              <span className="text-white text-title">+</span>
+            </div>
           </div>
           <input type="file" onChange={handleProfileChange} ref={inputref} className="hidden" />
         </div>
