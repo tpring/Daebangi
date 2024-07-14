@@ -11,6 +11,7 @@ import Toast from "../commons/Toast/Toast";
 type CommentProps = {
   bakery_id: string;
 };
+
 const CommentList: React.FC<CommentProps> = ({ bakery_id: bakeryId }) => {
   const [comment, setComment] = useState<string>("");
   const [commentList, setCommentList] = useState<Comment[]>([]);

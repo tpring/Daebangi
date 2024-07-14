@@ -1,5 +1,4 @@
 "use client";
-
 import { useUserStore } from "@/store/userStore";
 import { User } from "@/types/user";
 import { useEffect, useState } from "react";
@@ -65,19 +64,19 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
   };
 
   return (
-    <li className="border-b bg-white p-3 grid grid-cols-3 gap-2 items-center sm-max:grid-cols-1">
-      <div className="col-span-2 flex items-center sm-max:col-span-1">
+    <li className="border-b bg-white p-3 grid grid-cols-6 gap-2 items-center sm-max:grid-cols-1">
+      <div className="col-span-5 flex items-center sm-max:col-span-1">
         {/* 프로필 이미지 부분 */}
         <UserProfile src={commentUser?.profile as string} width={52} height={52} />
-        <div className="ml-[50px] sm-max:ml-[20px] ">
+        <div className="ml-[50px] sm-max:ml-[20px] w-full">
           <p className="font-semibold text-basics">{commentUser?.nickname as string}</p>
           {/* content 부분 */}
           {!updating ? (
             <p>{comment}</p>
           ) : (
-            <form>
+            <form className="w-full">
               <input
-                className="border rounded-lg w-full px-1 p-2 mt-1 cursor-not-allowed"
+                className="border rounded-lg w-full px-1 p-2 mt-1 focus:outline-[#c4c4c4]"
                 value={updatedContent}
                 onChange={(e) => setupdatedContent(e.target.value)}
                 onKeyDown={(e) => {
@@ -91,7 +90,7 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
           )}
         </div>
       </div>
-      <div className="flex gap-1 w-full items-center justify-end mr-3 relative sm-max:mt-2 sm-max:justify-start sm-max:flex-row sm-max:ml-[67px]">
+      <div className="col-span-1 flex gap-1 w-full items-center justify-end sm-max:mt-2 sm-max:justify-start sm-max:flex-row">
         {/* button 부분 */}
         {userId === loginUserId ? (
           <div className="flex gap-1 sm-max:gap-2 sm-max:flex-row sm-max:items-center">

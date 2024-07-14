@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-
 import Toast from "@/components/commons/Toast/Toast";
 import { useUserStore } from "@/store/userStore";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -49,6 +48,9 @@ const LoginPage = () => {
         } else {
           setToastState({ state: "error", message: `로그인 실패:${error.message} ` });
         }
+        //로그인 실패시 빈배열
+        setEmail("");
+        setPassword("");
       } else {
         if (data.user) {
           // Supabase에서 사용자 정보 가져오기
@@ -74,10 +76,11 @@ const LoginPage = () => {
       console.error(error);
       setToastState({ state: "error", message: "오류가 발생했습니다. 다시 시도해주세요." });
     }
+    return;
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center h-calc">
       <Image src={LogoBread} alt="Logo Bread" width={220} height={154} priority className="mb-[-20px]" />
       <label className="font-secondary text-[46px]">대빵이</label>
       <form onSubmit={handleLogin}>
@@ -98,14 +101,14 @@ const LoginPage = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <div>
-          <button type="submit" className="shared-butten my-10 hover:bg-[#C9AB9C]">
+          <button type="submit" className="shared-butten my-10 hover:bg-[#925435]">
             로그인
           </button>
         </div>
       </form>
       <Link
         href={"/signup"}
-        className="text-basics hover:text-teal-600 hover:bg-gray-200 hover:underline transition-colors duration-300 p-2 rounded-md"
+        className="text-basics hover:text-point hover:underline transition-colors duration-300 p-2 rounded-md"
       >
         회원가입 하러 가기
       </Link>

@@ -8,7 +8,7 @@ import { useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { uploadImage } from "../../../supabase/utils/makeimageUrl";
 import nookies from "nookies";
-import LogoBread from "../../../../public/image/breads/LogoBread.png";
+import userDefaultImage from "../../../../public/image/icons/userDefaultImage.png";
 import { signUp, updateUserProfile } from "@/lib/api/auth/route";
 
 const SignupPage = () => {
@@ -101,19 +101,23 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center h-calc">
       <form onSubmit={handleSignup}>
-        <div className="mt-6 mb-4 flex flex-col items-center justify-center">
-          <Image
-            src={profileUrl || LogoBread.src}
-            alt="Profile"
-            width={200}
-            height={200}
-            priority
-            className="w-40 h-40 rounded-full border-2 border-point object-contain"
-            onClick={handleImageClick}
-          />
-          <input type="file" accept="image/*" onChange={handleProfileChange} className="hidden" ref={fileInputRef} />
+        <div className="mt-6 mb-4 flex flex-col items-center justify-center ">
+          <div className="cursor-pointer relative" onClick={handleImageClick}>
+            <Image
+              src={profileUrl || userDefaultImage.src}
+              alt="Profile"
+              width={200}
+              height={200}
+              priority
+              className="w-40 h-40 rounded-full border-2 border-point object-contain"
+            />
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-30 rounded-full">
+              <span className="text-white text-title">+</span>
+            </div>
+            <input type="file" accept="image/*" onChange={handleProfileChange} className="hidden" ref={fileInputRef} />
+          </div>
           <p className="shared-text">프로필 업로드</p>
         </div>
         <p className="shared-text">이메일</p>
@@ -136,7 +140,7 @@ const SignupPage = () => {
         />
         <p className="shared-text">비밀번호</p>
         <input
-          className="shared-input mb-2 focus:outline-[#895236]"
+          className="shared-input mb-2 focus:outline-[#C9AB9C]"
           type="password"
           placeholder="Password"
           value={password}
@@ -145,7 +149,7 @@ const SignupPage = () => {
         />
         <p className="shared-text">비밀번호 확인</p>
         <input
-          className="shared-input mb-2 focus:outline-[#925435]"
+          className="shared-input mb-2 focus:outline-[#C9AB9C]"
           type="password"
           placeholder="Password"
           value={confirmPassword}

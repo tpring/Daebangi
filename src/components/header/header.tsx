@@ -1,12 +1,12 @@
 "use client";
 
+import { signOut } from "@/lib/api/auth/route";
+import { useUserStore } from "@/store/userStore";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useUserStore } from "@/store/userStore";
-import UserProfile from "../commons/profile/UserProfile";
 import breadImage from "../../../public/image/breads/LogoBread.png";
-import { signOut } from "@/lib/api/auth/route";
+import UserProfile from "../commons/profile/UserProfile";
 
 export const Header: React.FC = () => {
   const { userId, nickname, profile } = useUserStore((state) => ({
