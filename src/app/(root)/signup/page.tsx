@@ -95,7 +95,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center h-calc">
       <form onSubmit={handleSignup}>
         <div className="mt-6 mb-4 flex flex-col items-center justify-center">
           <Image
@@ -130,7 +130,7 @@ const SignupPage = () => {
         />
         <p className="shared-text">비밀번호</p>
         <input
-          className="shared-input mb-2 focus:outline-[#895236]"
+          className="shared-input mb-2 focus:outline-[#C9AB9C]"
           type="password"
           placeholder="Password"
           value={password}
@@ -139,7 +139,7 @@ const SignupPage = () => {
         />
         <p className="shared-text">비밀번호 확인</p>
         <input
-          className="shared-input mb-2 focus:outline-[#925435]"
+          className="shared-input mb-2 focus:outline-[#C9AB9C]"
           type="password"
           placeholder="Password"
           value={confirmPassword}

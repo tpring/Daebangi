@@ -7,7 +7,7 @@ const StoreInformation: React.FC<StoreInformationProps> = ({ bakeryId, image, na
   const imageSrc = image || defaultImg.src;
 
   return (
-    <section className="flex flex-col md:flex-row justify-between mt-6 bg-base p-6 rounded-lg sm-max:pb-10">
+    <section className="flex flex-col md:flex-row justify-between mt-6 bg-base p-6 rounded-lg sm-max:pb-10 shadow-lg">
       {/* 가게정보_이미지영역 */}
       <div className="relative w-full md:w-1/3 h-72 md:h-64">
         {<Image src={imageSrc} alt="베이커리 이미지" layout="fill" objectFit="cover" className="rounded-md" />}
