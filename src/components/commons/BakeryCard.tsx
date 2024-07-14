@@ -16,9 +16,9 @@ type BakeryCardProps = {
 export const BakeryCard: React.FC<BakeryCardProps> = ({ bakeryId, image, name, phone, address }) => {
   return (
     <div className="flex justify-center items-center ">
-      <div className="bg-base min-w-[350px] max-w-xs border border-point rounded-lg p-4 shadow-md text-center overflow-hidden min-h-80 h-[509px]">
+      <div className="bg-base min-w-[320px] max-w-xs border border-point rounded-lg p-4 shadow-md text-center overflow-hidden min-h-80 h-[490px]">
         <div className="flex justify-center items-center min-h-80">
-          <div className="w-[330px] h-[300px] overflow-hidden">
+          <div className="w-[310px] h-[310px] mb-3 overflow-hidden">
             <Image
               className="w-full h-full object-cover"
               src={image || defaultImg}
@@ -30,7 +30,7 @@ export const BakeryCard: React.FC<BakeryCardProps> = ({ bakeryId, image, name, p
         </div>
         <div className="flex justify-between items-center text-lg font-bold text-black mt-2">
           {name}
-          <span className="felx left text-red-500 text-xl">
+          <span className="flex left text-red-500 text-xl">
             <LikeButton bakeryId={bakeryId} />
           </span>
         </div>
@@ -43,7 +43,6 @@ export const BakeryCard: React.FC<BakeryCardProps> = ({ bakeryId, image, name, p
           </span>
           {phone ? phone : "매장번호 미제공"}
         </div>
-
         <div className="text-gray-700 text-sm mt-1 p-1 text-left truncate">{address}</div>
       </div>
     </div>

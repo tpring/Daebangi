@@ -43,7 +43,7 @@ const BouncingBread: React.FC = () => {
         alt="빵 애니메이션 이미지"
         width={98}
         height={98}
-        className="absolute animate-float lg:w-[95px] lg:h-[95px] md:w-20 md:h-20 sm:w-10 sm:h-10"
+        className="absolute animate-float custom-lg:w-[95px] custom-lg:h-[95px] md-max:w-[80px] md-max:h-[80px] sm-max:w-[65px] sm-max:h-[65px]"
         style={{
           objectFit: "contain",
           left: `calc(${baseLeft}% + ${index * 22}%)`,
@@ -53,7 +53,7 @@ const BouncingBread: React.FC = () => {
     ));
 
   return (
-    <div className="relative w-full h-[300px] bg-[#fff6d9] overflow-hidden">
+    <div className="relative w-full h-[300px] bg-[#fff6d9] overflow-hidden border-b border-[#f7ebc4]">
       {/* 첫 번째 줄 */}
       {renderImages(shuffledBreadImages1, "10%", 10)}
       {/* 두 번째 줄 (연속) */}

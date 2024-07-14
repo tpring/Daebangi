@@ -1,21 +1,24 @@
 import Image from "next/image";
-import userDefualteImage from "../../../public/image/icons/userDefaultImage.png";
+import userDefaultImage from "../../../public/image/icons/userDefaultImage.png";
+
 type UserProfileProps = {
   src: string | null;
   width?: number;
   height?: number;
 };
 
-const UserProfile: React.FC<UserProfileProps> = ({ src, width = 80, height = 80 }) => {
-  const width_height = `w-[${width}px] h-[${height}px]`;
+const UserProfile: React.FC<UserProfileProps> = ({ src, width = 120, height = 120 }) => {
   return (
-    <div className={`border rounded-full ${width_height} overflow-hidden`}>
+    <div
+      className="border border-[#ccc] rounded-full overflow-hidden bg-[#fdfbfb]"
+      style={{ width: `${width}px`, height: `${height}px` }}
+    >
       <Image
-        src={src || userDefualteImage}
+        src={src || userDefaultImage}
         width={width}
         height={height}
         alt="유저프로필"
-        className="w-full h-full object-cover"
+        className="object-cover w-full h-full"
       />
     </div>
   );
