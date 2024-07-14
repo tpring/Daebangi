@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import bread_icon from "../../../../public/image/breads/LogoBread.png";
-
 type ToastProps = {
   state: string;
   message: string;

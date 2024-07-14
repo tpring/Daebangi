@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss";
-
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -50,15 +49,15 @@ const config: Config = {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
+        smokeRise: {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "50%": { opacity: "0.7" },
+          "100%": { opacity: "0", transform: "translateY(-100px)" },
+        },
       },
       animation: {
         float: "float 3s ease-in-out infinite",
-        smokeRise: "smokeRise 4s ease-in-out infinite",
-      },
-      smokeRise: {
-        "0%": { opacity: "0", transform: "translateY(20px)" },
-        "50%": { opacity: "0.7" },
-        "100%": { opacity: "0", transform: "translateY(-100px)" },
+        smokeRise: "smokeRise 2s ease-in-out infinite",
       },
     },
   },
