@@ -70,7 +70,7 @@ const Toast: React.FC<ToastProps> = ({ state, message, onClear }) => {
   */
   return (
     <div>
-      <ToastContainer />
+      <ToastContainer stacked />
     </div>
   );
 };
