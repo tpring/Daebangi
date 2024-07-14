@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { getUserData, login } from "@/app/api/supabase/auth/route";
+import Toast from "@/components/commons/toast/Toast";
 import { useUserStore } from "@/store/userStore";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -15,7 +16,7 @@ const LoginPage = () => {
   const setUser = useUserStore((state) => state.setUser);
   const router = useRouter();
   const searchParams = useSearchParams();
-
+  const [toastState, setToastState] = useState({ state: "", message: "" });
   useEffect(() => {
     const messageParam = searchParams.get("message");
     if (messageParam) {
@@ -28,12 +29,12 @@ const LoginPage = () => {
 
     // 유효성 검사
     if (!email || !password) {
-      alert("이메일과 비밀번호를 모두 입력해주세요.");
+      setToastState({ state: "custom", message: "이메일과 비밀번호를 모두 입력해주세요." });
       return;
     }
 
     if (password.length < 6) {
-      alert("비밀번호는 6자리 이상이어야 합니다.");
+      setToastState({ state: "custom", message: "비밀번호는 6자리 이상이어야 합니다." });
       return;
     }
 
@@ -43,19 +44,17 @@ const LoginPage = () => {
       if (error) {
         // Supabase의 오류 메시지에 따라 유효성 검사 처리
         if (error.message.includes("Invalid login credentials")) {
-          alert("이메일이나 비밀번호가 잘못되었습니다.");
+          setToastState({ state: "custom", message: "이메일이나 비밀번호가 잘못되었습니다." });
         } else {
-          alert("로그인 실패: " + error.message);
+          setToastState({ state: "error", message: `로그인 실패:${error.message} ` });
         }
-        console.error("error:", error);
       } else {
         if (data.user) {
           // Supabase에서 사용자 정보 가져오기
           const { data: userData, error: userError } = await getUserData(email);
 
           if (userError) {
-            alert("사용자 정보를 가져오는 데 실패했습니다.");
-            console.error("userError:", userError);
+            setToastState({ state: "custom", message: "사용자 정보를 가져오는 데 실패했습니다." });
           } else {
             // Zustand 상태 업데이트
             setUser(
@@ -65,14 +64,14 @@ const LoginPage = () => {
               userData.profile ?? "",
               userData.description ?? "",
             );
-            alert("로그인 성공");
+            setToastState({ state: "custom", message: "로그인 성공" });
             router.push("/");
           }
         }
       }
     } catch (error) {
       console.error(error);
-      alert("오류가 발생했습니다. 다시 시도해주세요.");
+      setToastState({ state: "error", message: "오류가 발생했습니다. 다시 시도해주세요." });
     }
   };
 
@@ -109,6 +108,7 @@ const LoginPage = () => {
       >
         회원가입 하러 가기
       </Link>
+      {toastState.state && <Toast state={toastState.state} message={toastState.message} />}
     </div>
   );
 };
