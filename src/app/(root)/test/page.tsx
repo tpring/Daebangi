@@ -1,5 +1,5 @@
 "use client";
-import Toast from "@/components/commons/Toast/Toast";
+import Toast from "@/components/commons/toast/Toast";
 import { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 

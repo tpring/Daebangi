@@ -51,12 +51,9 @@ const LoginPage = () => {
       } else {
         if (data.user) {
           // Supabase에서 사용자 정보 가져오기
-          const { data: userData, error: userError } = await getUserData(email);
+          try {
+            const userData = await getUserData(email);
 
-          if (userError) {
-            alert("사용자 정보를 가져오는 데 실패했습니다.");
-            console.error("userError:", userError);
-          } else {
             // Zustand 상태 업데이트
             setUser(
               userData.user_id,
@@ -67,6 +64,8 @@ const LoginPage = () => {
             );
             alert("로그인 성공");
             router.push("/");
+          } catch (userError) {
+            console.error("userError:", userError);
           }
         }
       }

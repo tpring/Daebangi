@@ -4,7 +4,7 @@ import { fetchComments, insertComment } from "@/app/api/supabase/comment/route";
 import { useUserStore } from "@/store/userStore";
 import { Comment } from "@/types/comment";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import Toast from "../commons/Toast/Toast";
+import Toast from "../commons/toast/Toast";
 import UserProfile from "../commons/UserProfile";
 import CommentItem from "./CommentItem";
 

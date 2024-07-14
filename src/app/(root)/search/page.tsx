@@ -1,7 +1,7 @@
 "use client";
 
 import { searchBakery } from "@/app/api/supabase/bakery/route";
-import { BakeryList } from "@/components/bakeryList/BakeryList";
+import { BakeryList } from "@/components/bakeries/BakeryList";
 import SearchBar from "@/components/commons/SearchBar";
 import { Bakery } from "@/types/bakery";
 import { useRouter, useSearchParams } from "next/navigation";
