@@ -48,10 +48,10 @@ export const LikeBakeryList = () => {
   }, [userId, likesChanged]);
 
   return (
-    <div className="reactive-body mx-auto grid grid-cols-3 gap-4 mt-6">
+    <div className="grid grid-cols-1 sm-max:grid-cols-1 sm:grid-cols-2 custom-lg:grid-cols-3 gap-8">
       {bakeryList.length > 0 ? (
         bakeryList.map((bakery) => (
-          <div key={bakery.bakery_id} className="relative">
+          <div key={bakery.bakery_id} className="col-span-1">
             <Link
               href={{
                 pathname: `/detail/${bakery.bakery_id}`,
@@ -76,7 +76,7 @@ export const LikeBakeryList = () => {
           </div>
         ))
       ) : (
-        <div className="mt-6 text-center">
+        <div className="mt-6">
           <h2 className="text-xl font-semibold">좋아하는 가게를 추가해주세요</h2>
         </div>
       )}

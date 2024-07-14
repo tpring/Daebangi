@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <>
       <BouncingBread />
-      <div className="relative">
+      <div className="relative reactive-body mx-auto">
         <div className="flex justify-center items-center h-60">
           <SearchBar />
         </div>

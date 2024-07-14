@@ -1,26 +1,21 @@
 import Image from "next/image";
 import LikeButton from "@/components/commons/LikeButton";
 import defaultImg from "../../../public/image/noimg.png";
-
-type StoreInformationProps = {
-  bakeryId: string;
-  name: string | null;
-  address: string | null;
-  image: string | null;
-  phone: string | null;
-};
+import { StoreInformationProps } from "@/types/map";
 
 const StoreInformation: React.FC<StoreInformationProps> = ({ bakeryId, image, name, phone, address }) => {
+  const imageSrc = image || defaultImg.src;
+
   return (
-    <section className="flex flex-col md:flex-row justify-between mt-6">
+    <section className="flex flex-col md:flex-row justify-between mt-6 bg-base p-6 rounded-lg sm-max:pb-10">
       {/* 가게정보_이미지영역 */}
       <div className="relative w-full md:w-1/3 h-72 md:h-64">
-        <Image src={image || defaultImg} alt="베이커리 이미지" layout="fill" objectFit="cover" className="rounded-md" />
+        {<Image src={imageSrc} alt="베이커리 이미지" layout="fill" objectFit="cover" className="rounded-md" />}
       </div>
       {/* 가게정보_텍스트영역 */}
       <div className="w-full md:w-2/3 pt-4 md:pt-0 md:pl-8">
         <h1 className="mb-3 flex justify-between items-center">
-          <span className="text-title font-title">{name}</span>
+          <span className="text-title font-title sm-max:pt-4">{name}</span>
           <LikeButton bakeryId={bakeryId} />
         </h1>
         <address className="not-italic mb-2">
