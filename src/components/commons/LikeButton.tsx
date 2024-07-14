@@ -14,7 +14,7 @@ const LikeButton: React.FC<LikeButtonProp> = ({ bakeryId }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const { userId, setLikesChanged } = useUserStore((state) => ({
-    userId: state.userId,
+    userId: state.userId as string,
     setLikesChanged: state.setLikesChanged,
   }));
 
