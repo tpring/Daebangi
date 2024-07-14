@@ -5,7 +5,9 @@ import { deleteComment, updateComment } from "@/app/api/supabase/comment/route";
 import { useUserStore } from "@/store/userStore";
 import { User } from "@/types/user";
 import { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
 import UserProfile from "../commons/UserProfile";
+import { showConfirmToast } from "../commons/toast/ConfirmToast";
 
 type CommentItem = {
   content: string;
@@ -40,6 +42,7 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
   // 댓글 업데이트 로직
   const handleUpdateCommet = async () => {
     setupdatedContent(content);
+
     if (updating && updatedContent.trim()) {
       await updateComment(commentId, updatedContent);
       setComment(updatedContent);
@@ -51,12 +54,14 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
   };
 
   // 댓글 삭제 로직
-  const handleDeleteComment = async () => {
-    if (confirm("정말로 이 댓글을 삭제하시겠습니까?")) {
+  const handleDeleteComment = () => {
+    const onConfirm = async () => {
       await deleteComment(commentId).then(() => {
         onCommentUpdate(); // 댓글 목록 업데이트
       });
-    }
+    };
+
+    showConfirmToast("정말로 이 댓글을 삭제하시겠습니까?", onConfirm);
   };
 
   return (
@@ -99,6 +104,7 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
             <button className="comment-button cursor-pointer" onClick={handleDeleteComment}>
               삭제
             </button>
+            <ToastContainer />
           </>
         ) : null}
       </div>
