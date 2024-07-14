@@ -44,6 +44,12 @@ const Page = () => {
     }
   };
 
+  const handleImageClick = () => {
+    if (inputref.current) {
+      inputref.current.click();
+    }
+  };
+
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
 
@@ -73,10 +79,13 @@ const Page = () => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white rounded-lg shadow-lg p-3 w-70 max-w">
+      <div className="bg-white rounded-lg shadow-lg p-12 w-70 max-w">
         <h2 className="mb-4 text-center text-title font-title">프로필 수정</h2>
         <div className="flex justify-center">
-          <div className="relative w-32 h-32 border border-[#ccc] rounded-full overflow-hidden bg-[#fdfbfb] flex items-center justify-center cursor-pointer">
+          <div
+            className="relative w-32 h-32 border border-[#ccc] rounded-full overflow-hidden bg-[#fdfbfb] flex items-center justify-center cursor-pointer"
+            onClick={handleImageClick}
+          >
             {newProfile ? (
               <Image
                 src={profileUrl || ""}
@@ -84,9 +93,6 @@ const Page = () => {
                 width={100}
                 height={100}
                 className="w-full h-full rounded-full"
-                onClick={() => {
-                  inputref.current?.click();
-                }}
               />
             ) : (
               <Image
@@ -95,9 +101,6 @@ const Page = () => {
                 width={100}
                 height={100}
                 className="w-full h-full rounded-full"
-                onClick={() => {
-                  inputref.current?.click();
-                }}
               />
             )}
             <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-30 rounded-full">
@@ -126,7 +129,7 @@ const Page = () => {
             />
           </div>
           <div className="flex justify-end mt-4">
-            <button className="font-secondary shared-butten" onClick={handleSubmit}>
+            <button className="shared-butten" onClick={handleSubmit}>
               프로필 수정 완료
             </button>
           </div>
