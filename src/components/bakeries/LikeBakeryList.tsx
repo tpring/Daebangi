@@ -1,12 +1,12 @@
 "use client";
 
+import { getBakeriesByIds } from "@/app/api/supabase/bakery/route";
+import { getUserLikedBakeryIds } from "@/app/api/supabase/like/route";
+import { useUserStore } from "@/store/userStore";
+import { Bakery } from "@/types/bakery";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BakeryCard } from "./BakeryCard";
-import { useUserStore } from "@/store/userStore";
-import { getUserLikedBakeryIds } from "@/app/api/supabase/like/route";
-import { getBakeriesByIds } from "@/app/api/supabase/bakery/route";
-import { Bakery } from "@/types/bakery";
 
 export const LikeBakeryList = () => {
   const [bakeryList, setBakeryList] = useState<Bakery[]>([]);
