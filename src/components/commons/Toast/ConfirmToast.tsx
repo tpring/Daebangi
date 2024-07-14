@@ -11,9 +11,9 @@ const ConfirmToast: React.FC<ConfirmToastProp> = ({ content, onConfirm }) => {
     onConfirm();
   };
   return (
-    <div className="flex flex-col items-center gap-2 ">
+    <div className="flex flex-col items-center gap-5  ">
       <p>{content}</p>
-      <button className="px-3 py-1 bg-point text-white rounded-[16px]" onClick={closeToast}>
+      <button className="px-3 py-1 bg-point text-white rounded-[16px] hover:brightness-90" onClick={closeToast}>
         확인
       </button>
     </div>
