@@ -1,13 +1,12 @@
 "use client";
 
-import { useUserStore } from "@/store/userStore";
-import { createClient } from "@/supabase/client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { useRouter } from "next/navigation";
-import breadImage from "../../../public/image/breads/LogoBread.png";
+import { useUserStore } from "@/store/userStore";
+import { signOut } from "@/app/api/supabase/auth/route";
 import UserProfile from "../commons/UserProfile";
+import breadImage from "../../../public/image/breads/LogoBread.png";
 
 export const Header: React.FC = () => {
   const { userId, nickname, profile } = useUserStore((state) => ({
@@ -18,11 +17,10 @@ export const Header: React.FC = () => {
 
   const router = useRouter();
   const isLoggedIn = userId !== null;
-  const supabase = createClient();
 
   const handleLogout = async () => {
     useUserStore.getState().logout();
-    await supabase.auth.signOut();
+    await signOut();
 
     router.push("/");
   };

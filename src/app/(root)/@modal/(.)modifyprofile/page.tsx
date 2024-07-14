@@ -1,18 +1,18 @@
 "use client";
+
 import { useUserStore } from "@/store/userStore";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { createClient } from "../../../../supabase/client";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import { uploadImage } from "@/supabase/utils/makeimageUrl";
 import LogoBread from "../../../../../public/image/breads/LogoBread.png";
+import { updateUserInfo } from "@/app/api/supabase/auth/route";
 
 // modifyprofile의 페이지를 인터셉트 하는 페이지 입니다.
 // 모달창
 const Page = () => {
   const router = useRouter();
-  const supabase = createClient();
   const { userId, email, nickname, profile, newDescription, setUser } = useUserStore((state) => ({
     userId: state.userId as string,
     email: state.email as string,
@@ -44,14 +44,6 @@ const Page = () => {
     }
   };
 
-  const handleNicknameChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setNewNickname(e.target.value);
-  };
-
-  const handleDescriptionChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setDescription(e.target.value);
-  };
-
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
 
@@ -61,43 +53,22 @@ const Page = () => {
       // 선택 했을 때
       const imageFile = newProfile;
       const uploadPath = `profileImage/${newUuid}.png`;
-      const oldPath = profile ? profile.split("/").slice(-2).join("/") : undefined; // Extract the old path
+      const oldPath = profile ? profile.split("/").slice(-2).join("/") : undefined;
       const publicUrl = await uploadImage(imageFile as File, uploadPath, oldPath);
+      //새로운 프로필 파일이있는 경우
       if (publicUrl) {
-        updateUserInfo(publicUrl);
+        await updateUserInfo(userId, newNickname, publicUrl, description);
+        setUser(userId, email, newNickname, publicUrl, description);
       }
     } else {
+      // 기존 이미지 파일 업로드
       if (profile) {
-        updateUserInfo(profile);
-      } else {
-        alert("선택된 프로필이 없습니다.");
+        await updateUserInfo(userId, newNickname, profile, description);
+        setUser(userId, email, newNickname, profile, description);
       }
     }
-  };
-  // 기존에는 => 이전에 설정된 프로필이 있던 없던 무조건 사용자로부터 전달받은(이미지 선택) 이미지를 supabase에 넣는다.
-  // ==> 선택 했을 때 안 했을 때를 나눠서
-  //
-
-  const updateUserInfo = async (publicUrl: string) => {
-    try {
-      const { error } = await supabase
-        .from("user")
-        .update({
-          nickname: newNickname,
-          profile: publicUrl,
-          description,
-        })
-        .eq("user_id", userId);
-      if (error) {
-        console.error("Error updating user data:", error);
-      } else {
-        setUser(userId, email, newNickname, publicUrl, description);
-        // 프로필 수정 완료 후 /mypage로 이동
-        router.back();
-      }
-    } catch (error) {
-      console.error("Error updating user data:", error);
-    }
+    // 프로필 수정 완료 후 /mypage로 이동
+    router.back();
   };
 
   return (
@@ -135,11 +106,21 @@ const Page = () => {
         <div className="mt-4 flex flex-col">
           <div className="flex justify-between items-center shared-text">
             <p className="px-2">닉네임</p>
-            <input className="shared-input" type="text" value={newNickname || ""} onChange={handleNicknameChange} />
+            <input
+              className="shared-input"
+              type="text"
+              value={newNickname || ""}
+              onChange={(e) => setNewNickname(e.target.value)}
+            />
           </div>
           <div className="flex justify-between items-center mt-4 shared-text">
             <p className="px-2">소개</p>
-            <input className="shared-input" type="text" value={description} onChange={handleDescriptionChange} />
+            <input
+              className="shared-input"
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
           </div>
           <div className="flex justify-end mt-4">
             <button className="shared-butten" onClick={handleSubmit}>

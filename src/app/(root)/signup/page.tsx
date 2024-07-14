@@ -4,12 +4,12 @@ import Toast from "@/components/commons/toast/Toast";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import nookies from "nookies";
 import { useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import LogoBread from "../../../../public/image/breads/LogoBread.png";
 import { uploadImage } from "../../../supabase/utils/makeimageUrl";
 import { signUp, updateUserProfile } from "../../api/supabase/auth/route";
+import nookies from "nookies";
+import LogoBread from "../../../../public/image/breads/LogoBread.png";
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");
@@ -20,7 +20,6 @@ const SignupPage = () => {
   const [profileUrl, setProfileUrl] = useState<string | null>(null);
   const router = useRouter();
   const newUuid = uuidv4();
-
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [toastState, setToastState] = useState({ state: "", message: "" });
 
@@ -50,23 +49,25 @@ const SignupPage = () => {
           setToastState({ state: "error", message: `가입 실패 : ${error.message}` });
         }
       } else {
-        // 회원가입 성공 후 이미지 업로드
-        if (data.user) {
-          const imagePath = `profileImage/${newUuid}.png`;
-          // 이미지 업로드
-          const profileUrl = await uploadImage(profile as File, imagePath);
-          // 사용자 프로필 업데이트
-          if (profileUrl) {
-            await updateUserProfile(data.user.id, profileUrl);
+        //회원가입 성공 후 profile이 있을때 이미지 업로드
+        if (profile) {
+          if (data.user) {
+            const imagePath = `profileImage/${newUuid}.png`;
+            // 이미지 업로드
+            const profileUrl = await uploadImage(profile as File, imagePath);
+            // 사용자 프로필 업데이트
+            if (profileUrl) {
+              await updateUserProfile(data.user.id, profileUrl);
+            }
           }
-          alert("회원가입 성공!");
-
-          // 쿠키에 저장된 토큰 제거
-          nookies.destroy(null, "sb-txvvzlryxqhzxjcsncqo-auth-token");
-          nookies.destroy(null, "sb-txvvzlryxqhzxjcsncqo-auth-token-code-verifier");
-
-          router.push("/login");
         }
+        alert("회원가입 성공!");
+
+        // 쿠키에 저장된 토큰 제거
+        nookies.destroy(null, "sb-txvvzlryxqhzxjcsncqo-auth-token");
+        nookies.destroy(null, "sb-txvvzlryxqhzxjcsncqo-auth-token-code-verifier");
+
+        router.push("/login");
       }
     } catch (error) {
       console.error(error);

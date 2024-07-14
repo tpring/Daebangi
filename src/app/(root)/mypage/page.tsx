@@ -1,6 +1,6 @@
 "use client";
 
-import { LikeBakeryList } from "@/components/BakeryList/LikeBakeryList";
+import { LikeBakeryList } from "@/components/bakeries/LikeBakeryList";
 import { useUserStore } from "@/store/userStore";
 import Link from "next/link";
 import UserProfile from "@/components/commons/UserProfile";

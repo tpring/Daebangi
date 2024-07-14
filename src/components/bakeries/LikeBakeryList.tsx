@@ -1,47 +1,29 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { createClient } from "@/supabase/client";
 import { BakeryCard } from "../commons/BakeryCard";
 import { useUserStore } from "@/store/userStore";
-import Link from "next/link";
-
-type Bakery = {
-  bakery_id: string;
-  name: string;
-  image: string;
-  phone: string;
-  address: string;
-};
+import { getUserLikedBakeryIds } from "@/app/api/supabase/like/route";
+import { getBakeriesByIds } from "@/app/api/supabase/bakery/route";
+import { Bakery } from "@/types/bakery";
 
 export const LikeBakeryList = () => {
   const [bakeryList, setBakeryList] = useState<Bakery[]>([]);
-  const [likesChanged, setLikesChanged] = useState(false);
-  const supabase = createClient();
-  const { userId } = useUserStore((state) => ({
+  const { userId, likesChanged, setLikesChanged } = useUserStore((state) => ({
     userId: state.userId as string,
+    likesChanged: state.likesChanged,
+    setLikesChanged: state.setLikesChanged,
   }));
 
   const fetchBakeryData = async () => {
     try {
-      const { data: likeData, error: likeError } = await supabase
-        .from("like")
-        .select("bakery_id")
-        .eq("user_id", userId);
-
-      if (likeError) throw likeError;
-
-      const bakeryIds = likeData?.map((row: any) => row.bakery_id).filter((id: any) => id !== null) || [];
+      //// `userId`를 사용하여 좋아요한 bakery의 ID 리스트를 가져오기
+      const bakeryIds = await getUserLikedBakeryIds(userId);
 
       if (bakeryIds.length > 0) {
-        const { data: bakeryData, error: bakeryError } = await supabase
-          .from("bakery")
-          .select("bakery_id, name, image, phone, address")
-          .in("bakery_id", bakeryIds)
-          .order("sort_id", { ascending: true });
-
-        if (bakeryError) throw bakeryError;
-
+        // `bakeryIds`를 사용하여 bakery 데이터를 가져오기
+        const bakeryData = await getBakeriesByIds(bakeryIds);
         const formattedBakeryData: Bakery[] = (bakeryData || []).map((item: any) => ({
           bakery_id: item.bakery_id,
           name: item.name || "",
@@ -56,6 +38,8 @@ export const LikeBakeryList = () => {
       }
     } catch (error) {
       console.error("데이터를 가져오는 중 오류 발생:", error);
+    } finally {
+      setLikesChanged(false);
     }
   };
 
@@ -79,7 +63,6 @@ export const LikeBakeryList = () => {
                   bakeryId: bakery.bakery_id,
                 },
               }}
-              key={bakery.bakery_id}
               passHref
             >
               <BakeryCard
