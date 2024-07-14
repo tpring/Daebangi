@@ -27,6 +27,12 @@ const SignupPage = () => {
   const handleSignup = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // 이미지
+    if (!profile) {
+      setToastState({ state: "error", message: "이미지를 넣어주세요." });
+      return;
+    }
+
     // 유효성 검사
     if (password.length < 6) {
       setToastState({ state: "custom", message: "비밀번호는 6자리 이상이어야 합니다." });
