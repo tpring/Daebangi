@@ -55,6 +55,7 @@ export const signUp = async (email: string, password: string, nickname: string) 
       options: {
         data: {
           nickname,
+          description: "소개란을 작성해주세요",
         },
       },
     });
@@ -102,7 +103,7 @@ export const updateUserInfo = async (userId: string, nickname: string, profileUr
       .update({
         nickname,
         profile: profileUrl,
-        description: "소개란을 작성해주세요",
+        description,
       })
       .eq("user_id", userId);
     if (error) {

@@ -61,18 +61,18 @@ const SignupPage = () => {
             }
           }
         }
-        setToastState({ state: "error", message: `회원가입 성공!` });
+        setToastState({ state: "custom", message: `회원가입 성공!` });
 
         // 쿠키에 저장된 토큰 제거
         nookies.destroy(null, "sb-txvvzlryxqhzxjcsncqo-auth-token");
         nookies.destroy(null, "sb-txvvzlryxqhzxjcsncqo-auth-token-code-verifier");
 
-        router.push("/login");
+        router.push("/login?message=회원가입 성공! 로그인 해주세요.");
       }
     } catch (error) {
       console.error(error);
-      setToastState({ state: "error", message: "오류가 발생했습니다. 다시 시도해주세요." });
     }
+    return;
   };
 
   // 프로필 이미지 파일 변경 핸들러

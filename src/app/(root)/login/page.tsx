@@ -21,7 +21,7 @@ const LoginPage = () => {
   useEffect(() => {
     const messageParam = searchParams.get("message");
     if (messageParam) {
-      setToastState({ state: "custom", message: "로그인 후 이용부탁드립니다" });
+      setToastState({ state: "custom", message: messageParam });
     }
   }, [searchParams]);
 
