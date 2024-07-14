@@ -20,7 +20,6 @@ const SignupPage = () => {
   const [profileUrl, setProfileUrl] = useState<string | null>(null);
   const router = useRouter();
   const newUuid = uuidv4();
-
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [toastState, setToastState] = useState({ state: "", message: "" });
 
@@ -50,23 +49,25 @@ const SignupPage = () => {
           setToastState({ state: "error", message: `가입 실패 : ${error.message}` });
         }
       } else {
-        // 회원가입 성공 후 이미지 업로드
-        if (data.user) {
-          const imagePath = `profileImage/${newUuid}.png`;
-          // 이미지 업로드
-          const profileUrl = await uploadImage(profile as File, imagePath);
-          // 사용자 프로필 업데이트
-          if (profileUrl) {
-            await updateUserProfile(data.user.id, profileUrl);
+        //회원가입 성공 후 profile이 있을때 이미지 업로드
+        if (profile) {
+          if (data.user) {
+            const imagePath = `profileImage/${newUuid}.png`;
+            // 이미지 업로드
+            const profileUrl = await uploadImage(profile as File, imagePath);
+            // 사용자 프로필 업데이트
+            if (profileUrl) {
+              await updateUserProfile(data.user.id, profileUrl);
+            }
           }
-          alert("회원가입 성공!");
-
-          // 쿠키에 저장된 토큰 제거
-          nookies.destroy(null, "sb-txvvzlryxqhzxjcsncqo-auth-token");
-          nookies.destroy(null, "sb-txvvzlryxqhzxjcsncqo-auth-token-code-verifier");
-
-          router.push("/login");
         }
+        alert("회원가입 성공!");
+
+        // 쿠키에 저장된 토큰 제거
+        nookies.destroy(null, "sb-txvvzlryxqhzxjcsncqo-auth-token");
+        nookies.destroy(null, "sb-txvvzlryxqhzxjcsncqo-auth-token-code-verifier");
+
+        router.push("/login");
       }
     } catch (error) {
       console.error(error);

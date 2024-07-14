@@ -1,5 +1,5 @@
 import Image from "next/image";
-import userDefaultImage from "../../../public/image/icons/userDefaultImage.png";
+import userDefaultImage from "../../../../public/image/icons/userDefaultImage.png";
 
 type UserProfileProps = {
   src: string | null;

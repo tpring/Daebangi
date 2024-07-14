@@ -1,12 +1,15 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Map, CustomOverlayMap } from "react-kakao-maps-sdk";
+import { loadKakaoMapScript } from "@/app/api/kakao/route";
+
+import { GeocoderResult, KakaoMapProps, WindowWithKakao } from "@/types/map";
 import Image from "next/image";
 import Link from "next/link";
-import { KakaoMapProps, GeocoderResult, WindowWithKakao } from "@/types/map";
-import { loadKakaoMapScript } from "@/app/api/kakao/route";
-import SkeletonMap from "@/components/commons/Skeleton/SkeletonMap";
+import React, { useEffect, useState } from "react";
+import { CustomOverlayMap, Map } from "react-kakao-maps-sdk";
+
+import SkeletonMap from "../commons/Skeleton/SkeletonMap";
+
 
 const KakaoMap: React.FC<KakaoMapProps> = ({ name, address }) => {
   const [isLoaded, setIsLoaded] = useState(false);

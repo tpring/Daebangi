@@ -6,9 +6,8 @@ import { useUserStore } from "@/store/userStore";
 import { User } from "@/types/user";
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
-import UserProfile from "../commons/UserProfile";
+import UserProfile from "../commons/profile/UserProfile";
 import { showConfirmToast } from "../commons/toast/ConfirmToast";
-
 type CommentItem = {
   content: string;
   userId: string; // 댓글을 작성한 유저의 ID
@@ -103,7 +102,7 @@ const CommentItem: React.FC<CommentItem> = ({ content, userId, commentId, onComm
               삭제
             </button>
             <ToastContainer />
-          </>
+          </div>
         ) : null}
       </div>
     </li>

@@ -1,7 +1,7 @@
-import { fetchBakeryDetails } from "@/app/api/supabase/(detail)/route";
+import { fetchBakeryDetails } from "@/app/api/supabase/detail/route";
 import CommentList from "@/components/comment/CommentList";
 import SkeletonMap from "@/components/commons/Skeleton/SkeletonMap";
-import StoreInformation from "@/components/detailMap/StoreInformation";
+import StoreInformation from "@/components/map/StoreInformation";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { notFound, redirect } from "next/navigation";
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   };
 }
 
-const KakaoMap = dynamic(() => import("@/components/detailMap/KakaoMap"), {
+const KakaoMap = dynamic(() => import("@/components/map/KakaoMap"), {
   ssr: false,
   loading: () => <SkeletonMap />,
 });

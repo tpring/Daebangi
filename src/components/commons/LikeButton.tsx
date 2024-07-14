@@ -1,6 +1,6 @@
 "use client";
 
-import { checkLikeStatus, toggleLikeStatus } from "@/app/api/supabase/(like)/route";
+import { checkLikeStatus, toggleLikeStatus } from "@/app/api/supabase/like/route";
 import { useUserStore } from "@/store/userStore";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -9,16 +9,13 @@ type LikeButtonProp = {
   bakeryId: string;
 };
 
-type UserStoreState = {
-  userId: string | null;
-};
-
 const LikeButton: React.FC<LikeButtonProp> = ({ bakeryId }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { userId } = useUserStore((state: UserStoreState) => ({
-    userId: state.userId,
+  const { userId, setLikesChanged } = useUserStore((state) => ({
+    userId: state.userId as string,
+    setLikesChanged: state.setLikesChanged,
   }));
 
   const fetchLikeStatus = async () => {
@@ -37,15 +34,13 @@ const LikeButton: React.FC<LikeButtonProp> = ({ bakeryId }) => {
     fetchLikeStatus();
   }, [userId]);
 
-
   const handleToggleLike = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-
-
     try {
       const result = await toggleLikeStatus(isLiked, userId, bakeryId);
       if (result) {
         setIsLiked(!isLiked);
+        setLikesChanged(true);
       }
     } catch (error) {
       console.error(error);

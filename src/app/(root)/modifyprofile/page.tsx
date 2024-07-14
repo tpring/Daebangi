@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 
 // 병렬 라우팅을 위한 페이지입니다
 const Page = () => {
+<<<<<<< HEAD
     const router = useRouter();
 
     useEffect(() => {
@@ -14,5 +15,9 @@ const Page = () => {
 
     return null;
 }
+=======
+  return <>this is modifyprofile page</>;
+};
+>>>>>>> 73ea2177c5b47b6417c215430312c754127acb1e
 
 export default Page;
