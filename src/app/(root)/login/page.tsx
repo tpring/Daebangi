@@ -81,7 +81,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center h-calc">
       <Image src={LogoBread} alt="Logo Bread" width={220} height={154} priority className="mb-[-20px]" />
       <label className="font-secondary text-[46px]">대빵이</label>
       <form onSubmit={handleLogin}>
@@ -102,14 +102,16 @@ const LoginPage = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <div>
-          <button type="submit" disabled={false} className="shared-butten my-10 hover:bg-[#C9AB9C]">
+
+          <button type="submit" className="shared-butten my-10 hover:bg-[#925435]">
+
             로그인
           </button>
         </div>
       </form>
       <Link
         href={"/signup"}
-        className="text-basics hover:text-teal-600 hover:bg-gray-200 hover:underline transition-colors duration-300 p-2 rounded-md"
+        className="text-basics hover:text-point hover:underline transition-colors duration-300 p-2 rounded-md"
       >
         회원가입 하러 가기
       </Link>
