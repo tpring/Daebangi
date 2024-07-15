@@ -5,10 +5,10 @@ const supabase = createClient();
 export const fetchComments = async (bakery_id: string, userId: string | undefined): Promise<Comment[]> => {
   try {
     const { data: comments, error } = await supabase
-      .from("comment")
+      .from("commentt")
       .select("*")
       .eq("bakery_id", bakery_id)
-      .order("comment_id", { ascending: false });
+      .order("id", { ascending: false });
 
     if (error) {
       console.error("댓글 목록 fetch 실패 :", error);
@@ -30,28 +30,28 @@ export const fetchComments = async (bakery_id: string, userId: string | undefine
 // 댓글을 저장하고 저장된 목록을 반환 하는 함수.
 export const insertComment = async (bakery_id: string, userId: string, content: string): Promise<Comment[]> => {
   try {
-    const { error } = await supabase.from("comment").insert({
+    const { error } = await supabase.from("commentt").insert({
       user_id: userId,
       bakery_id: bakery_id,
       content: content,
     });
 
     if (error) {
-      console.error("댓글 작성 중 에러 :", error);
+      console.error("댓글 입력 요청 중 에러 (DB) :", error);
       throw error;
     }
 
     const updatedComments = await fetchComments(bakery_id, userId);
     return updatedComments;
   } catch (error) {
-    console.error("댓글 작성 중 에러 :", error);
+    console.error("댓글 입력 요청 까지 했지만 에러 :", error);
     throw error;
   }
 };
 
 // 댓글 업데이트 및 업데이트 된 목록 반환 하는 함수.
 export const updateComment = async (commentId: number, content: string): Promise<void> => {
-  const { data, error } = await supabase.from("comment").update({ content }).eq("comment_id", commentId).select();
+  const { data, error } = await supabase.from("commentt").update({ content }).eq("id", commentId).select();
 
   if (error) {
     console.error("댓글 업데이트 실패 :", error);
@@ -61,7 +61,7 @@ export const updateComment = async (commentId: number, content: string): Promise
 
 // 댓글 삭제
 export const deleteComment = async (commentId: number): Promise<void> => {
-  const { error } = await supabase.from("comment").delete().eq("comment_id", commentId);
+  const { error } = await supabase.from("commentt").delete().eq("id", commentId);
 
   if (error) {
     console.error("댓글 삭제 실패 :", error);

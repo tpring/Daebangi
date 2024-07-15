@@ -4,4 +4,5 @@ export type Bakery = {
   image: string;
   phone: string;
   address: string;
+  comment_count: number;
 };

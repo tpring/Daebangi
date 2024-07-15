@@ -47,7 +47,6 @@ export const toggleLikeStatus = async (isLiked: boolean, userId: string, bakeryI
     return false;
   }
 };
-
 // `userId`를 사용하여 좋아요한 bakery의 ID 리스트를 가져오기
 export const getUserLikedBakeryIds = async (userId: string) => {
   try {

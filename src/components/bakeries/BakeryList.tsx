@@ -19,7 +19,7 @@ export const BakeryList = ({ searchedBakeries }: BakeryListProp) => {
     } else {
       const fetchBreads = async () => {
         const data = await bakeryItem();
-        setBreads((data as Bakery[]) || []);
+        setBreads((data as any as Bakery[]) || []);
       };
       fetchBreads();
     }
@@ -36,6 +36,7 @@ export const BakeryList = ({ searchedBakeries }: BakeryListProp) => {
               name={bakery.name}
               phone={bakery.phone}
               address={bakery.address}
+              commentCount={bakery.comment_count}
             />
           </div>
         </Link>

@@ -101,7 +101,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-calc">
+    <div className="flex flex-col items-center justify-center min-h-screen">
       <form onSubmit={handleSignup}>
         <div className="mt-6 mb-4 flex flex-col items-center justify-center ">
           <div className="cursor-pointer relative" onClick={handleImageClick}>

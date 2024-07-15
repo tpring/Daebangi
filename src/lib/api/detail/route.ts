@@ -9,7 +9,7 @@ export const fetchBakeryDetails = async (bakeryId: string): Promise<Bakery | nul
       console.error("Error fetching bakery details:", error);
       return null;
     }
-    return data as Bakery;
+    return data as any as Bakery;
   } catch (error) {
     console.error("Error fetching bakery details:", error);
     return null;

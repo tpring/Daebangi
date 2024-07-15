@@ -27,7 +27,7 @@ export const getBakeriesByIds = async (bakeryIds: string[]) => {
   try {
     const { data, error } = await supabase
       .from("bakery")
-      .select("bakery_id, name, image, phone, address")
+      .select("bakery_id, name, image, phone, address, comment_count")
       .in("bakery_id", bakeryIds)
       .order("sort_id", { ascending: true });
 
